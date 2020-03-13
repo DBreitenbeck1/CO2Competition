@@ -57,6 +57,39 @@ public class ApiService {
 		
 	}
 	
+
+	public String getStart() {
+		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
+				+ "Disneyland&destination=Universal+Studios+Hollywood&key="+apiKey);
+		SearchResult result = rt.getForObject(url, SearchResult.class);
+			System.out.println(result.toString());
+		List<Route> routes = result.getRoutes();
+		Route r = routes.get(0);	
+			System.out.println(r.getLegs().size());
+		Leg leg = r.getLegs().get(0);
+			System.out.println(leg.toString());
+			
+		//Distance distance = leg.getDistance();
+		return leg.getStartAddress();
+		
+	}
+	
+	public String getDest() {
+		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
+				+ "Disneyland&destination=Universal+Studios+Hollywood&key="+apiKey);
+		SearchResult result = rt.getForObject(url, SearchResult.class);
+			System.out.println(result.toString());
+		List<Route> routes = result.getRoutes();
+		Route r = routes.get(0);	
+			System.out.println(r.getLegs().size());
+		Leg leg = r.getLegs().get(0);
+			System.out.println(leg.toString());
+			
+		//Distance distance = leg.getDistance();
+		return leg.getEndAddress();
+		
+	}
+	
 	
 	
 	
