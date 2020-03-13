@@ -67,7 +67,7 @@ public class Employee {
 
 	private String city;
 	private String zipCode;
-	@ManyToOne
+//	@ManyToOne
 	private Long companyId;
 
 }

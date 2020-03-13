@@ -20,7 +20,7 @@ public class Company {
 	private String streetAdress;
 	private String city;
 	private String zipCode;
-	@OneToMany(mappedBy = "employee")
+	//@OneToMany(mappedBy = "employee")
 	private List<Employee> employees;
 
 	public Long getCompanyId() {
