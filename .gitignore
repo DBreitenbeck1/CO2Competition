@@ -29,3 +29,7 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### API Keys ###
+src/main/resources/config/application.properties
+
