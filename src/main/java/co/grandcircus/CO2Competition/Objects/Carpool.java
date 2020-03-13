@@ -16,6 +16,7 @@ public class Carpool {
 	// to do change to object date
 	private String date;
 	private Double co2;
+	private List<Employee> employees;
 
 	public Long getCarpoolId() {
 		return carpoolId;
@@ -48,7 +49,4 @@ public class Carpool {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
-
-	private List<Employee> employees;
-
 }
