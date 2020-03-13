@@ -1,74 +1,74 @@
 package co.grandcircus.CO2Competition.Objects;
-//package co.grandcircus.CO2Competition.objects;
-//
-//import java.util.Set;
-//
-//import javax.persistence.Entity;
-//import javax.persistence.GeneratedValue;
-//import javax.persistence.GenerationType;
-//import javax.persistence.Id;
-//import javax.persistence.OneToMany;
-//
-//@Entity
-//
-//public class Company {
-//
-//	// no argument constructor
-//
-//	public Company() {
-//
-//	}
-//
-//	// to string
-//
-//	@Override
-//	public String toString() {
-//		return "Company [id=" + id + ", totEm=" + totEm + ", totSav=" + totSav + ", employees=" + employees + "]";
-//	}
-//
-//	// getters and setters below
-//
-//	public Long getId() {
-//		return id;
-//	}
-//
-//	public void setId(Long id) {
-//		this.id = id;
-//	}
-//
-//	public Double getTotEm() {
-//		return totEm;
-//	}
-//
-//	public void setTotEm(Double totEm) {
-//		this.totEm = totEm;
-//	}
-//
-//	public Double getTotSav() {
-//		return totSav;
-//	}
-//
-//	public void setTotSav(Double totSav) {
-//		this.totSav = totSav;
-//	}
-//
-//	public Set<Employee> getEmployees() {
-//		return employees;
-//	}
-//
-//	public void setEmployees(Set<Employee> employees) {
-//		this.employees = employees;
-//	}
-//
-//	// fields
-//
-//	@Id
-//	@GeneratedValue(strategy = GenerationType.IDENTITY)
-//
-//	private Long id;
-//	private Double totEm;
-//	private Double totSav;
-//	@OneToMany(mappedBy = "employee")
-//	private Set<Employee> employees;
-//
-//}
+
+import java.util.List;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+
+@Entity
+
+public class Company {
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
+	private Long companyId;
+	private String name;
+	private String streetAdress;
+	private String city;
+	private String zipCode;
+	@OneToMany(mappedBy = "employee")
+	private List<Employee> employees;
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getStreetAdress() {
+		return streetAdress;
+	}
+
+	public void setStreetAdress(String streetAdress) {
+		this.streetAdress = streetAdress;
+	}
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getZipCode() {
+		return zipCode;
+	}
+
+	public void setZipCode(String zipCode) {
+		this.zipCode = zipCode;
+	}
+
+	public List<Employee> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
+	}
+
+}
