@@ -14,6 +14,13 @@ public class Leg {
 	
 	@JsonProperty("end_location")
 	EndLocation endLocation;
+	
+	@JsonProperty("start_address")
+	String startAddress;
+	
+	
+	@JsonProperty("end_address")
+	String endAddress;
 
 	public Distance getDistance() {
 		return distance;
@@ -47,6 +54,23 @@ public class Leg {
 		this.endLocation = endLocation;
 	}
 
+		
+	public String getStartAddress() {
+		return startAddress;
+	}
+
+	public void setStartAddress(String startAddress) {
+		this.startAddress = startAddress;
+	}
+
+	public String getEndAddress() {
+		return endAddress;
+	}
+
+	public void setEndAddress(String endAddress) {
+		this.endAddress = endAddress;
+	}
+
 	@Override
 	public String toString() {
 		return "Leg [distance=" + distance + ", duration=" + duration + ", startLocation=" + startLocation
@@ -54,5 +78,6 @@ public class Leg {
 	}
 	
 	
+
 
 }

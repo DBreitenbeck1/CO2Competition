@@ -19,6 +19,8 @@ public class IndexController {
 	public ModelAndView showIndex() {
 		ModelAndView mav = new ModelAndView("index");
 		Distance distance = apiServe.getDistance();
+		mav.addObject("start", apiServe.getStart());
+		mav.addObject("dest", apiServe.getDest());
 		mav.addObject("text", distance.getText());
 		mav.addObject("value", distance.getValue());
 		return mav;
