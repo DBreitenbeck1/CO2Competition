@@ -104,12 +104,12 @@ public class Employee {
 		this.zipCode = zipCode;
 	}
 
-	@Override
-	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
-				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
-				+ ", company=" + company + ", carpool=" + carpool + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
+//				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
+//				+ ", company=" + company + ", carpool=" + carpool + "]";
+//	}
 
 
 

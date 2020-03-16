@@ -104,7 +104,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView("details");
 		String address1 = street+city+zip;
 //		String address2 = street1+city1+zip1;
-		String address2 = coRepo.findByName(des).getStreetAdress() + coRepo.findByName(des).getCity() + coRepo.findByName(des).getZipCode();
+		String address2 = coRepo.findByName(des).getStreetAddress() + coRepo.findByName(des).getCity() + coRepo.findByName(des).getZipCode();
 		Distance distance = apiServe.getDistance(address1, address2);
 		if (distance!=null) {
 	
@@ -112,16 +112,16 @@ public class LoginController {
 		mav.addObject("city", city);
 		mav.addObject("zip", zip);
 		mav.addObject("coName",coRepo.findByName(des).getName());
-		mav.addObject("street1", coRepo.findByName(des).getStreetAdress());
+		mav.addObject("street1", coRepo.findByName(des).getStreetAddress());
 		mav.addObject("city1", coRepo.findByName(des).getCity());
 		mav.addObject("zip1", coRepo.findByName(des).getZipCode());
 		mav.addObject("distance", distance);
 		mav.addObject("em", coCal.smallCar(distance.getValue() ));
 		
 		employee.setCity(city);
-		employee.setStreetAdress(street);
+		employee.setStreetAddress(street);
 		employee.setZipCode(zip);
-		employee.getCompany().getStreetAdress();
+		employee.getCompany().getStreetAddress();
 //		carRepo.saveAll(employee);
 		} else {
 			mav.addObject("invalid", "No such address");
