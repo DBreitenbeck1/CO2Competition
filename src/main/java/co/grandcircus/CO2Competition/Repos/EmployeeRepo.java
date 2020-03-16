@@ -7,4 +7,5 @@ package co.grandcircus.CO2Competition.Repos;
 //
 //public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 //
+//	Employee findByUsernameIgnoreCase(String username);
 //}
