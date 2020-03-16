@@ -26,7 +26,7 @@ public class IndexController {
 		String address2 = "DetroitMI";
 		Distance distance = apiServe.getDistance(address1, address2);
 		mav.addObject("start", apiServe.getStart(address1, address2));
-		mav.addObject("dest", apiServe.getDest(address1, address2));
+	//	mav.addObject("dest", apiServe.getDest(address1, address2));
 		mav.addObject("text", distance.getText());
 		mav.addObject("value", distance.getValue());
 		return mav;

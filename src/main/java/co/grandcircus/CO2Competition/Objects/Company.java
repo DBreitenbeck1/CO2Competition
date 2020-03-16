@@ -14,12 +14,13 @@ public class Company {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Long companyId;
+	
 	private String name;
 	private String streetAdress;
 	private String city;
 	private String zipCode;
+	
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
 

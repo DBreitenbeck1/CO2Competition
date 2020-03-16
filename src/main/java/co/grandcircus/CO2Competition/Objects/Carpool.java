@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 
 @Entity
 
@@ -16,6 +17,8 @@ public class Carpool {
 	// to do change to object date
 	private String date;
 	private Double co2;
+	
+	@ManyToMany(mappedBy="carpool")
 	private List<Employee> employees;
 
 	public Long getCarpoolId() {
@@ -49,4 +52,12 @@ public class Carpool {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+
+	@Override
+	public String toString() {
+		return "Carpool [carpoolId=" + carpoolId + ", date=" + date + ", co2=" + co2 + ", employees=" + employees + "]";
+	}
+	
+	
+	
 }

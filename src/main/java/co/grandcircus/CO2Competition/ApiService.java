@@ -43,7 +43,7 @@ public class ApiService {
 		try {
 			r = routes.get(0);
 			} catch(Exception e) {
-				System.out.println("No address found");
+				System.out.println("No route found");
 				return null;
 			}
 		Leg leg = r.getLegs().get(0);
@@ -75,22 +75,38 @@ public class ApiService {
 		return leg.getStartAddress();
 		
 	}
+//	
+//	public String getDest(String startAddress, String destAddress) {
+//		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
+//				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
+//		SearchResult result = rt.getForObject(url, SearchResult.class);
+//			System.out.println(result.toString());
+//		List<Route> routes = result.getRoutes();
+//		Route r = routes.get(0);	
+//			System.out.println(r.getLegs().size());
+//		Leg leg = r.getLegs().get(0);
+//			System.out.println(leg.toString());
+//		return leg.getEndAddress();
+//		
+//	}
 	
-	public String getDest(String startAddress, String destAddress) {
+	
+	public SearchResult getResult(String startAddress, String destAddress){
 		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
 				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
-			System.out.println(result.toString());
+		return result;
+	}
+	
+
+	public String getDest(SearchResult result) {
 		List<Route> routes = result.getRoutes();
 		Route r = routes.get(0);	
 			System.out.println(r.getLegs().size());
 		Leg leg = r.getLegs().get(0);
 			System.out.println(leg.toString());
-		return leg.getEndAddress();
-		
+		return leg.getEndAddress();	
 	}
-	
-	
 	
 	
 }

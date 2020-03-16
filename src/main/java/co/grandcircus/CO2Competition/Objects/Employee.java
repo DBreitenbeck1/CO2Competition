@@ -1,9 +1,12 @@
 package co.grandcircus.CO2Competition.Objects;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
 @Entity
@@ -12,14 +15,31 @@ public class Employee {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-
 	private Long employeeId;
 	private String name;
-	private String streetAdress;
+	
 	private String username;
 	private String password;
+	private String streetAdress;
+	private String city;
+	private String zipCode;
+	
 	@ManyToOne
 	private Company company;
+	
+	@ManyToMany
+	private List<Carpool> carpool;
+
+	
+	
+
+	public List<Carpool> getCarpool() {
+		return carpool;
+	}
+
+	public void setCarpool(List<Carpool> carpool) {
+		this.carpool = carpool;
+	}
 
 	public Company getCompany() {
 		return company;
@@ -85,7 +105,13 @@ public class Employee {
 		this.zipCode = zipCode;
 	}
 
-	private String city;
-	private String zipCode;
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
+				+ password + ", streetAdress=" + streetAdress + ", city=" + city + ", zipCode=" + zipCode + ", company="
+				+ company + ", carpool=" + carpool + "]";
+	}
+
+
 
 }
