@@ -11,6 +11,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<main class="container">
+<form method="post" action="/tripdetails">
+
+<section class="jumbotron">
 <c:if test="${message ne null}">
 <div class="alert alert-warning">
   <h4 class="alert-heading">Warning!</h4>
@@ -19,11 +23,17 @@
 </c:if>
 <h4>Please enter the starting address:</h4>
 
-<form method="post" action="/tripdetails">
 <label for="street">Street Address:<input class="form-control" name="street" required></label>
 <label for="city">City:<input class="form-control" name="city" required></label>
 <label for="zip">Zip Code:<input class="form-control" name="zip" required></label>
+<h4>Please enter the destination address:</h4>
+<label for="street1">Street Address:<input class="form-control" name="street1" required></label>
+<label for="city1">City:<input class="form-control" name="city1" required></label>
+<label for="zip1">Zip Code:<input class="form-control" name="zip1" required></label>
+</section>
+
 <button class="btn btn-primary" action="submit">Click here to submit address</button>
 </form>
+</main>
 </body>
 </html>

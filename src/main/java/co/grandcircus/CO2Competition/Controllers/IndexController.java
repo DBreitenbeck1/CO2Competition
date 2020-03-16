@@ -39,6 +39,9 @@ public class IndexController {
 			@RequestParam String street,
 			@RequestParam String city,
 			@RequestParam String zip,
+			@RequestParam String street1,
+			@RequestParam String city1,
+			@RequestParam String zip1,
 			RedirectAttributes redir
 			) {
 		// This needs better error checking, this is just a starter
@@ -54,7 +57,9 @@ public class IndexController {
 		mav.addObject("street", street);
 		mav.addObject("city", city);
 		mav.addObject("zip", zip);
-		
+		mav.addObject("street1", street1);
+		mav.addObject("city1", city1);
+		mav.addObject("zip1", zip1);
 		return mav;
 		
 	}
