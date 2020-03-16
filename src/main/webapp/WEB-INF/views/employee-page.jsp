@@ -12,6 +12,25 @@
 
 </head>
 <body>
-<h5>Employee page</h5>
+<main class="container">
+<section class="jumbotron">
+
+<p>Welcome ${name }</p>
+<p>You are currently working at ${company }</p>
+
+</section>
+<section class="jumbotron">
+
+<a href="/previous-routes" class="btn btn-primary" type="submit">Previous Routes</a>
+<a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
+<a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
+<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
+
+
+</section>
+
+</main>
+
+
 </body>
 </html>

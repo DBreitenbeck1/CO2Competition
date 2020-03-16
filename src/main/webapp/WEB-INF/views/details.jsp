@@ -17,19 +17,25 @@
 	<main class="container">
 		<section class="jumbotron">
 		<h2>${invalid }</h2>
+		<section class="jumbotron">
 			<h1>From:</h1>
 			<h1>${street}</h1>
 			<h1>${city}</h1>
 			<h1>${zip}</h1>
-			<h1>To:</h1>
+			</section>
+			<section class="jumbotron">
+			<h1>To: ${coName }</h1>
 
 			<h1>${street1}</h1>
 			<h1>${city1}</h1>
 			<h1>${zip1}</h1>
+			</section>
+			<section class="jumbotron">
 			<h1>Is:</h1>
 			<h1>${distance.text }</h1>
 			<h1>And Produces:</h1>
 			<h1>${em} lbs of CO2</h1>
+			</section>
 		</section>
 		<div>
 		
