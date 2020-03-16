@@ -17,7 +17,7 @@ public class Company {
 	private Long companyId;
 	
 	private String name;
-	private String streetAdress;
+	private String streetAddress;
 	private String city;
 	private String zipCode;
 	
@@ -40,12 +40,12 @@ public class Company {
 		this.name = name;
 	}
 
-	public String getStreetAdress() {
-		return streetAdress;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setStreetAdress(String streetAdress) {
-		this.streetAdress = streetAdress;
+	public void setStreetAdress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
 	public String getCity() {
@@ -71,4 +71,12 @@ public class Company {
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}
+
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+				+ city + ", zipCode=" + zipCode + ", employees=" + employees + "]";
+	}
+	
+	
 }

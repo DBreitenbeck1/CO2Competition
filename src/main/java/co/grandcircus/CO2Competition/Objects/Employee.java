@@ -20,7 +20,8 @@ public class Employee {
 	
 	private String username;
 	private String password;
-	private String streetAdress;
+	
+	private String streetAddress;
 	private String city;
 	private String zipCode;
 	
@@ -30,8 +31,6 @@ public class Employee {
 	@ManyToMany
 	private List<Carpool> carpool;
 
-	
-	
 
 	public List<Carpool> getCarpool() {
 		return carpool;
@@ -81,12 +80,12 @@ public class Employee {
 		this.name = name;
 	}
 
-	public String getStreetAdress() {
-		return streetAdress;
+	public String getStreetAddress() {
+		return streetAddress;
 	}
 
-	public void setStreetAdress(String streetAdress) {
-		this.streetAdress = streetAdress;
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
 	}
 
 	public String getCity() {
@@ -108,9 +107,11 @@ public class Employee {
 	@Override
 	public String toString() {
 		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
-				+ password + ", streetAdress=" + streetAdress + ", city=" + city + ", zipCode=" + zipCode + ", company="
-				+ company + ", carpool=" + carpool + "]";
+				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
+				+ ", company=" + company + ", carpool=" + carpool + "]";
 	}
+
+
 
 
 
