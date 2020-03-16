@@ -10,7 +10,7 @@ import javax.persistence.ManyToMany;
 
 @Entity
 
-public class Carpool {
+public class Carpool{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long carpoolId;
@@ -57,6 +57,7 @@ public class Carpool {
 	public String toString() {
 		return "Carpool [carpoolId=" + carpoolId + ", date=" + date + ", co2=" + co2 + ", employees=" + employees + "]";
 	}
+
 	
 	
 	

@@ -1,5 +1,10 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Objects.Carpool;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Repos.CarpoolRepo;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
@@ -122,6 +128,18 @@ public class LoginController {
 		employee.setStreetAddress(street);
 		employee.setZipCode(zip);
 		employee.getCompany().getStreetAddress();
+		
+		
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+	    Date dateobj = new Date();
+	    Carpool carpool = new Carpool();
+		carpool.setCo2(coCal.smallCar(distance.getValue() ));
+		carpool.setDate(df.format(dateobj));
+		//add userId
+		carRepo.save(carpool);
+//		employee.getEmployeeId();
+		
+//		carpool.setEmployees(employee);
 //		carRepo.saveAll(employee);
 		} else {
 			mav.addObject("invalid", "No such address");
