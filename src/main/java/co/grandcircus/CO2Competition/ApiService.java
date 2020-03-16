@@ -22,6 +22,7 @@ public class ApiService {
 	String apiKey;
 	
 	
+	
 	private RestTemplate rt;
 
 	{
@@ -32,25 +33,28 @@ public class ApiService {
 		rt = new RestTemplateBuilder().additionalInterceptors(interceptor).build();
 	}
 	
-	public Distance getDistance(){
+	public Distance getDistance(String startAddress, String destAddress){
 		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ "Disneyland&destination=Universal+Studios+Hollywood&key="+apiKey);
+				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
 			System.out.println(result.toString());
 		List<Route> routes = result.getRoutes();
-		Route r = routes.get(0);	
-			System.out.println(r.getLegs().size());
+		Route r;
+		try {
+			r = routes.get(0);
+			} catch(Exception e) {
+				System.out.println("No address found");
+				return null;
+			}
 		Leg leg = r.getLegs().get(0);
 			System.out.println(leg.toString());
-			
-		//Distance distance = leg.getDistance();
 		return leg.getDistance();
 		
 	}
 	
-	public List<Route> getRoutes(){
+	public List<Route> getRoutes(String startAddress, String destAddress){
 		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ "Disneyland&destination=Universal+Studios+Hollywood&key="+apiKey);
+				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
 			System.out.println(result.toString());
 		return result.getRoutes();
@@ -58,9 +62,9 @@ public class ApiService {
 	}
 	
 
-	public String getStart() {
+	public String getStart(String startAddress, String destAddress) {
 		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ "Disneyland&destination=Universal+Studios+Hollywood&key="+apiKey);
+				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
 			System.out.println(result.toString());
 		List<Route> routes = result.getRoutes();
@@ -68,15 +72,13 @@ public class ApiService {
 			System.out.println(r.getLegs().size());
 		Leg leg = r.getLegs().get(0);
 			System.out.println(leg.toString());
-			
-		//Distance distance = leg.getDistance();
 		return leg.getStartAddress();
 		
 	}
 	
-	public String getDest() {
+	public String getDest(String startAddress, String destAddress) {
 		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ "Disneyland&destination=Universal+Studios+Hollywood&key="+apiKey);
+				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
 			System.out.println(result.toString());
 		List<Route> routes = result.getRoutes();
@@ -84,8 +86,6 @@ public class ApiService {
 			System.out.println(r.getLegs().size());
 		Leg leg = r.getLegs().get(0);
 			System.out.println(leg.toString());
-			
-		//Distance distance = leg.getDistance();
 		return leg.getEndAddress();
 		
 	}

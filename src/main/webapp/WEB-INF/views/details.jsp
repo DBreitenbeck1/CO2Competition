@@ -16,6 +16,7 @@
 <body>
 	<main class="container">
 		<section class="jumbotron">
+		<h2>${invalid }</h2>
 			<h1>From:</h1>
 			<h1>${street}</h1>
 			<h1>${city}</h1>
@@ -25,7 +26,14 @@
 			<h1>${street1}</h1>
 			<h1>${city1}</h1>
 			<h1>${zip1}</h1>
+			<h1>Is:</h1>
+			<h1>${distance.text }</h1>
+			<h1>And Produces:</h1>
+			<h1>${em} lbs of CO2</h1>
 		</section>
+		<div>
+		
+		</div>
 	</main>
 </body>
 </html>
