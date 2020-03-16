@@ -11,11 +11,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%@ include file="partials/header.jsp" %>
-<h1>${text}</h1>
-<h2>${value}</h2>
-<h3>${start }</h3>
-<h3>${dest}</h3>
+<h1>Your input:</h1>
+<h1>${street}</h1>
+<h1>${city}</h1>
+<h1>${zip}</h1>
+
 
 </body>
 </html>
