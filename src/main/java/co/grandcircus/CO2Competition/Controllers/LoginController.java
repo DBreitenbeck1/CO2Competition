@@ -181,4 +181,9 @@ public class LoginController {
 		return mav;
 		
 	}
+	
+	@RequestMapping("/summary")
+	public ModelAndView showSummary() {
+		return new ModelAndView("summary","saved",carRepo.findAll());
+	}
 }
