@@ -15,21 +15,38 @@
 <main class="container">
 <section class="jumbotron">
 
-<p>Welcome ${name }</p>
-<p>You are currently working at ${company }</p>
-
+<h4>${cName } employees</h4>
 </section>
 <section class="jumbotron">
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>Employee</th>
+    <th>City</th>
+    <th>Street</th>
+    <th>Zip code</th>
+  </tr>
+  </thead>
+  <tbody>
+  <c:forEach var="d" items="${info }">
+  
+  <tr>
+    <td>${d.name }</td>
+    <td>${d.city }</td>
+    <td>${d.streetAddress }</td>
+    <td>${d.zipCode }</td>
+  </tr>
+  </c:forEach>
+  </tbody>
+</table>
 
-<a href="/list-of-routes" class="btn btn-primary" type="submit">See list of routes</a>
-<a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
-<a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
-<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
 
 
 </section>
 
+
 </main>
+
 
 
 </body>

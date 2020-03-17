@@ -13,8 +13,11 @@
 </head>
 <body>
 <main class="container">
-<form method="post" action="/tripdetails/${emId }">
-
+<!-- <form method="post" action="/tripdetails/${emId }"> -->
+<section class="jumbotron">
+<h4>Hey ${name }, let's plan your carpool.</h4>
+<h4>Where to?</h4>
+</section>
 <section class="jumbotron">
 <c:if test="${message ne null}">
 <div class="alert alert-warning">
@@ -22,6 +25,7 @@
   <p class="mb-0">${message}</p>
 </div>
 </c:if>
+
 <!-- <h4>Please enter the starting address:</h4>
 
 <label for="street">Street Address:<input class="form-control" name="street" required></label>
@@ -31,7 +35,7 @@
 <label for="street1">Street Address:<input class="form-control" name="street1" required></label>
 <label for="city1">City:<input class="form-control" name="city1" required></label>
 <label for="zip1">Zip Code:<input class="form-control" name="zip1" required></label> -->
-<c:forEach var="all" items="${allEmployee }">
+<!--<c:forEach var="all" items="${allEmployee }">
 
 <label><input type="radio" name="em" value="${all.username}">Employee Name: ${all.name }		Address: ${all.city }	${all.streetAddress }	${all.zipCode }		
 Company:	${all.company.name }</label>
@@ -47,6 +51,8 @@ Company:	${all.company.name }</label>
 
 </c:forEach>
 </section> -->
+<a href="/ridetw/${emId }" class="btn btn-primary" type="submit">Ride to work</a>
+<a href="/ridebh/${emId }" class="btn btn-primary" type="submit">Ride back home</a>
 </section>
 
 <button class="btn btn-primary" type="submit">Click here to submit address</button>

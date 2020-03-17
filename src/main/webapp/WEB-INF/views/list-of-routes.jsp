@@ -13,24 +13,29 @@
 </head>
 <body>
 <main class="container">
+
 <section class="jumbotron">
 
-<p>Welcome ${name }</p>
-<p>You are currently working at ${company }</p>
-
-</section>
-<section class="jumbotron">
-
-<a href="/list-of-routes" class="btn btn-primary" type="submit">See list of routes</a>
-<a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
-<a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
-<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
+<table class="table table-striped">
+<thead>
+  <tr>
+    <th>Company Name</th>
+    <th>City</th>
+  </tr>
+  </thead>
+  <tbody>
+  <c:forEach var="co" items="${company }">
+  <tr>
+    <td><a href="/details-list/${co.companyId}">${co.name }</a></td>
+    <td>${co.city }</td>
+  </tr>
+  </c:forEach>
+  </tbody>
+</table>
 
 
 </section>
 
 </main>
-
-
 </body>
 </html>

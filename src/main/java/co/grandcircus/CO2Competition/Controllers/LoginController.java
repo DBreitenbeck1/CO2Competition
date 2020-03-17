@@ -21,6 +21,7 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Objects.Carpool;
+import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Repos.CarpoolRepo;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
@@ -85,6 +86,7 @@ public class LoginController {
 		
 		ModelAndView mav = new ModelAndView ("carpool");
 		mav.addObject("emId",employee.getEmployeeId());
+		mav.addObject("name",employee.getName());
 		mav.addObject("company",coRepo.findAll());
 		mav.addObject("allEmployee",emRepo.findAll());
 		return mav;
@@ -185,5 +187,63 @@ public class LoginController {
 	@RequestMapping("/summary")
 	public ModelAndView showSummary() {
 		return new ModelAndView("summary","saved",carRepo.findAll());
+	}
+	
+	@RequestMapping("/list-of-routes")
+	public ModelAndView showList() {
+		return new ModelAndView("list-of-routes","company",coRepo.findAll());
+	}
+	
+	@RequestMapping("/details-list/{id}")
+	public ModelAndView showDetials(@PathVariable ("id") Company company) {
+		ModelAndView mav =  new ModelAndView("company-details");
+		mav.addObject("info",company.getEmployees());
+		mav.addObject("cName",company.getName());
+		return mav;
+	}
+	
+	@RequestMapping("/ridetw/{id}")
+	public ModelAndView showRideToWork(@PathVariable ("id") Employee employee) {
+		
+		ModelAndView mav = new ModelAndView("show-origin");
+		mav.addObject("eCity",employee.getCity());
+		mav.addObject("eStreet",employee.getStreetAddress());
+		mav.addObject("eZip",employee.getZipCode());
+		mav.addObject("cCity", employee.getCompany().getCity());
+		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
+		mav.addObject("cZip",employee.getCompany().getZipCode());
+		mav.addObject("id",employee.getCompany().getCompanyId());
+		return mav;
+	}
+	
+	@RequestMapping("/find-carpool/{id}")
+	public ModelAndView findCarpool(@PathVariable("id") Employee employee, 
+			@RequestParam(value="eCity", required=false) String city
+			, @RequestParam("date") String date,
+			@RequestParam("time") String time) {
+		
+		ModelAndView mav = new ModelAndView ("search-carpool");
+		List<Employee> em = emRepo.findByCity(city);
+		
+		mav.addObject("list", em);
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("emId",employee.getEmployeeId());
+		return mav;
+	}
+	
+	@RequestMapping("/submit-carpool")
+	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
+			@RequestParam(value="date",required=false) String date,
+			@RequestParam(value="time",required=false) String time,
+			@RequestParam(value="id", required=false) Long id) {
+		System.out.println("emid" +id);
+		ModelAndView mav = new ModelAndView("confirmation");
+		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
+		mav.addObject("company",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("id", id);
+		return mav;
 	}
 }

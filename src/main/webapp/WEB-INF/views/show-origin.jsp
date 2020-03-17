@@ -13,24 +13,18 @@
 </head>
 <body>
 <main class="container">
+<form action="/find-carpool/${id }">
 <section class="jumbotron">
 
-<p>Welcome ${name }</p>
-<p>You are currently working at ${company }</p>
+<div>Home - ${eCity }, ${eStreet }, ${eZip }</div>
+<div>Work - ${cCity }, ${cStreet }, ${cZip }</div>
+<div>Select pickup date: <input type="date" name="date" required/></div>
+<div>Select pickup time: <input type="time" name="time" required/></div>
 
 </section>
-<section class="jumbotron">
-
-<a href="/list-of-routes" class="btn btn-primary" type="submit">See list of routes</a>
-<a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
-<a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
-<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
-
-
-</section>
-
+<input type="hidden" name="eCity" value="${eCity }"/>
+<button class="btn btn-primary" type="submit">Find carpool</button>
+</form>
 </main>
-
-
 </body>
 </html>

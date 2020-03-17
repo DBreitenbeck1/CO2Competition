@@ -13,24 +13,16 @@
 </head>
 <body>
 <main class="container">
+<form action="/employee/${id }">
 <section class="jumbotron">
 
-<p>Welcome ${name }</p>
-<p>You are currently working at ${company }</p>
-
-</section>
-<section class="jumbotron">
-
-<a href="/list-of-routes" class="btn btn-primary" type="submit">See list of routes</a>
-<a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
-<a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
-<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
-
+<h4>Your carpool request successfully submitted</h4>
+<h5>${name } will pick you up on ${date } at ${time } to ${company }</h5>
 
 </section>
 
+<button class="btn btn-primary" type="submit">Home Page</button>
+</form>
 </main>
-
-
 </body>
 </html>
