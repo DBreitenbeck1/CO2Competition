@@ -19,7 +19,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
+import co.grandcircus.CO2Competition.CalculationService;
 import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Carpool;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
@@ -45,6 +47,8 @@ public class LoginController {
 	private ApiService apiServe;
 	
 	private COCalculator coCal;
+	
+	private CalculationService calcServe;
 	
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
@@ -82,13 +86,15 @@ public class LoginController {
 	
 	@RequestMapping("/carpool/{id}")
 	public ModelAndView showCarpool(@PathVariable("id") Employee employee) {
-		
-		
+		Company company =coRepo.findByName(employee.getCompany().getName());
+		System.out.println(company.getName());
+		List<Employee> allEmps = company.getEmployees();
+		allEmps.remove(employee);
 		ModelAndView mav = new ModelAndView ("carpool");
 		mav.addObject("emId",employee.getEmployeeId());
 		mav.addObject("name",employee.getName());
 		mav.addObject("company",coRepo.findAll());
-		mav.addObject("allEmployee",emRepo.findAll());
+		mav.addObject("allEmployee", allEmps);
 		return mav;
 	}
 	
@@ -97,14 +103,14 @@ public class LoginController {
 	@RequestMapping("/tripdetails/{id}")
 	public ModelAndView showDetails(
 			@PathVariable ("id") Employee employee,
-//			@RequestParam String street,
-//			@RequestParam String city,
-//			@RequestParam String zip,
-//			@RequestParam (value="co") String des, 
+			@RequestParam String street,
+			@RequestParam String city,
+			@RequestParam String zip,
+			@RequestParam (value="co") String des, 
 			@RequestParam(value="em") String username,
-//			@RequestParam String street1,
-//			@RequestParam String city1,
-//			@RequestParam String zip1,
+			@RequestParam String street1,
+			@RequestParam String city1,
+			@RequestParam String zip1,
 			RedirectAttributes redir
 			) {
 		System.out.println("em**"+username);
@@ -119,9 +125,10 @@ public class LoginController {
 		}
 		ModelAndView mav = new ModelAndView("details");
 		String address1 = emRepo.findByUsernameIgnoreCase(username).getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCity()+emRepo.findByUsernameIgnoreCase(username).getZipCode();
-//		String address2 = street1+city1+zip1;
-		String address2 = emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCompany().getCity()+ emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode();
-		Distance distance = apiServe.getDistance(address1, address2);
+		String address2 = street1+city1+zip1;
+		 address2 = emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCompany().getCity()+ emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode();
+		SearchResult result = apiServe.getResult(address1, address2);
+		 Distance distance = apiServe.getDistance(result);
 		if (distance!=null) {
 	
 		mav.addObject("street", emRepo.findByUsernameIgnoreCase(username).getStreetAddress());
@@ -134,10 +141,10 @@ public class LoginController {
 		mav.addObject("distance", distance);
 		mav.addObject("em", coCal.smallCar(distance.getValue() ));
 		
-//		employee.setCity(city);
-//		employee.setStreetAddress(street);
-//		employee.setZipCode(zip);
-//		employee.getCompany().getStreetAddress();
+		employee.setCity(city);
+		employee.setStreetAddress(street);
+		employee.setZipCode(zip);
+		employee.getCompany().getStreetAddress();
 	
 		employee.getCompany().getStreetAddress();
 		System.out.println(employee.getName());
@@ -165,12 +172,6 @@ public class LoginController {
 		
 		carRepo.save(carpool);
 		System.out.println(carpool.getCarpoolId());
-		//add userId
-		
-//		employee.getEmployeeId();
-
-//		carpool.setEmployees(employee);
-//		carRepo.saveAll(employee);
 		List<Employee> em = new ArrayList<>();
 		employee.addCarpool(carpool);
 		carpool.setEmployees(em);
@@ -184,9 +185,68 @@ public class LoginController {
 		
 	}
 	
-	@RequestMapping("/summary")
-	public ModelAndView showSummary() {
-		return new ModelAndView("summary","saved",carRepo.findAll());
+	@RequestMapping("/carpoolsummary/{id}")
+	public ModelAndView showSummary(@PathVariable("id") Carpool carpool) {
+		ModelAndView mav = new ModelAndView("summary");
+		mav.addObject("cp", carpool);
+		mav.addObject("company", carpool.getCompany().getName());
+		
+		return mav;
+	}
+	
+	@RequestMapping("/carpool")
+	public ModelAndView assignCarpool(
+			@RequestParam("id") Long id,
+			@RequestParam(value="passengers", defaultValue="") List<Long> ids
+	//@RequestParam(value="toppings", defaultValue = "") List<String> toppings,
+			) {
+		System.out.println(ids);
+		List<Employee> passengers = new ArrayList<>();
+		for(Long pass: ids) {
+			passengers.add(emRepo.findById(pass).orElse(null));
+		}
+		Employee driver = emRepo.findById(id).orElse(null);
+		Company company = driver.getCompany();
+		
+		double saved = 0;
+		double total = 0;
+		double e =0;
+		for(Employee pass: passengers) {
+			SearchResult result =apiServe.getResult(pass.getAddress(), company.getAddress());
+		Distance distance= apiServe.getDistance(result);
+		System.out.println(distance.getValue());
+		Long d = distance.getValue();
+		System.out.println(d);
+		double miles = d/1609.344;
+		System.out.println(miles);
+		CalculationService cs = new CalculationService();
+		e=cs.calculateCO2(miles, "car");
+	//	e=7.08*miles;
+	//	e=calcServe.calculateCO2(miles, "car");
+			System.out.println(e);
+			saved += e;
+			total +=e;
+		}
+	
+		
+		passengers.add(driver);
+		
+		Carpool carpool = new Carpool();
+		carpool.setCompany(driver.getCompany());
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+	    Date dateobj = new Date();
+		carpool.setDate(df.format(dateobj));
+		carpool.setCo2(saved);
+		carRepo.save(carpool);
+		carpool.setEmployees(passengers);
+		for(Employee pass: passengers) {
+			pass.addCarpool(carpool);
+			emRepo.save(pass);
+		}
+		carRepo.save(carpool);
+		System.out.println(carpool.getCarpoolId());
+		ModelAndView mav = new ModelAndView("redirect:/carpoolsummary/"+carpool.getCarpoolId());		
+		return mav;
 	}
 	
 	@RequestMapping("/list-of-routes")
@@ -246,4 +306,7 @@ public class LoginController {
 		mav.addObject("id", id);
 		return mav;
 	}
+
+	
+	
 }

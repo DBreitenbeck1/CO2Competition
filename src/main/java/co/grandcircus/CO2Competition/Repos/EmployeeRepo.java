@@ -11,4 +11,6 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 
 	Employee findByUsernameIgnoreCase(String username);
 	List<Employee> findByCity (String city);
+	
+	Employee findByCompany(String companyname);
 }

@@ -7,6 +7,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 
 @Entity
 
@@ -18,13 +19,24 @@ public class Carpool{
 	private String date;
 	private Double co2;
 	
-		@ManyToMany(mappedBy="carpool")
+	@ManyToOne
+	private Company company;
+	
+	
+	
+	@ManyToMany(mappedBy="carpool")
 	private List<Employee> employees  ;
 	
 	
 	
-//	@ManyToMany(mappedBy="carpool")
-//	private List<Employee> employees;
+
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
 
 	public Long getCarpoolId() {
 		return carpoolId;
@@ -54,8 +66,7 @@ public class Carpool{
 		return employees;
 	}
 	public void addItem (Employee item) {employees.add(item);}
-//	public void setEmployees(List<Employee> object) {
-//		this.employees = object;
+
 	
 	public void addEmployee(Employee employee) {
 		employees.add(employee);
@@ -65,10 +76,13 @@ public class Carpool{
 		this.employees = employees;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Carpool [carpoolId=" + carpoolId + ", date=" + date + ", co2=" + co2 + ", employees=" + employees + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Carpool [carpoolId=" + carpoolId + ", date=" + date + ", co2=" + co2 + ", company=" + company
+				+ ", employees=" + employees + "]";
+	}
+
+
 
 	
 	

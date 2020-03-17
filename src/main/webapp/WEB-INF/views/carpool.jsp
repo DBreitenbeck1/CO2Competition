@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +7,7 @@
 <link rel="stylesheet" href="/style.css" />
 
 </head>
+
 <body>
 <main class="container">
 <!-- <form method="post" action="/tripdetails/${emId }"> -->
@@ -18,13 +15,15 @@
 <h4>Hey ${name }, let's plan your carpool.</h4>
 <h4>Where to?</h4>
 </section>
-<section class="jumbotron">
+<form method="post" action="/carpool">
+
+<!-- <section class="jumbotron">
 <c:if test="${message ne null}">
 <div class="alert alert-warning">
   <h4 class="alert-heading">Warning!</h4>
   <p class="mb-0">${message}</p>
 </div>
-</c:if>
+</c:if> -->
 
 <!-- <h4>Please enter the starting address:</h4>
 
@@ -39,10 +38,16 @@
 
 <label><input type="radio" name="em" value="${all.username}">Employee Name: ${all.name }		Address: ${all.city }	${all.streetAddress }	${all.zipCode }		
 Company:	${all.company.name }</label>
+=======
+>>>>>>> 8d6608f2cbd7ec0a330a9880f56566b5d9eb7002
 
+<c:forEach var="em" items="${allEmployee }">
 
+<label><input type="checkbox" name="passengers" value="${em.employeeId}">Employee Name: ${em.name }		Address: ${em.city }	${em.streetAddress }	${em.zipCode }		
+Company:	${em.company.name }</label>
 
 </c:forEach>
+<<<<<<< HEAD
 <!-- <section> 
 <h5>Choose your company</h5>
 <c:forEach var="c" items="${company }">
@@ -54,8 +59,8 @@ Company:	${all.company.name }</label>
 <a href="/ridetw/${emId }" class="btn btn-primary" type="submit">Ride to work</a>
 <a href="/ridebh/${emId }" class="btn btn-primary" type="submit">Ride back home</a>
 </section>
-
-<button class="btn btn-primary" type="submit">Click here to submit address</button>
+<input type="hidden" value = ${emId } name ="id">
+<!-- <button class="btn btn-primary" type="submit">Click here to submit address</button> -->
 </form>
 </main>
 </body>
