@@ -14,7 +14,7 @@
 <body>
 <main class="container">
 <section class="jumbotron">
-<p>Carpool: ${cp.carpoolId } From: ${company }</p>
+<p>Carpool: ${cp.carpoolId } From: ${company } Has saved: ${cp.co2 } lbs</p>
 <table class="table table-striped">
 <thead>
   <tr>

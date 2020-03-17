@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
+import co.grandcircus.CO2Competition.CalculationService;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Carpool;
@@ -46,6 +47,8 @@ public class LoginController {
 	private ApiService apiServe;
 	
 	private COCalculator coCal;
+	
+	private CalculationService calcServe;
 	
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
@@ -202,12 +205,37 @@ public class LoginController {
 			passengers.add(emRepo.findById(pass).orElse(null));
 		}
 		Employee driver = emRepo.findById(id).orElse(null);
+		Company company = driver.getCompany();
+		
+		double saved = 0;
+		double total = 0;
+		double e =0;
+		for(Employee pass: passengers) {
+			SearchResult result =apiServe.getResult(pass.getAddress(), company.getAddress());
+		Distance distance= apiServe.getDistance(result);
+		System.out.println(distance.getValue());
+		Long d = distance.getValue();
+		System.out.println(d);
+		double miles = d/1609.344;
+		System.out.println(miles);
+		CalculationService cs = new CalculationService();
+		e=cs.calculateCO2(miles, "car");
+	//	e=7.08*miles;
+	//	e=calcServe.calculateCO2(miles, "car");
+			System.out.println(e);
+			saved += e;
+			total +=e;
+		}
+	
+		
 		passengers.add(driver);
+		
 		Carpool carpool = new Carpool();
 		carpool.setCompany(driver.getCompany());
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 	    Date dateobj = new Date();
 		carpool.setDate(df.format(dateobj));
+		carpool.setCo2(saved);
 		carRepo.save(carpool);
 		carpool.setEmployees(passengers);
 		for(Employee pass: passengers) {

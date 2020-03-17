@@ -13,7 +13,7 @@ public class COCalculator {
 	private ApiService apiServe;
 	
 	//Estimations based on average for each car type
-	public double smallCar(double meters) {
+	public double smallCar(long meters) {
 		double miles = meters/1609.344;
 		double emissions = 7.08*miles;
 		emissions = (int)(Math.round(emissions*100))/100.00;
