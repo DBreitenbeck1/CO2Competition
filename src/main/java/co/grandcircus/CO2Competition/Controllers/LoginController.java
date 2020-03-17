@@ -2,6 +2,7 @@ package co.grandcircus.CO2Competition.Controllers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -87,6 +88,9 @@ public class LoginController {
 		mav.addObject("company",coRepo.findAll());
 		return mav;
 	}
+	
+	
+	
 	@RequestMapping("/tripdetails/{id}")
 	public ModelAndView showDetails(
 			@PathVariable ("id") Employee employee,
@@ -124,10 +128,11 @@ public class LoginController {
 		mav.addObject("distance", distance);
 		mav.addObject("em", coCal.smallCar(distance.getValue() ));
 		
-		employee.setCity(city);
-		employee.setStreetAddress(street);
-		employee.setZipCode(zip);
+	
 		employee.getCompany().getStreetAddress();
+		System.out.println(employee.getName());
+		System.out.println(employee.getAddress());
+		System.out.println(employee.getEmployeeId());
 		
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
@@ -135,12 +140,20 @@ public class LoginController {
 	    Carpool carpool = new Carpool();
 		carpool.setCo2(coCal.smallCar(distance.getValue() ));
 		carpool.setDate(df.format(dateobj));
-		//add userId
 		carRepo.save(carpool);
-//		employee.getEmployeeId();
+		System.out.println(carpool.getCarpoolId());
+		//add userId
 		
+//		employee.getEmployeeId();
+
 //		carpool.setEmployees(employee);
 //		carRepo.saveAll(employee);
+		List<Employee> em = new ArrayList<>();
+		employee.addCarpool(carpool);
+		carpool.setEmployees(em);
+		carRepo.save(carpool);
+		emRepo.save(employee);
+		System.out.println(carpool.getCarpoolId());
 		} else {
 			mav.addObject("invalid", "No such address");
 		}

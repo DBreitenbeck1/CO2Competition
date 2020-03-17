@@ -18,6 +18,7 @@ public class Carpool{
 	private String date;
 	private Double co2;
 	
+	
 	@ManyToMany(mappedBy="carpool")
 	private List<Employee> employees;
 
@@ -47,6 +48,10 @@ public class Carpool{
 
 	public List<Employee> getEmployees() {
 		return employees;
+	}
+	
+	public void addEmployee(Employee employee) {
+		employees.add(employee);
 	}
 
 	public void setEmployees(List<Employee> employees) {
