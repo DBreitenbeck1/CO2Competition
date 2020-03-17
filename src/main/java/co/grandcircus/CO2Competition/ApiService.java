@@ -32,81 +32,76 @@ public class ApiService {
 		};
 		rt = new RestTemplateBuilder().additionalInterceptors(interceptor).build();
 	}
-	
-	public Distance getDistance(String startAddress, String destAddress){
-		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
-		SearchResult result = rt.getForObject(url, SearchResult.class);
-			System.out.println(result.toString());
-		List<Route> routes = result.getRoutes();
-		Route r;
-		try {
-			r = routes.get(0);
-			} catch(Exception e) {
-				System.out.println("No route found");
-				return null;
-			}
-		Leg leg = r.getLegs().get(0);
-			System.out.println(leg.toString());
-		return leg.getDistance();
-		
-	}
-	
-	public List<Route> getRoutes(String startAddress, String destAddress){
-		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
-		SearchResult result = rt.getForObject(url, SearchResult.class);
-			System.out.println(result.toString());
-		return result.getRoutes();
-		
-	}
-	
 
-	public String getStart(String startAddress, String destAddress) {
-		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
-		SearchResult result = rt.getForObject(url, SearchResult.class);
-			System.out.println(result.toString());
-		List<Route> routes = result.getRoutes();
-		Route r = routes.get(0);	
-			System.out.println(r.getLegs().size());
-		Leg leg = r.getLegs().get(0);
-			System.out.println(leg.toString());
-		return leg.getStartAddress();
-		
-	}
-//	
-//	public String getDest(String startAddress, String destAddress) {
-//		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-//				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
-//		SearchResult result = rt.getForObject(url, SearchResult.class);
-//			System.out.println(result.toString());
-//		List<Route> routes = result.getRoutes();
-//		Route r = routes.get(0);	
-//			System.out.println(r.getLegs().size());
-//		Leg leg = r.getLegs().get(0);
-//			System.out.println(leg.toString());
-//		return leg.getEndAddress();
-//		
-//	}
-	
-	
 	public SearchResult getResult(String startAddress, String destAddress){
 		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
-				+ startAddress+ "&destination=" +destAddress+"&key="+apiKey);
+				+ startAddress + "&destination=" + destAddress + "&key=" + apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
 		return result;
 	}
 	
+	// Overloaded for Midway Point
+	public SearchResult getResult(String startAddress, String midway, String destAddress) throws IllegalArgumentException{
+		String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
+				+ startAddress + "&destination=" + destAddress
+				+ "&waypoints=" + midway
+				+ "&key=" + apiKey);
+		SearchResult result = rt.getForObject(url, SearchResult.class);
+		System.out.println(url);
+		return result;
+	}
 
-	public String getDest(SearchResult result) {
-		List<Route> routes = result.getRoutes();
-		Route r = routes.get(0);	
-			System.out.println(r.getLegs().size());
-		Leg leg = r.getLegs().get(0);
-			System.out.println(leg.toString());
-		return leg.getEndAddress();	
+	// Overloaded to allow user to pick which leg they want
+	public Distance getDistance(SearchResult result, Integer index) {
+		Route route = result.getRoutes().get(0);
+		Leg leg = route.getLegs().get(index);
+		return leg.getDistance();
 	}
 	
+	// Overloaded, returns aggregate distance of full trip
+	public Distance getDistance(SearchResult result){
+		String dist;
+		Double distDouble = 0.0;
+		Long distLong = 0L;
+		
+		Route routes = result.getRoutes().get(0);
+		List<Leg> legs = routes.getLegs();
+		for (Leg leg : legs) {
+			distLong += leg.getDistance().getValue();
+
+			dist = leg.getDistance().getText();
+			dist = dist.substring(0, dist.length() - 3);
+			distDouble += Double.parseDouble(dist);
+		}
+		
+		dist = distDouble.toString() + " mi";
+		Distance distance = new Distance();
+		distance.setText(dist);
+		distance.setValue(distLong);
+		return distance;
+	}
+	
+	public List<Route> getRoutes(SearchResult result){
+		return result.getRoutes();
+	}
+	
+	public String getStart(SearchResult result, Integer index) throws IllegalArgumentException {
+		List<Route> routes = result.getRoutes();
+		try {
+			Route r = routes.get(0);	
+			Leg leg = r.getLegs().get(index);
+			return leg.getStartAddress();
+		} catch (IndexOutOfBoundsException iae) {
+			iae.printStackTrace();
+			throw new IllegalArgumentException("No Results Found");
+		}
+	}
+
+	public String getDest(SearchResult result, Integer index) {
+		List<Route> routes = result.getRoutes();
+		Route r = routes.get(0);	
+		Leg leg = r.getLegs().get(index);
+		return leg.getEndAddress();	
+	}
 	
 }

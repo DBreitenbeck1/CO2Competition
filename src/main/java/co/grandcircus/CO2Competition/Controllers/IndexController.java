@@ -10,71 +10,84 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
 
 @Controller
 public class IndexController {
-	
+
 	@Autowired
 	private ApiService apiServe;
-	
+
+	@Autowired
 	private COCalculator coCal;
-	
+
 	@RequestMapping("/")
-	public ModelAndView showIndex() {
+	public ModelAndView showIndex(RedirectAttributes redir) {
+		// Create ModelAndView
 		ModelAndView mav = new ModelAndView("index");
-		String address1 = "209HillStreetNorthvilleMI48167";
+
+		// Declare Variables
+		String address1 = "NoviMI";
 		String address2 = "DetroitMI";
-		Distance distance = apiServe.getDistance(address1, address2);
-		mav.addObject("start", apiServe.getStart(address1, address2));
-	//	mav.addObject("dest", apiServe.getDest(address1, address2));
-		mav.addObject("text", distance.getText());
-		mav.addObject("value", distance.getValue());
+		String address3 = "ChicagoIL";
+		String start;
+		String midway;
+		String destination;
+		Distance distance;
+		
+		// Get Search Results
+		SearchResult result = apiServe.getResult(address1, address2, address3);
+
+		// Will catch thrown exception if there were no results found and redirect
+		try {
+			start = apiServe.getStart(result, 0);
+			midway = apiServe.getStart(result, 1);
+			destination = apiServe.getDest(result, 1);
+			distance = apiServe.getDistance(result);
+		} catch (IllegalArgumentException IAE) {
+			redir.addFlashAttribute("message", IAE.getMessage());
+			return new ModelAndView("redirect:/logtrip");
+		}
+		double CO2Savings = coCal.calculateSavings(address1, address2);
+//		double CO2Savings = coCal.smallCar(5.7);
+		
+		// Add Objects to ModelAndView
+		mav.addObject("co2savings", CO2Savings);
+		mav.addObject("start", start);
+		mav.addObject("midway", midway);
+		mav.addObject("destination", destination);
+		mav.addObject("distance", distance);
 		return mav;
-		//return new ModelAndView("index");
 	}
-	
+
 	@RequestMapping("/logtrip")
 	public ModelAndView logTripForm() {
 		return new ModelAndView("tripform");
 	}
-	
+
 	@RequestMapping("/tripdetails")
-	public ModelAndView showDetails(
-			@RequestParam String street,
-			@RequestParam String city,
-			@RequestParam String zip,
-			@RequestParam String street1,
-			@RequestParam String city1,
-			@RequestParam String zip1,
-			RedirectAttributes redir
-			) {
-		// This needs better error checking, this is just a starter
-		boolean validStreet = !street.isEmpty() || street != null;
-		boolean validCity = !city.isEmpty() || city != null;
-		boolean validZip = !zip.isEmpty() || zip != null;
-		if (!(validStreet && validCity && validZip)) {
-			redir.addFlashAttribute("message", "Invalid address input, please try again.");
-			return new ModelAndView("redirect:/logtrip");
-		}
+	public ModelAndView showDetails(@RequestParam String street, @RequestParam String city, @RequestParam String zip,
+			@RequestParam String street1, @RequestParam String city1, @RequestParam String zip1,
+			RedirectAttributes redir) {
 		ModelAndView mav = new ModelAndView("details");
-		String address1 = street+city+zip;
-		String address2 = street1+city1+zip1;
-		Distance distance = apiServe.getDistance(address1, address2);
-		if (distance!=null) {
-	
-		mav.addObject("street", street);
-		mav.addObject("city", city);
-		mav.addObject("zip", zip);
-		mav.addObject("street1", street1);
-		mav.addObject("city1", city1);
-		mav.addObject("zip1", zip1);
-		mav.addObject("distance", distance);
-		mav.addObject("em", coCal.smallCar(distance.getValue() ));
+		String startAddress = street + city + zip;
+		String destAddress = street1 + city1 + zip1;
+		SearchResult result = apiServe.getResult(startAddress, destAddress);
+		Distance distance = apiServe.getDistance(result);
+		if (distance != null) {
+			mav.addObject("street", street);
+			mav.addObject("city", city);
+			mav.addObject("zip", zip);
+			mav.addObject("street1", street1);
+			mav.addObject("city1", city1);
+			mav.addObject("zip1", zip1);
+			mav.addObject("distance", distance);
+			mav.addObject("em", coCal.smallCar(distance.getValue()));
 		} else {
 			mav.addObject("invalid", "No such address");
 		}
 		return mav;
-		
+
 	}
-	
+
 }
