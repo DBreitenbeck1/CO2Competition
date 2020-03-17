@@ -2,6 +2,7 @@ package co.grandcircus.CO2Competition.Controllers;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -85,62 +86,73 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView ("carpool");
 		mav.addObject("emId",employee.getEmployeeId());
 		mav.addObject("company",coRepo.findAll());
+		mav.addObject("allEmployee",emRepo.findAll());
 		return mav;
 	}
 	@RequestMapping("/tripdetails/{id}")
 	public ModelAndView showDetails(
 			@PathVariable ("id") Employee employee,
-			@RequestParam String street,
-			@RequestParam String city,
-			@RequestParam String zip,
-			@RequestParam (value="co") String des, 
+//			@RequestParam String street,
+//			@RequestParam String city,
+//			@RequestParam String zip,
+//			@RequestParam (value="co") String des, 
+			@RequestParam(value="em") String username,
 //			@RequestParam String street1,
 //			@RequestParam String city1,
 //			@RequestParam String zip1,
 			RedirectAttributes redir
 			) {
+		System.out.println("em**"+username);
+
 		// This needs better error checking, this is just a starter
-		boolean validStreet = !street.isEmpty() || street != null;
-		boolean validCity = !city.isEmpty() || city != null;
-		boolean validZip = !zip.isEmpty() || zip != null;
+		boolean validStreet = !emRepo.findByUsernameIgnoreCase(username).getStreetAddress().isEmpty() || emRepo.findByUsernameIgnoreCase(username).getStreetAddress() != null;
+		boolean validCity = !emRepo.findByUsernameIgnoreCase(username).getCity().isEmpty() || emRepo.findByUsernameIgnoreCase(username).getCity() != null;
+		boolean validZip = !emRepo.findByUsernameIgnoreCase(username).getZipCode().isEmpty() || emRepo.findByUsernameIgnoreCase(username).getZipCode() != null;
 		if (!(validStreet && validCity && validZip)) {
 			redir.addFlashAttribute("message", "Invalid address input, please try again.");
 			return new ModelAndView("redirect:/logtrip");
 		}
 		ModelAndView mav = new ModelAndView("details");
-		String address1 = street+city+zip;
+		String address1 = emRepo.findByUsernameIgnoreCase(username).getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCity()+emRepo.findByUsernameIgnoreCase(username).getZipCode();
 //		String address2 = street1+city1+zip1;
-		String address2 = coRepo.findByName(des).getStreetAddress() + coRepo.findByName(des).getCity() + coRepo.findByName(des).getZipCode();
+		String address2 = emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCompany().getCity()+ emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode();
 		Distance distance = apiServe.getDistance(address1, address2);
 		if (distance!=null) {
 	
-		mav.addObject("street", street);
-		mav.addObject("city", city);
-		mav.addObject("zip", zip);
-		mav.addObject("coName",coRepo.findByName(des).getName());
-		mav.addObject("street1", coRepo.findByName(des).getStreetAddress());
-		mav.addObject("city1", coRepo.findByName(des).getCity());
-		mav.addObject("zip1", coRepo.findByName(des).getZipCode());
+		mav.addObject("street", emRepo.findByUsernameIgnoreCase(username).getStreetAddress());
+		mav.addObject("city", emRepo.findByUsernameIgnoreCase(username).getCity());
+		mav.addObject("zip", emRepo.findByUsernameIgnoreCase(username).getZipCode());
+		mav.addObject("coName",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
+		mav.addObject("street1",emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress());
+		mav.addObject("city1", emRepo.findByUsernameIgnoreCase(username).getCompany().getCity());
+		mav.addObject("zip1", emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode());
 		mav.addObject("distance", distance);
 		mav.addObject("em", coCal.smallCar(distance.getValue() ));
 		
-		employee.setCity(city);
-		employee.setStreetAddress(street);
-		employee.setZipCode(zip);
-		employee.getCompany().getStreetAddress();
+//		employee.setCity(city);
+//		employee.setStreetAddress(street);
+//		employee.setZipCode(zip);
+//		employee.getCompany().getStreetAddress();
 		
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 	    Date dateobj = new Date();
 	    Carpool carpool = new Carpool();
-		carpool.setCo2(coCal.smallCar(distance.getValue() ));
+		carpool.setCo2(coCal.smallCar(distance.getValue()));
 		carpool.setDate(df.format(dateobj));
 		//add userId
+		List<Employee> em = new ArrayList<>();
+		em.add(employee);
 		carRepo.save(carpool);
-//		employee.getEmployeeId();
+//		Employee em = new Employee();
+//		em.getEmployeeId();
+		List<Carpool> c = new ArrayList<>();
+		c.add(carpool);
+		carpool.setEmployees(em);
+		employee.setCarpool(c);
+		carpool.getCarpoolId();
+		employee.addItem(carpool);
 		
-//		carpool.setEmployees(employee);
-//		carRepo.saveAll(employee);
 		} else {
 			mav.addObject("invalid", "No such address");
 		}

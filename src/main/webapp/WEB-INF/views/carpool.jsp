@@ -22,7 +22,7 @@
   <p class="mb-0">${message}</p>
 </div>
 </c:if>
-<h4>Please enter the starting address:</h4>
+<!-- <h4>Please enter the starting address:</h4>
 
 <label for="street">Street Address:<input class="form-control" name="street" required></label>
 <label for="city">City:<input class="form-control" name="city" required></label>
@@ -31,14 +31,22 @@
 <label for="street1">Street Address:<input class="form-control" name="street1" required></label>
 <label for="city1">City:<input class="form-control" name="city1" required></label>
 <label for="zip1">Zip Code:<input class="form-control" name="zip1" required></label> -->
-<section>
+<c:forEach var="all" items="${allEmployee }">
+
+<label><input type="radio" name="em" value="${all.username}">Employee Name: ${all.name }		Address: ${all.city }	${all.streetAddress }	${all.zipCode }		
+Company:	${all.company.name }</label>
+
+
+
+</c:forEach>
+<!-- <section> 
 <h5>Choose your company</h5>
 <c:forEach var="c" items="${company }">
 
 <label><input type="radio" name="co" value="${c.name }"/>${c.name }</label>
 
 </c:forEach>
-</section>
+</section> -->
 </section>
 
 <button class="btn btn-primary" type="submit">Click here to submit address</button>

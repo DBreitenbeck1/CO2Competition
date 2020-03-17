@@ -107,6 +107,7 @@ public class Employee {
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
 	}
+	public void addItem (Carpool item) {carpool.add(item);}
 
 //	@Override
 //	public String toString() {

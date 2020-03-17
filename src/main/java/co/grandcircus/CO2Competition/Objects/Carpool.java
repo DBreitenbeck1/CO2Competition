@@ -18,9 +18,10 @@ public class Carpool{
 	private String date;
 	private Double co2;
 	
-	@ManyToMany(mappedBy="carpool")
-	private List<Employee> employees;
-
+		@ManyToMany(mappedBy="carpool")
+	private List<Employee> employees  ;
+	
+	
 	public Long getCarpoolId() {
 		return carpoolId;
 	}
@@ -48,15 +49,15 @@ public class Carpool{
 	public List<Employee> getEmployees() {
 		return employees;
 	}
-
-	public void setEmployees(List<Employee> employees) {
-		this.employees = employees;
+	public void addItem (Employee item) {employees.add(item);}
+	public void setEmployees(List<Employee> object) {
+		this.employees = object;
 	}
 
-	@Override
-	public String toString() {
-		return "Carpool [carpoolId=" + carpoolId + ", date=" + date + ", co2=" + co2 + ", employees=" + employees + "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Carpool [carpoolId=" + carpoolId + ", date=" + date + ", co2=" + co2 + ", employees=" + employees + "]";
+//	}
 
 	
 	
