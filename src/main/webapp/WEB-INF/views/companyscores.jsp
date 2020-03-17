@@ -17,7 +17,7 @@
 	<h1>Company Scores:</h1>
 
 	<section class="jumbotron">
-		<table class="table table-striped">
+		<table class="text-muted">
 			<thead>
 				<tr>
 					<th>Company</th>
@@ -28,7 +28,7 @@
 			<tbody>
 				<!-- 
 		<c:forEach var="" items="${}">
-			<tr>
+			<tr class="table-primary">
 				<td>${}</td>
 				<td>${}</td>
 			</tr>
