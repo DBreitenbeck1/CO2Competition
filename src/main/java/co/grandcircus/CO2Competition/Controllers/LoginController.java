@@ -21,6 +21,7 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Objects.Carpool;
+import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Repos.CarpoolRepo;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
@@ -81,12 +82,14 @@ public class LoginController {
 	
 	@RequestMapping("/carpool/{id}")
 	public ModelAndView showCarpool(@PathVariable("id") Employee employee) {
-		
-		
+		Company company =coRepo.findByName(employee.getCompany().getName());
+		System.out.println(company.getName());
+		List<Employee> allEmps = company.getEmployees();
+		allEmps.remove(employee);
 		ModelAndView mav = new ModelAndView ("carpool");
 		mav.addObject("emId",employee.getEmployeeId());
 		mav.addObject("company",coRepo.findAll());
-		mav.addObject("allEmployee",emRepo.findAll());
+		mav.addObject("allEmployee", allEmps);
 		return mav;
 	}
 	
@@ -163,12 +166,6 @@ public class LoginController {
 		
 		carRepo.save(carpool);
 		System.out.println(carpool.getCarpoolId());
-		//add userId
-		
-//		employee.getEmployeeId();
-
-//		carpool.setEmployees(employee);
-//		carRepo.saveAll(employee);
 		List<Employee> em = new ArrayList<>();
 		employee.addCarpool(carpool);
 		carpool.setEmployees(em);
@@ -182,8 +179,46 @@ public class LoginController {
 		
 	}
 	
-	@RequestMapping("/summary")
-	public ModelAndView showSummary() {
-		return new ModelAndView("summary","saved",carRepo.findAll());
+	@RequestMapping("/carpoolsummary/{id}")
+	public ModelAndView showSummary(@PathVariable("id") Carpool carpool) {
+		ModelAndView mav = new ModelAndView("summary");
+		mav.addObject("cp", carpool);
+		mav.addObject("company", carpool.getCompany().getName());
+		
+		return mav;
 	}
+	
+	@RequestMapping("/carpool")
+	public ModelAndView assignCarpool(
+			@RequestParam("id") Long id,
+			@RequestParam(value="passengers", defaultValue="") List<Long> ids
+	//@RequestParam(value="toppings", defaultValue = "") List<String> toppings,
+			) {
+		System.out.println(ids);
+		List<Employee> passengers = new ArrayList<>();
+		for(Long pass: ids) {
+			passengers.add(emRepo.findById(pass).orElse(null));
+		}
+		Employee driver = emRepo.findById(id).orElse(null);
+		passengers.add(driver);
+		Carpool carpool = new Carpool();
+		carpool.setCompany(driver.getCompany());
+		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+	    Date dateobj = new Date();
+		carpool.setDate(df.format(dateobj));
+		carRepo.save(carpool);
+		carpool.setEmployees(passengers);
+		for(Employee pass: passengers) {
+			pass.addCarpool(carpool);
+			emRepo.save(pass);
+		}
+		carRepo.save(carpool);
+		System.out.println(carpool.getCarpoolId());
+		ModelAndView mav = new ModelAndView("redirect:/carpoolsummary/"+carpool.getCarpoolId());		
+		return mav;
+	}
+	
+
+	
+	
 }

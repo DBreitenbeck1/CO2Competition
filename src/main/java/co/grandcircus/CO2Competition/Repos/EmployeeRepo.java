@@ -8,4 +8,6 @@ import co.grandcircus.CO2Competition.Objects.Employee;
 public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 
 	Employee findByUsernameIgnoreCase(String username);
+	
+	Employee findByCompany(String companyname);
 }

@@ -24,7 +24,21 @@ public class Company {
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
 	
+	@OneToMany(mappedBy = "company")
+	private List<Carpool> carpool;
 	
+	public List<Carpool> getCarpool() {
+		return carpool;
+	}
+
+	public void setCarpool(List<Carpool> carpool) {
+		this.carpool = carpool;
+	}
+
+	public void setStreetAddress(String streetAddress) {
+		this.streetAddress = streetAddress;
+	}
+
 	public String getAddress() {
 	return this.streetAddress+", " +this.city+" "+this.zipCode;
 }

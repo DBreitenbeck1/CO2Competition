@@ -14,6 +14,7 @@
 <body>
 <main class="container">
 <section class="jumbotron">
+<p>Carpool: ${cp.carpoolId } From: ${company }</p>
 <table class="table table-striped">
 <thead>
   <tr>
@@ -22,10 +23,10 @@
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="s" items="${saved }">
+  <c:forEach var="pass" items="${cp.employees }">
   <tr>
-    <td>${s.date }</td>
-    <td>${s.co2 }</td>
+    <td>${pass.name }</td>
+    <td></td>
   </tr>
   </c:forEach>
   </tbody>

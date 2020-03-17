@@ -13,7 +13,7 @@
 </head>
 <body>
 <main class="container">
-<form method="post" action="/tripdetails/${emId }">
+<form method="post" action="/carpool">
 
 <section class="jumbotron">
 <c:if test="${message ne null}">
@@ -31,24 +31,15 @@
 <label for="street1">Street Address:<input class="form-control" name="street1" required></label>
 <label for="city1">City:<input class="form-control" name="city1" required></label>
 <label for="zip1">Zip Code:<input class="form-control" name="zip1" required></label> -->
-<c:forEach var="all" items="${allEmployee }">
 
-<label><input type="radio" name="em" value="${all.username}">Employee Name: ${all.name }		Address: ${all.city }	${all.streetAddress }	${all.zipCode }		
-Company:	${all.company.name }</label>
+<c:forEach var="em" items="${allEmployee }">
 
-
-
-</c:forEach>
-<!-- <section> 
-<h5>Choose your company</h5>
-<c:forEach var="c" items="${company }">
-
-<label><input type="radio" name="co" value="${c.name }"/>${c.name }</label>
+<label><input type="checkbox" name="passengers" value="${em.employeeId}">Employee Name: ${em.name }		Address: ${em.city }	${em.streetAddress }	${em.zipCode }		
+Company:	${em.company.name }</label>
 
 </c:forEach>
-</section> -->
 </section>
-
+<input type="hidden" value = ${emId } name ="id">
 <button class="btn btn-primary" type="submit">Click here to submit address</button>
 </form>
 </main>
