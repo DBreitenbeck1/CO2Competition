@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Carpool;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
@@ -98,14 +99,14 @@ public class LoginController {
 	@RequestMapping("/tripdetails/{id}")
 	public ModelAndView showDetails(
 			@PathVariable ("id") Employee employee,
-//			@RequestParam String street,
-//			@RequestParam String city,
-//			@RequestParam String zip,
-//			@RequestParam (value="co") String des, 
+			@RequestParam String street,
+			@RequestParam String city,
+			@RequestParam String zip,
+			@RequestParam (value="co") String des, 
 			@RequestParam(value="em") String username,
-//			@RequestParam String street1,
-//			@RequestParam String city1,
-//			@RequestParam String zip1,
+			@RequestParam String street1,
+			@RequestParam String city1,
+			@RequestParam String zip1,
 			RedirectAttributes redir
 			) {
 		System.out.println("em**"+username);
@@ -120,9 +121,10 @@ public class LoginController {
 		}
 		ModelAndView mav = new ModelAndView("details");
 		String address1 = emRepo.findByUsernameIgnoreCase(username).getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCity()+emRepo.findByUsernameIgnoreCase(username).getZipCode();
-//		String address2 = street1+city1+zip1;
-		String address2 = emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCompany().getCity()+ emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode();
-		Distance distance = apiServe.getDistance(address1, address2);
+		String address2 = street1+city1+zip1;
+		 address2 = emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCompany().getCity()+ emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode();
+		SearchResult result = apiServe.getResult(address1, address2);
+		 Distance distance = apiServe.getDistance(result);
 		if (distance!=null) {
 	
 		mav.addObject("street", emRepo.findByUsernameIgnoreCase(username).getStreetAddress());
@@ -135,10 +137,10 @@ public class LoginController {
 		mav.addObject("distance", distance);
 		mav.addObject("em", coCal.smallCar(distance.getValue() ));
 		
-//		employee.setCity(city);
-//		employee.setStreetAddress(street);
-//		employee.setZipCode(zip);
-//		employee.getCompany().getStreetAddress();
+		employee.setCity(city);
+		employee.setStreetAddress(street);
+		employee.setZipCode(zip);
+		employee.getCompany().getStreetAddress();
 	
 		employee.getCompany().getStreetAddress();
 		System.out.println(employee.getName());
