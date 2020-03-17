@@ -48,8 +48,8 @@ public class IndexController {
 			redir.addFlashAttribute("message", IAE.getMessage());
 			return new ModelAndView("redirect:/logtrip");
 		}
-//		double CO2Savings = coCal.calculateSavings(start, destination);
-		double CO2Savings = coCal.smallCar(5.7);
+		double CO2Savings = coCal.calculateSavings(address1, address2);
+//		double CO2Savings = coCal.smallCar(5.7);
 		
 		// Add Objects to ModelAndView
 		mav.addObject("co2savings", CO2Savings);

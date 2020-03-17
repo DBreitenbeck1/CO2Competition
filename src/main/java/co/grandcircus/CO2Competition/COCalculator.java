@@ -1,10 +1,15 @@
 package co.grandcircus.CO2Competition;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
 
 @Component
 public class COCalculator {
 	
+	@Autowired
 	private ApiService apiServe;
 	
 	//Estimations based on average for each car type
@@ -35,16 +40,15 @@ public class COCalculator {
 			String start,
 			String destination
 			) {
-//		// Calculate distance
-//		SearchResult result = apiServe.getResult(start, destination);
-//		Distance distance = apiServe.getDistance(result);
-//		
-//		// call calculator method, assume medCar for now
-//		double CO2Savings = medCar(distance.getValue());
-//		
-//		// return savings
-//		return CO2Savings;
-		return 0.0;
+		// Calculate distance
+		SearchResult result = apiServe.getResult(start, destination);
+		Distance distance = apiServe.getDistance(result);
+		
+		// call calculator method, assume medCar for now
+		double CO2Savings = medCar(distance.getValue());
+		
+		// return savings
+		return CO2Savings;
 	}
 	
 //	public double calculateSavings(
