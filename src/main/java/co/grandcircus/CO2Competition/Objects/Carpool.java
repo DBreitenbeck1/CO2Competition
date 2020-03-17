@@ -22,6 +22,10 @@ public class Carpool{
 	private List<Employee> employees  ;
 	
 	
+	
+//	@ManyToMany(mappedBy="carpool")
+//	private List<Employee> employees;
+
 	public Long getCarpoolId() {
 		return carpoolId;
 	}
@@ -50,8 +54,15 @@ public class Carpool{
 		return employees;
 	}
 	public void addItem (Employee item) {employees.add(item);}
-	public void setEmployees(List<Employee> object) {
-		this.employees = object;
+//	public void setEmployees(List<Employee> object) {
+//		this.employees = object;
+	
+	public void addEmployee(Employee employee) {
+		employees.add(employee);
+	}
+
+	public void setEmployees(List<Employee> employees) {
+		this.employees = employees;
 	}
 
 //	@Override

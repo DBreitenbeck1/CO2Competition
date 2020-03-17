@@ -89,6 +89,9 @@ public class LoginController {
 		mav.addObject("allEmployee",emRepo.findAll());
 		return mav;
 	}
+	
+	
+	
 	@RequestMapping("/tripdetails/{id}")
 	public ModelAndView showDetails(
 			@PathVariable ("id") Employee employee,
@@ -133,6 +136,11 @@ public class LoginController {
 //		employee.setStreetAddress(street);
 //		employee.setZipCode(zip);
 //		employee.getCompany().getStreetAddress();
+	
+		employee.getCompany().getStreetAddress();
+		System.out.println(employee.getName());
+		System.out.println(employee.getAddress());
+		System.out.println(employee.getEmployeeId());
 		
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
@@ -141,18 +149,32 @@ public class LoginController {
 		carpool.setCo2(coCal.smallCar(distance.getValue()));
 		carpool.setDate(df.format(dateobj));
 		//add userId
-		List<Employee> em = new ArrayList<>();
-		em.add(employee);
+//		List<Employee> em = new ArrayList<>();
+//		em.add(employee);
 		carRepo.save(carpool);
 //		Employee em = new Employee();
 //		em.getEmployeeId();
 		List<Carpool> c = new ArrayList<>();
 		c.add(carpool);
-		carpool.setEmployees(em);
+//		carpool.setEmployees(em);
 		employee.setCarpool(c);
 		carpool.getCarpoolId();
 		employee.addItem(carpool);
 		
+		carRepo.save(carpool);
+		System.out.println(carpool.getCarpoolId());
+		//add userId
+		
+//		employee.getEmployeeId();
+
+//		carpool.setEmployees(employee);
+//		carRepo.saveAll(employee);
+		List<Employee> em = new ArrayList<>();
+		employee.addCarpool(carpool);
+		carpool.setEmployees(em);
+		carRepo.save(carpool);
+		emRepo.save(employee);
+		System.out.println(carpool.getCarpoolId());
 		} else {
 			mav.addObject("invalid", "No such address");
 		}
