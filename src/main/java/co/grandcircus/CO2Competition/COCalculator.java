@@ -1,33 +1,68 @@
 package co.grandcircus.CO2Competition;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class COCalculator {
-	//Estimations based on average for each car type
 	
-	public static double smallCar(double meters) {
+	private ApiService apiServe;
+	
+	//Estimations based on average for each car type
+	public double smallCar(double meters) {
 		double miles = meters/1609.344;
 		double emissions = 7.08*miles;
 		emissions = (int)(Math.round(emissions*100))/100.00;
 		return emissions;
 	}
 	
-	
-	public static double medCar(double meters) {
-
+	public double medCar(double meters) {
 		double miles = meters/1609.344;
 		double emissions = 13.2*miles;
 		emissions = (int)(Math.round(emissions*100))/100.00;
-		
 		return emissions;
 	}
 
-	public static double SUV(double meters) {
-
+	public double SUV(double meters) {
 		double miles = meters/1609.344;
 		double emissions = 18.84*miles;
 		emissions = (int)(Math.round(emissions*100))/100.00;
-		
 		return emissions;
 	}
+	
+	
+	// Overloaded method, takes in start and destination, calculates CO2 that would have been spent, and returns that value as "Savings"
+	public double calculateSavings(
+			String start,
+			String destination
+			) {
+//		// Calculate distance
+//		SearchResult result = apiServe.getResult(start, destination);
+//		Distance distance = apiServe.getDistance(result);
+//		
+//		// call calculator method, assume medCar for now
+//		double CO2Savings = medCar(distance.getValue());
+//		
+//		// return savings
+//		return CO2Savings;
+		return 0.0;
+	}
+	
+//	public double calculateSavings(
+//			String start,
+//			String midway,
+//			String destination) {
+//		// get original spending CO2
+//		// get original for each leg
+//		SearchResult startToDestination = apiServe.getResult(start, destination);
+//		SearchResult midwayToDestination = apiServe.getResult(midway, destination);
+//		
+//		
+//		// get current CO2
+//		// subtract and return savings
+//		
+//		return 0.0;
+//	}
+	
 	
 	
 }
