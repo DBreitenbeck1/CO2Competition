@@ -23,6 +23,11 @@ public class Company {
 	
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
+	
+	
+	public String getAddress() {
+	return this.streetAddress+", " +this.city+" "+this.zipCode;
+}
 
 	public Long getCompanyId() {
 		return companyId;

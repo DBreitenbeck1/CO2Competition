@@ -31,6 +31,10 @@ public class Employee {
 	@ManyToMany
 	private List<Carpool> carpool;
 
+	
+	public String getAddress() {
+	return this.streetAddress+", " +this.city+" "+this.zipCode;
+}
 
 	public List<Carpool> getCarpool() {
 		return carpool;
