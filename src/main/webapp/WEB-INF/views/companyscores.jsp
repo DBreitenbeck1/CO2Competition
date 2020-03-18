@@ -20,8 +20,8 @@
 
 	<h1 class="Jumborton">Company Scores:</h1>
 
-	<section class="jumbotron">
-		<table class="lead">
+	<section class="lead">
+		<table class="text-muted">
 			<thead>
 				<tr>
 					<th>Company</th>
