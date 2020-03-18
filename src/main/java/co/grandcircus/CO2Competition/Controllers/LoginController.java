@@ -307,6 +307,30 @@ public class LoginController {
 		return mav;
 	}
 
+	@RequestMapping("/routes/{id}")
+	public ModelAndView showRoutes(@PathVariable ("id") Employee employee) {
+		Company company = employee.getCompany();
+		List<Employee> emps = company.getEmployees();
+		emps.remove(employee);
+		List<Distance> distanceFromYou = new ArrayList<>();
+		List<Distance> distanceFromCom = new ArrayList<>();
+		for (Employee e: emps) {
+			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
+			distanceFromYou.add(apiServe.getDistance(result1));
+			SearchResult result2 = apiServe.getResult(e.getAddress(), company.getAddress());
+			distanceFromCom.add(apiServe.getDistance(result2));
+		}
+		
+		
+		
+		ModelAndView mav = new ModelAndView("routes");
+		mav.addObject("carpools", company.getCarpool());
+		mav.addObject("employees", emps);
+		mav.addObject("distanceC", distanceFromCom);
+		mav.addObject("distanceY", distanceFromYou);
+
+		return mav;
+	}
 	
 	
 }
