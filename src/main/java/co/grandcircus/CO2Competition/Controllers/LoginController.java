@@ -262,6 +262,7 @@ public class LoginController {
 		return mav;
 	}
 	
+	//getting the information for ride to work 
 	@RequestMapping("/ridetw/{id}")
 	public ModelAndView showRideToWork(@PathVariable ("id") Employee employee) {
 		
@@ -289,6 +290,7 @@ public class LoginController {
 		employee1.remove(employee);
 		List<Distance> distanceFromYou = new ArrayList<>();
 		List<Distance> distanceFromCom = new ArrayList<>();
+		//find employee that work for this company and calculate their distances from home to work and to each others house
 		for (Employee e: employee1) {
 			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
 			distanceFromYou.add(apiServe.getDistance(result1));
@@ -306,6 +308,7 @@ public class LoginController {
 		return mav;
 	}
 	
+	//submit the carpool that user already chose
 	@RequestMapping("/submit-carpool")
 	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
 			@RequestParam(value="date",required=false) String date,
@@ -346,6 +349,8 @@ public class LoginController {
 		return mav;
 	}
 	
+	//show the start and end address which is work to home 
+	//and other setups on jsp to be picked up
 	@RequestMapping("/ridebh/{id}")
 	public ModelAndView showRideBackHome(@PathVariable ("id") Employee employee) {
 		
@@ -360,17 +365,21 @@ public class LoginController {
 		return mav;
 	}
 	
+	//search for the carpool to ride back home
+	//
 	@RequestMapping("/find-carpool-back/{id}")
 	public ModelAndView carpoolBack(@PathVariable ("id") Employee employee,
 			@RequestParam("date") String date,
 			@RequestParam("time") String time) {
 		
+		//finding all the employees that work for this company
 		Company company = employee.getCompany();
 		List<Employee> empl = company.getEmployees();
 		empl.remove(employee);
 		List<Distance> distanceToYourHouse = new ArrayList<>();
 		List<Distance> distanceToTheirOwn = new ArrayList<>();
 		
+		//calculating distance between work to rider's house and work to driver's house
 		for (Employee e: empl) {
 			SearchResult result1 = apiServe.getResult(employee.getAddress(),company.getAddress());
 			distanceToYourHouse.add(apiServe.getDistance(result1));
@@ -391,6 +400,8 @@ public class LoginController {
 		return mav;
 	}
 	
+	//submit carpool to ride back home
+	//finding the name of the driver based on their username and sending information to jsp to show the confirmation page
 	@RequestMapping("/submit-carpool-back/{id}")
 	public ModelAndView carpoolBackS(@RequestParam(value="carpool")String username,
 			@RequestParam(value="date",required=false) String date,
