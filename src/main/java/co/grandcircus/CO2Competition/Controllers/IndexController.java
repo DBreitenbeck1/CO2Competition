@@ -14,7 +14,7 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
-import co.grandcircus.CO2Competition.Objects.Score;
+import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
@@ -98,11 +98,15 @@ public class IndexController {
 
 	}
 	
+	// Tester to see if Scoreboard will work, needs polishing
 	@RequestMapping("/{id}/testscores")
 	public ModelAndView showScores(@PathVariable Long id) {
-		List<Score> scores = emRepo.findScoresByCompany(id);
-//		return new ModelAndView("");
-		return null;
+//		List<Long> scores = emRepo.findScoresByCompany(4L);
+		Employee em = emRepo.findByCompany("Grand Circus");
+		ModelAndView mav = new ModelAndView("userscores");
+		mav.addObject("employee",em);
+//		mav.addObject("scoreboard", scores);
+		return mav;
 	}
 
 }

@@ -26,14 +26,14 @@
 			</thead>
 
 			<tbody>
-				<!-- 
-		<c:forEach var="" items="${}">
+				 
+<!-- 		<c:forEach var="player" items="${scoreboard}"> -->
 			<tr class="table-primary">
-				<td>${}</td>
-				<td>${}</td>
+				<td>${employee}</td>
+				<td><!--${ player.employee.name} --></td>
 			</tr>
-		</c:forEach>
--->
+<!-- 	</c:forEach> -->	
+
 			</tbody>
 
 		</table>
