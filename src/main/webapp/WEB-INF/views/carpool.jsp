@@ -1,7 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,17 +7,24 @@
 <link rel="stylesheet" href="/style.css" />
 
 </head>
+
 <body>
 <main class="container">
+<!-- <form method="post" action="/tripdetails/${emId }"> -->
+<section class="jumbotron">
+<h4>Hey ${name }, let's plan your carpool.</h4>
+<h4>Where to?</h4>
+</section>
 <form method="post" action="/carpool">
 
-<section class="jumbotron">
+<!-- <section class="jumbotron">
 <c:if test="${message ne null}">
 <div class="alert alert-warning">
   <h4 class="alert-heading">Warning!</h4>
   <p class="mb-0">${message}</p>
 </div>
-</c:if>
+</c:if> -->
+
 <!-- <h4>Please enter the starting address:</h4>
 
 <label for="street">Street Address:<input class="form-control" name="street" required></label>
@@ -31,6 +34,12 @@
 <label for="street1">Street Address:<input class="form-control" name="street1" required></label>
 <label for="city1">City:<input class="form-control" name="city1" required></label>
 <label for="zip1">Zip Code:<input class="form-control" name="zip1" required></label> -->
+<!--<c:forEach var="all" items="${allEmployee }">
+
+<label><input type="radio" name="em" value="${all.username}">Employee Name: ${all.name }		Address: ${all.city }	${all.streetAddress }	${all.zipCode }		
+Company:	${all.company.name }</label>
+=======
+>>>>>>> 8d6608f2cbd7ec0a330a9880f56566b5d9eb7002
 
 <c:forEach var="em" items="${allEmployee }">
 
@@ -38,9 +47,20 @@
 Company:	${em.company.name }</label>
 
 </c:forEach>
+<<<<<<< HEAD
+<!-- <section> 
+<h5>Choose your company</h5>
+<c:forEach var="c" items="${company }">
+
+<label><input type="radio" name="co" value="${c.name }"/>${c.name }</label>
+
+</c:forEach>
+</section> -->
+<a href="/ridetw/${emId }" class="btn btn-primary" type="submit">Ride to work</a>
+<a href="/ridebh/${emId }" class="btn btn-primary" type="submit">Ride back home</a>
 </section>
 <input type="hidden" value = ${emId } name ="id">
-<button class="btn btn-primary" type="submit">Click here to submit address</button>
+<!-- <button class="btn btn-primary" type="submit">Click here to submit address</button> -->
 </form>
 </main>
 </body>

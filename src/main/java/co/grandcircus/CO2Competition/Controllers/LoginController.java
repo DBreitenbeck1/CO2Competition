@@ -92,6 +92,7 @@ public class LoginController {
 		allEmps.remove(employee);
 		ModelAndView mav = new ModelAndView ("carpool");
 		mav.addObject("emId",employee.getEmployeeId());
+		mav.addObject("name",employee.getName());
 		mav.addObject("company",coRepo.findAll());
 		mav.addObject("allEmployee", allEmps);
 		return mav;
@@ -248,7 +249,88 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping("/list-of-routes")
+	public ModelAndView showList() {
+		return new ModelAndView("list-of-routes","company",coRepo.findAll());
+	}
+	
+	@RequestMapping("/details-list/{id}")
+	public ModelAndView showDetials(@PathVariable ("id") Company company) {
+		ModelAndView mav =  new ModelAndView("company-details");
+		mav.addObject("info",company.getEmployees());
+		mav.addObject("cName",company.getName());
+		return mav;
+	}
+	
+	@RequestMapping("/ridetw/{id}")
+	public ModelAndView showRideToWork(@PathVariable ("id") Employee employee) {
+		
+		ModelAndView mav = new ModelAndView("show-origin");
+		mav.addObject("eCity",employee.getCity());
+		mav.addObject("eStreet",employee.getStreetAddress());
+		mav.addObject("eZip",employee.getZipCode());
+		mav.addObject("cCity", employee.getCompany().getCity());
+		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
+		mav.addObject("cZip",employee.getCompany().getZipCode());
+		mav.addObject("id",employee.getCompany().getCompanyId());
+		return mav;
+	}
+	
+	@RequestMapping("/find-carpool/{id}")
+	public ModelAndView findCarpool(@PathVariable("id") Employee employee, 
+			@RequestParam(value="eCity", required=false) String city
+			, @RequestParam("date") String date,
+			@RequestParam("time") String time) {
+		
+		ModelAndView mav = new ModelAndView ("search-carpool");
+		List<Employee> em = emRepo.findByCity(city);
+		
+		mav.addObject("list", em);
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("emId",employee.getEmployeeId());
+		return mav;
+	}
+	
+	@RequestMapping("/submit-carpool")
+	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
+			@RequestParam(value="date",required=false) String date,
+			@RequestParam(value="time",required=false) String time,
+			@RequestParam(value="id", required=false) Long id) {
+		System.out.println("emid" +id);
+		ModelAndView mav = new ModelAndView("confirmation");
+		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
+		mav.addObject("company",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("id", id);
+		return mav;
+	}
 
+	@RequestMapping("/routes/{id}")
+	public ModelAndView showRoutes(@PathVariable ("id") Employee employee) {
+		Company company = employee.getCompany();
+		List<Employee> emps = company.getEmployees();
+		emps.remove(employee);
+		List<Distance> distanceFromYou = new ArrayList<>();
+		List<Distance> distanceFromCom = new ArrayList<>();
+		for (Employee e: emps) {
+			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
+			distanceFromYou.add(apiServe.getDistance(result1));
+			SearchResult result2 = apiServe.getResult(e.getAddress(), company.getAddress());
+			distanceFromCom.add(apiServe.getDistance(result2));
+		}
+		
+		
+		
+		ModelAndView mav = new ModelAndView("routes");
+		mav.addObject("carpools", company.getCarpool());
+		mav.addObject("employees", emps);
+		mav.addObject("distanceC", distanceFromCom);
+		mav.addObject("distanceY", distanceFromYou);
+
+		return mav;
+	}
 	
 	
 }
