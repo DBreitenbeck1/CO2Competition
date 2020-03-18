@@ -106,5 +106,14 @@ public class IndexController {
 		mav.addObject("scoreboard", scores);
 		return mav;
 	}
+	
+	// Tester to see if individual score will work, needs polishing
+	@RequestMapping("/user/{id}/score")
+	public ModelAndView showUserScore(@PathVariable Long id) {
+		Score score = emRepo.findScoreByEmployee(id);
+		ModelAndView mav = new ModelAndView("individualScoreTESTER");
+		mav.addObject("userscore", score);
+		return mav;
+	}
 
 }

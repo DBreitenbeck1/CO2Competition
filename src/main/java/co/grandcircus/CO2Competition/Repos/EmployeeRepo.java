@@ -30,13 +30,17 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			)
 	public List<Score> findScoresByCompany(@Param("company_id") Long company_id);
 	
-//	@Query(value = "SELECT round(sum(co2),2) AS score, employees_employee_id AS employee "
-//			+ "FROM carpool INNER JOIN ( " + 
-//			"SELECT * FROM employee_carpool WHERE employees_employee_id = 21) AS A " + 
-//			"ON (carpool_id = A.carpool_carpool_id) " + 
-//			"GROUP BY employees_employee_id " + 
-//			"ORDER BY CO2 DESC;", nativeQuery = true)
-//	public Score findScoreByEmployee(/*@Param("employee_id") Long employee_id*/);
+	@Query(value = "SELECT round(sum(co2),2) AS score, name AS employee FROM carpool INNER JOIN ( " + 
+			"SELECT * FROM employee_carpool INNER JOIN (" + 
+			"SELECT employee.employee_id, name FROM employee WHERE employee_id = :employee_id " + 
+			") as B ON (employee_carpool.employees_employee_id = B.employee_id) " + 
+			") AS A " + 
+			"ON (carpool_id = A.carpool_carpool_id) " + 
+			"GROUP BY employees_employee_id " + 
+			"ORDER BY CO2 DESC;",
+			nativeQuery = true
+			)
+	public Score findScoreByEmployee(@Param("employee_id") Long employee_id);
 	
 	
 	
