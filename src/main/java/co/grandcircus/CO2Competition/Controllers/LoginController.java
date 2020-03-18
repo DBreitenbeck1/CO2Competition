@@ -272,7 +272,7 @@ public class LoginController {
 		mav.addObject("cCity", employee.getCompany().getCity());
 		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
 		mav.addObject("cZip",employee.getCompany().getZipCode());
-		mav.addObject("id",employee.getCompany().getCompanyId());
+		mav.addObject("id",employee.getEmployeeId());
 		return mav;
 	}
 	
@@ -356,7 +356,7 @@ public class LoginController {
 		mav.addObject("cCity", employee.getCompany().getCity());
 		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
 		mav.addObject("cZip",employee.getCompany().getZipCode());
-		mav.addObject("id",employee.getCompany().getCompanyId());
+		mav.addObject("id",employee.getEmployeeId());
 		return mav;
 	}
 	
