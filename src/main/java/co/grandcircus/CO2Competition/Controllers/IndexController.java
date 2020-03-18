@@ -1,7 +1,10 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -11,6 +14,8 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
+import co.grandcircus.CO2Competition.Objects.Score;
+import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class IndexController {
@@ -21,6 +26,9 @@ public class IndexController {
 	@Autowired
 	private COCalculator coCal;
 
+	@Autowired
+	private EmployeeRepo emRepo;
+	
 	@RequestMapping("/")
 	public ModelAndView showIndex(RedirectAttributes redir) {
 		// Create ModelAndView
@@ -88,6 +96,13 @@ public class IndexController {
 		}
 		return mav;
 
+	}
+	
+	@RequestMapping("/{id}/testscores")
+	public ModelAndView showScores(@PathVariable Long id) {
+		List<Score> scores = emRepo.findScoresByCompany(id);
+//		return new ModelAndView("");
+		return null;
 	}
 
 }
