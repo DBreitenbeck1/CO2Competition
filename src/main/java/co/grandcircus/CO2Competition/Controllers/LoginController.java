@@ -407,4 +407,13 @@ public class LoginController {
 		return mav;
 	}
 	
+	
+	@RequestMapping("/previous-routes/{id}")
+	public ModelAndView previousRoutes(@PathVariable ("id") Employee employee) {
+		Company company = employee.getCompany();
+		ModelAndView mav = new ModelAndView("routes");
+		mav.addObject("carpools", company.getCarpool());
+		return mav;
+	}
+	
 }

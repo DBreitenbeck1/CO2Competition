@@ -1,8 +1,5 @@
 package co.grandcircus.CO2Competition.Controllers;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +11,6 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
-import co.grandcircus.CO2Competition.Objects.Employee;
-import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class IndexController {
@@ -26,11 +21,6 @@ public class IndexController {
 	@Autowired
 	private COCalculator coCal;
 
-	@Autowired
-	private EmployeeRepo emRepo;
-	
-	
-	
 	@RequestMapping("/")
 	public ModelAndView showIndex(RedirectAttributes redir) {
 		// Create ModelAndView
@@ -45,45 +35,27 @@ public class IndexController {
 		String destination;
 		Distance distance;
 		
-		Employee employee1 = emRepo.findById((long)1).orElse(null);
-		
-		Employee employee2 = emRepo.findById((long)9).orElse(null);
-		
-		SearchResult result = apiServe.getResult(employee1.getAddress(), employee2.getAddress());
-		
-		
-//		List<Distance> distanceFromYou = new ArrayList<>();
-//		List<Distance> distanceFromCom = new ArrayList<>();
-//		for (Employee e: employee1) {
-//			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
-//			distanceFromYou.add(apiServe.getDistance(result1));
-//			SearchResult result2 = apiServe.getResult(e.getAddress(), company.getAddress());
-//			distanceFromCom.add(apiServe.getDistance(result2));
-//		}
-		
 		// Get Search Results
-	//	SearchResult result = apiServe.getResult(address1, address2, address3);
+		SearchResult result = apiServe.getResult(address1, address2, address3);
 
-//		// Will catch thrown exception if there were no results found and redirect
-//		try {
-//			start = apiServe.getStart(result, 0);
-//			midway = apiServe.getStart(result, 1);
-//			destination = apiServe.getDest(result, 1);
-//			distance = apiServe.getDistance(result);
-//		} catch (IllegalArgumentException IAE) {
-//			redir.addFlashAttribute("message", IAE.getMessage());
-//			return new ModelAndView("redirect:/logtrip");
-//		}
-//		double CO2Savings = coCal.calculateSavings(address1, address2);
+		// Will catch thrown exception if there were no results found and redirect
+		try {
+			start = apiServe.getStart(result, 0);
+			midway = apiServe.getStart(result, 1);
+			destination = apiServe.getDest(result, 1);
+			distance = apiServe.getDistance(result);
+		} catch (IllegalArgumentException IAE) {
+			redir.addFlashAttribute("message", IAE.getMessage());
+			return new ModelAndView("redirect:/logtrip");
+		}
+		double CO2Savings = coCal.calculateSavings(address1, address2);
 //		double CO2Savings = coCal.smallCar(5.7);
 		
 		// Add Objects to ModelAndView
-//		mav.addObject("co2savings", CO2Savings);
-//		mav.addObject("start", start);
-//		mav.addObject("midway", midway);
-//		mav.addObject("destination", destination);
-		distance = apiServe.getDistance(result);
-		
+		mav.addObject("co2savings", CO2Savings);
+		mav.addObject("start", start);
+		mav.addObject("midway", midway);
+		mav.addObject("destination", destination);
 		mav.addObject("distance", distance);
 		return mav;
 	}

@@ -44,7 +44,7 @@ ${emp.name }
 </section>
 <section class="jumbotron">
 
-<a href="/previous-routes" class="btn btn-primary" type="submit">Previous Routes</a>
+<a href="/previous-routes/${emId }" class="btn btn-primary" type="submit">Previous Routes</a>
 <a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
 <a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
 <a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
