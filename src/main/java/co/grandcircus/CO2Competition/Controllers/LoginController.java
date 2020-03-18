@@ -346,5 +346,65 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping("/ridebh/{id}")
+	public ModelAndView showRideBackHome(@PathVariable ("id") Employee employee) {
+		
+		ModelAndView mav = new ModelAndView("show-endLocation");
+		mav.addObject("eCity",employee.getCity());
+		mav.addObject("eStreet",employee.getStreetAddress());
+		mav.addObject("eZip",employee.getZipCode());
+		mav.addObject("cCity", employee.getCompany().getCity());
+		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
+		mav.addObject("cZip",employee.getCompany().getZipCode());
+		mav.addObject("id",employee.getCompany().getCompanyId());
+		return mav;
+	}
+	
+	@RequestMapping("/find-carpool-back/{id}")
+	public ModelAndView carpoolBack(@PathVariable ("id") Employee employee,
+			@RequestParam("date") String date,
+			@RequestParam("time") String time) {
+		
+		Company company = employee.getCompany();
+		List<Employee> empl = company.getEmployees();
+		empl.remove(employee);
+		List<Distance> distanceToYourHouse = new ArrayList<>();
+		List<Distance> distanceToTheirOwn = new ArrayList<>();
+		
+		for (Employee e: empl) {
+			SearchResult result1 = apiServe.getResult(employee.getAddress(),company.getAddress());
+			distanceToYourHouse.add(apiServe.getDistance(result1));
+			SearchResult result2 = apiServe.getResult(e.getAddress(),company.getAddress() );
+			distanceToTheirOwn.add(apiServe.getDistance(result2));
+		}
+		ModelAndView mav = new ModelAndView("search-carpoolBack");
+		mav.addObject("carpools", company.getCarpool());
+		mav.addObject("employees", empl);
+		mav.addObject("cCity",company.getCity());
+		mav.addObject("cStreet",company.getStreetAddress());
+		mav.addObject("cZip",company.getZipCode());
+		mav.addObject("distanceFY", distanceToYourHouse);
+		mav.addObject("distanceFT", distanceToTheirOwn);
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("id",employee.getEmployeeId());
+		return mav;
+	}
+	
+	@RequestMapping("/submit-carpool-back/{id}")
+	public ModelAndView carpoolBackS(@RequestParam(value="carpool")String username,
+			@RequestParam(value="date",required=false) String date,
+			@RequestParam(value="time",required=false) String time,
+			@PathVariable("id") Employee employee,
+			@RequestParam(value="id", required=false) Long id) {
+		
+		ModelAndView mav = new ModelAndView("confirmationBack");
+		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
+		mav.addObject("address",employee.getCity());
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("id", id);
+		return mav;
+	}
 	
 }
