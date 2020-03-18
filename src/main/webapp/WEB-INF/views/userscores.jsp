@@ -12,11 +12,14 @@
 <link rel="stylesheet" href="/style.css" />
 <meta charset="ISO-8859-1">
 <title>User Scores!</title>
+
+<%@ include file="partials/header.jsp"%>
+
 </head>
 <body>
-	<h1>User Scores:</h1>
+	<h1 class="Jumbotron">User Scores:</h1>
 
-	<section class="jumbotron">
+	<section class="lead">
 		<table class="text-muted">
 			<thead>
 				<tr>
@@ -39,7 +42,11 @@
 		</table>
 
 	</section>
-
+	<!-- if we want to make a progress bar to a goal stretch 
+	<div class="progress">
+  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
+</div>
+-->
 
 </body>
 </html>
