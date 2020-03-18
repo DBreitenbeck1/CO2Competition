@@ -407,12 +407,20 @@ public class LoginController {
 		return mav;
 	}
 	
-	
+	//Previous Routes:
+		//-displays the previous routes of the employee
 	@RequestMapping("/previous-routes/{id}")
 	public ModelAndView previousRoutes(@PathVariable ("id") Employee employee) {
 		Company company = employee.getCompany();
+		List<Carpool> carpools = company.getCarpool();
+		List<Carpool> cp = new ArrayList();
+		for (int i =0; i<carpools.size(); i++) {
+		if (carpools.get(i).getEmployees().contains(employee)) {
+			cp.add(carpools.get(i));
+		}
+		}
 		ModelAndView mav = new ModelAndView("routes");
-		mav.addObject("carpools", company.getCarpool());
+		mav.addObject("carpools", cp);
 		return mav;
 	}
 	

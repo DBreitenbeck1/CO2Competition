@@ -40,6 +40,7 @@
     <th>Id</th>
     <th>Date</th>
     <th>Passengers</th>
+    <th>CO2 Saved</th>
   </tr>
   <c:forEach var="cp" items="${carpools }">
   <tr>
@@ -52,6 +53,7 @@
     </c:forEach>
     </ul>
     </td>
+     <th>${cp.co2}</th>
   </tr>
   </c:forEach>
 </table>
