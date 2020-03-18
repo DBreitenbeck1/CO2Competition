@@ -18,14 +18,37 @@
 <p>Welcome ${name }</p>
 <p>You are currently working at ${company }</p>
 
+<ul>
+<c:forEach items="${carpools }" var="cp">
+<li>
+<a href="/carpoolsummary/${cp.carpoolId }">${cp.carpoolId }</a>
+</li>
+<li>
+${cp.co2 }
+</li>
+<li>
+<c:forEach items="${cp.employees }" var ="emp">
+<ul>
+<li>
+${emp.name }
+</li>
+
+</ul>
+</c:forEach>
+</li>
+
+</c:forEach>
+
+</ul>
+
 </section>
 <section class="jumbotron">
 
-<a href="/list-of-routes" class="btn btn-primary" type="submit">See list of routes</a>
+<a href="/previous-routes" class="btn btn-primary" type="submit">Previous Routes</a>
 <a href="/favorite-routes" class="btn btn-primary" type="submit">Favorite Routes</a>
 <a href="/summary" class="btn btn-primary" type="submit">Summary of saved</a>
 <a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request a Carpool</a>
-
+<a href="/routes/${emId}"  class="btn btn-primary" type="submit">See Available Routes</a>
 
 </section>
 
