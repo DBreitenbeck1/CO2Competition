@@ -13,7 +13,7 @@
 </head>
 <body>
 <main class="container">
-<form action ="/submit-carpool">
+<form action ="/submit-carpool-back/${id }">
 <section class="jumbotron">
 <table class="table table-striped">
 <thead>
@@ -22,8 +22,8 @@
     <th>City</th>
     <th>Street</th>
     <th>Zip code</th>
-    <th>Distance from work</th>
-    <th>Distance from you</th>
+    <th>Distance to your address</th>
+    <th>Distance to their own</th>
   </tr>
   </thead>
   <tbody>
@@ -31,11 +31,11 @@
   
   <tr>
     <td><input type="radio" name="carpool" value="${m.username }"/>${m.name }</td>
-    <td>${m.city }</td>
-    <td>${m.streetAddress }</td>
-    <td>${m.zipCode }</td>
-    <td>${distanceC [mloop.index].text}</td>
-    <td>${distanceY [mloop.index].text}</td>
+    <td>${cCity }</td>
+    <td>${cStreet }</td>
+    <td>${cZip }</td>
+    <td>${distanceFY [mloop.index].text}</td>
+    <td>${distanceFT [mloop.index].text}</td>
   </tr>
   </c:forEach>
   </tbody>
@@ -43,13 +43,14 @@
 </table>
 <input type="hidden" name="date" value="${date }"/>
 <input type="hidden" name="time" value="${time }"/>
-<input type="hidden" name="id" value="${emId }" />
-<button class="btn btn-primary" type="submit">Submit your request</button>
+<input type="hidden" name="id" value="${id }" />
 
 
 
 
 </section>
+<button class="btn btn-primary" type="submit">Submit your request</button>
+
 </form>
 </main>
 </body>
