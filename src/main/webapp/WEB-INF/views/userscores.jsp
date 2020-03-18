@@ -30,12 +30,12 @@
 
 			<tbody>
 				 
-<!-- 		<c:forEach var="player" items="${scoreboard}"> -->
+ 		<c:forEach var="player" items="${scoreboard}">
 			<tr class="table-primary">
-				<td>${employee}</td>
-				<td><!--${ player.employee.name} --></td>
+				<td>${player.employee}</td>
+				<td>${player.score}</td>
 			</tr>
-<!-- 	</c:forEach> -->	
+ 	</c:forEach>	
 
 			</tbody>
 
