@@ -283,11 +283,25 @@ public class LoginController {
 			@RequestParam("time") String time) {
 		
 		ModelAndView mav = new ModelAndView ("search-carpool");
-		List<Employee> em = emRepo.findByCity(city);
-		
-		mav.addObject("list", em);
+		Company company = employee.getCompany();
+//		List<Employee> em = emRepo.findByCity(city);
+		List<Employee> employee1 = company.getEmployees();
+		employee1.remove(employee);
+		List<Distance> distanceFromYou = new ArrayList<>();
+		List<Distance> distanceFromCom = new ArrayList<>();
+		for (Employee e: employee1) {
+			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
+			distanceFromYou.add(apiServe.getDistance(result1));
+			SearchResult result2 = apiServe.getResult(e.getAddress(), company.getAddress());
+			distanceFromCom.add(apiServe.getDistance(result2));
+		}
+//		mav.addObject("list", em);
 		mav.addObject("date",date);
 		mav.addObject("time",time);
+		mav.addObject("carpools", company.getCarpool());
+		mav.addObject("employees", employee1);
+		mav.addObject("distanceC", distanceFromCom);
+		mav.addObject("distanceY", distanceFromYou);
 		mav.addObject("emId",employee.getEmployeeId());
 		return mav;
 	}

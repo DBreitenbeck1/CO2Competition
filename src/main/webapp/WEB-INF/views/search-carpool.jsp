@@ -22,16 +22,20 @@
     <th>City</th>
     <th>Street</th>
     <th>Zip code</th>
+    <th>Distance from work</th>
+    <th>Distance from you</th>
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="m" items="${list }">
+  <c:forEach var="m" items="${employees }" varStatus="mloop">
   
   <tr>
     <td><input type="radio" name="carpool" value="${m.username }"/>${m.name }</td>
     <td>${m.city }</td>
     <td>${m.streetAddress }</td>
     <td>${m.zipCode }</td>
+    <td>${distanceC [mloop.index].text}</td>
+    <td>${distanceY [mloop.index].text}</td>
   </tr>
   </c:forEach>
   </tbody>
