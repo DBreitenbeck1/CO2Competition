@@ -17,13 +17,16 @@
 <section class="jumbotron">
 <table class="table table-striped">
 <thead>
+
+<h4>From: ${company.name }</h4>
+<h5>${company.address }</h5>
   <tr>
     <th>Name</th>
     <th>City</th>
     <th>Street</th>
-    <th>Zip code</th>
-    <th>Distance to your address</th>
-    <th>Distance to their own</th>
+    <th>Zip Code</th>
+    <th>Distance to Your Address</th>
+    <th>Distance to Their Own</th>
   </tr>
   </thead>
   <tbody>
@@ -31,9 +34,9 @@
   
   <tr>
     <td><input type="radio" name="carpool" value="${m.username }"/>${m.name }</td>
-    <td>${cCity }</td>
-    <td>${cStreet }</td>
-    <td>${cZip }</td>
+    <td>${m.city }</td> 
+    <td>${m.streetAddress }</td>
+    <td>${m.zipCode }</td>
     <td>${distanceFY [mloop.index].text}</td>
     <td>${distanceFT [mloop.index].text}</td>
   </tr>

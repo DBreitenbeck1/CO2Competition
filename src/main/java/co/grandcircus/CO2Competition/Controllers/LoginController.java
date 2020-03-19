@@ -210,20 +210,33 @@ public class LoginController {
 			@RequestParam(value="time",required=false) String time,
 			@RequestParam(value="id", required=false) Long id) {
 		List<Employee> poolers = new ArrayList<>();  
-		Employee driver = emRepo.findById(id).orElse(null);
-		Employee passenger = emRepo.findByUsernameIgnoreCase(username);
-		Company company = driver.getCompany();
-		poolers.add(driver);
-		poolers.add(passenger);
+		Employee passenger1 = emRepo.findById(id).orElse(null);
+		Employee passenger2 = emRepo.findByUsernameIgnoreCase(username);
 		
-		SearchResult result =apiServe.getResult(passenger.getAddress(), company.getAddress());
-		Distance distance= apiServe.getDistance(result);
+		poolers.add(passenger1);
+		poolers.add(passenger2);
+		Company company = passenger1.getCompany();
+
+		SearchResult result1 =apiServe.getResult(passenger1.getAddress(), company.getAddress());
+		SearchResult result2 =apiServe.getResult(passenger2.getAddress(), company.getAddress());
+		Distance d1= apiServe.getDistance(result1);
+		Distance d2= apiServe.getDistance(result2);
+		Distance distance;
+		if(d1.getValue()>d2.getValue()) {
+			distance = d2;
+		}else {
+			distance = d1;
+		}
+		
 		Long d = distance.getValue();
 		double miles = d/1609.344;
 		CalculationService cs = new CalculationService();
 		double saved=cs.calculateCO2(miles, "car");
+		
+		double score = saved*10;
+		
 		Carpool carpool = new Carpool();
-		carpool.setCompany(driver.getCompany());
+		carpool.setCompany(company);
 		date=date+" "+time;
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    Date dateobj = new Date();
@@ -233,7 +246,7 @@ public class LoginController {
 	    	e.printStackTrace();
 	    }
 		carpool.setDate(df.format(dateobj));
-		carpool.setCo2(saved);
+		carpool.setCo2(score);
 		carRepo.save(carpool);
 		carpool.setEmployees(poolers);
 		for(Employee pool: poolers) {
@@ -243,65 +256,13 @@ public class LoginController {
 		carRepo.save(carpool);
 
 		ModelAndView mav = new ModelAndView("confirmation");
-		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
-		mav.addObject("company",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
+		mav.addObject("name", passenger2.getName());
+		mav.addObject("destination", company.getName());
 		mav.addObject("date",date);
 		mav.addObject("time",time);
+		mav.addObject("saved", saved);
+		mav.addObject("score", score);
 		mav.addObject("id", id);
-		return mav;
-	}
-	
-	@RequestMapping("/carpool")
-	public ModelAndView assignCarpool(
-			@RequestParam("id") Long id,
-			@RequestParam(value="passengers", defaultValue="") List<Long> ids
-	//@RequestParam(value="toppings", defaultValue = "") List<String> toppings,
-			) {
-		System.out.println(ids);
-		List<Employee> passengers = new ArrayList<>();
-		for(Long pass: ids) {
-			passengers.add(emRepo.findById(pass).orElse(null));
-		}
-		Employee driver = emRepo.findById(id).orElse(null);
-		Company company = driver.getCompany();
-		
-		double saved = 0;
-		double total = 0;
-		double e =0;
-		for(Employee pass: passengers) {
-			SearchResult result =apiServe.getResult(pass.getAddress(), company.getAddress());
-		Distance distance= apiServe.getDistance(result);
-		System.out.println(distance.getValue());
-		Long d = distance.getValue();
-		System.out.println(d);
-		double miles = d/1609.344;
-		System.out.println(miles);
-		CalculationService cs = new CalculationService();
-		e=cs.calculateCO2(miles, "car");
-	//	e=7.08*miles;
-	//	e=calcServe.calculateCO2(miles, "car");
-			System.out.println(e);
-			saved += e;
-			total +=e;
-		}
-
-		passengers.add(driver);
-		
-		Carpool carpool = new Carpool();
-		carpool.setCompany(driver.getCompany());
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-	    Date dateobj = new Date();
-		carpool.setDate(df.format(dateobj));
-		carpool.setCo2(saved);
-		carRepo.save(carpool);
-		carpool.setEmployees(passengers);
-		for(Employee pass: passengers) {
-			pass.addCarpool(carpool);
-			emRepo.save(pass);
-		}
-		carRepo.save(carpool);
-		System.out.println(carpool.getCarpoolId());
-		ModelAndView mav = new ModelAndView("redirect:/carpoolsummary/"+carpool.getCarpoolId());		
 		return mav;
 	}
 	
@@ -358,6 +319,7 @@ public class LoginController {
 		mav.addObject("time",time);
 		mav.addObject("carpools", company.getCarpool());
 		mav.addObject("employees", employee1);
+		mav.addObject("company", company);
 		mav.addObject("distanceC", distanceFromCom);
 		mav.addObject("distanceY", distanceFromYou);
 		mav.addObject("emId",employee.getEmployeeId());
@@ -397,7 +359,7 @@ public class LoginController {
 	public ModelAndView showRideBackHome(@PathVariable ("id") Employee employee) {
 		
 		ModelAndView mav = new ModelAndView("show-endLocation");
-		mav.addObject("eCity",employee.getCity());
+		mav.addObject("eCity", employee.getCity());
 		mav.addObject("eStreet",employee.getStreetAddress());
 		mav.addObject("eZip",employee.getZipCode());
 		mav.addObject("cCity", employee.getCompany().getCity());
@@ -431,9 +393,7 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView("search-carpoolBack");
 		mav.addObject("carpools", company.getCarpool());
 		mav.addObject("employees", empl);
-		mav.addObject("cCity",company.getCity());
-		mav.addObject("cStreet",company.getStreetAddress());
-		mav.addObject("cZip",company.getZipCode());
+		mav.addObject("company",company);
 		mav.addObject("distanceFY", distanceToYourHouse);
 		mav.addObject("distanceFT", distanceToTheirOwn);
 		mav.addObject("date",date);
@@ -446,18 +406,65 @@ public class LoginController {
 	//finding the name of the driver based on their username and sending information to jsp to show the confirmation page
 	@RequestMapping("/submit-carpool-back/{id}")
 	public ModelAndView carpoolBackS(@RequestParam(value="carpool")String username,
-			@RequestParam(value="date",required=false) String date,
-			@RequestParam(value="time",required=false) String time,
-			@PathVariable("id") Employee employee,
-			@RequestParam(value="id", required=false) Long id) {
+					@RequestParam(value="date",required=false) String date,
+					@RequestParam(value="time",required=false) String time,
+					@RequestParam(value="id", required=false) Long id) {
+		List<Employee> poolers = new ArrayList<>();  
+		Employee passenger1 = emRepo.findById(id).orElse(null);
+		Employee passenger2 = emRepo.findByUsernameIgnoreCase(username);
 		
+		poolers.add(passenger1);
+		poolers.add(passenger2);
+		Company company = passenger1.getCompany();
+
+		SearchResult result1 =apiServe.getResult(company.getAddress(), passenger1.getAddress());
+		SearchResult result2 =apiServe.getResult(company.getAddress(), passenger2.getAddress());
+		Distance d1= apiServe.getDistance(result1);
+		Distance d2= apiServe.getDistance(result2);
+		Distance distance;
+		if(d1.getValue()>d2.getValue()) {
+			distance = d2;
+		}else {
+			distance = d1;
+		}
+		
+		Long d = distance.getValue();
+		double miles = d/1609.344;
+		CalculationService cs = new CalculationService();
+		double saved=cs.calculateCO2(miles, "car");
+		
+		double score = saved*10;
+		
+		Carpool carpool = new Carpool();
+		carpool.setCompany(company);
+		date=date+" "+time;
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    Date dateobj = new Date();
+	    try {
+	    	dateobj=df.parse(date);
+	    } catch (ParseException e) {
+	    	e.printStackTrace();
+	    }
+		carpool.setDate(df.format(dateobj));
+		carpool.setCo2(score);
+		carRepo.save(carpool);
+		carpool.setEmployees(poolers);
+		for(Employee pool: poolers) {
+			pool.addCarpool(carpool);
+			emRepo.save(pool);
+		}
+		carRepo.save(carpool);
+
 		ModelAndView mav = new ModelAndView("confirmationBack");
-		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
-		mav.addObject("address",employee.getCity());
+		mav.addObject("name", passenger2.getName());
+		mav.addObject("destination", passenger1.getAddress());
 		mav.addObject("date",date);
 		mav.addObject("time",time);
+		mav.addObject("saved", saved);
+		mav.addObject("score", score);
 		mav.addObject("id", id);
 		return mav;
+		
 	}
 	
 	//Previous Routes:
@@ -477,5 +484,22 @@ public class LoginController {
 		mav.addObject("emId", employee.getEmployeeId());
 		return mav;
 	}
+	
+	
+	
+//	@RequestParam(value="carpool")String username,
+//	@RequestParam(value="date",required=false) String date,
+//	@RequestParam(value="time",required=false) String time,
+//	@PathVariable("id") Employee employee,
+//	@RequestParam(value="id", required=false) Long id) {
+//
+//ModelAndView mav = new ModelAndView("confirmationBack");
+//mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
+//mav.addObject("address",employee.getCity());
+//mav.addObject("date",date);
+//mav.addObject("time",time);
+//mav.addObject("id", id);
+//return mav;
+//
 	
 }
