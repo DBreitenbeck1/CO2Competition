@@ -234,14 +234,15 @@ public class LoginController {
 		double saved=cs.calculateCO2(miles, "car");
 		
 		double score = saved*10;
+		score = (int)(Math.round(score*100))/100.00;
 		
 		Carpool carpool = new Carpool();
 		carpool.setCompany(company);
-		date=date+" "+time;
+		String dateRec=date+" "+time;
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    Date dateobj = new Date();
 	    try {
-	    	dateobj=df.parse(date);
+	    	dateobj=df.parse(dateRec);
 	    } catch (ParseException e) {
 	    	e.printStackTrace();
 	    }
@@ -434,14 +435,15 @@ public class LoginController {
 		double saved=cs.calculateCO2(miles, "car");
 		
 		double score = saved*10;
-		
+		score = (int)(Math.round(score*100))/100.00;
+		 
 		Carpool carpool = new Carpool();
 		carpool.setCompany(company);
-		date=date+" "+time;
+		String dateRec=date+" "+time;
 		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 	    Date dateobj = new Date();
 	    try {
-	    	dateobj=df.parse(date);
+	    	dateobj=df.parse(dateRec);
 	    } catch (ParseException e) {
 	    	e.printStackTrace();
 	    }
