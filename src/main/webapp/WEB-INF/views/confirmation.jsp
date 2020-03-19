@@ -17,8 +17,8 @@
 <section class="jumbotron">
 
 <h4>Your carpool request successfully submitted</h4>
-<h5>${name } will pick you up on ${date } at ${time } to ${company }</h5>
-
+<h5>${name } will pick you up on ${date } at ${time } to take you to ${destination }</h5>
+<h5>This will save ${saved} lbs of co2 and earn you ${score } points!</h5>
 </section>
 
 <button class="btn btn-primary" type="submit">Home Page</button>

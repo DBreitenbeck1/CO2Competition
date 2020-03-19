@@ -17,13 +17,17 @@
 <section class="jumbotron">
 <table class="table table-striped">
 <thead>
+
+<h4>To: ${company.name }</h4>
+<h5>${company.address }</h5>
+
   <tr>
     <th>Name</th>
     <th>City</th>
     <th>Street</th>
-    <th>Zip code</th>
-    <th>Distance from work</th>
-    <th>Distance from you</th>
+    <th>Zip Code</th>
+    <th>Distance from Work</th>
+    <th>Distance from You</th>
   </tr>
   </thead>
   <tbody>

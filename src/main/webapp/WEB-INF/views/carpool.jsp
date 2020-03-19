@@ -38,8 +38,6 @@
 
 <label><input type="radio" name="em" value="${all.username}">Employee Name: ${all.name }		Address: ${all.city }	${all.streetAddress }	${all.zipCode }		
 Company:	${all.company.name }</label>
-=======
->>>>>>> 8d6608f2cbd7ec0a330a9880f56566b5d9eb7002
 
 <c:forEach var="em" items="${allEmployee }">
 
@@ -47,7 +45,6 @@ Company:	${all.company.name }</label>
 Company:	${em.company.name }</label>
 
 </c:forEach>
-<<<<<<< HEAD
 <!-- <section> 
 <h5>Choose your company</h5>
 <c:forEach var="c" items="${company }">
