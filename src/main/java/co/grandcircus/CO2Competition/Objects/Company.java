@@ -15,18 +15,19 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long companyId;
-	
+
 	private String name;
 	private String streetAddress;
 	private String city;
 	private String zipCode;
-	
+	private Double goalPercent;
+
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Carpool> carpool;
-	
+
 	public List<Carpool> getCarpool() {
 		return carpool;
 	}
@@ -40,8 +41,8 @@ public class Company {
 	}
 
 	public String getAddress() {
-	return this.streetAddress+", " +this.city+" "+this.zipCode;
-}
+		return this.streetAddress + ", " + this.city + " " + this.zipCode;
+	}
 
 	public Long getCompanyId() {
 		return companyId;
@@ -96,6 +97,5 @@ public class Company {
 		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
 				+ city + ", zipCode=" + zipCode + ", employees=" + employees + "]";
 	}
-	
-	
+
 }
