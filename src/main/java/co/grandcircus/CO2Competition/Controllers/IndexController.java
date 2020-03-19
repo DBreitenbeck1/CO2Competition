@@ -101,9 +101,21 @@ public class IndexController {
 	// Tester to see if Scoreboard will work, needs polishing
 	@RequestMapping("/company/{id}/scores")
 	public ModelAndView showScores(@PathVariable Long id) {
+		// Declare Variables
+		Double companyTotal = 0.0;
+		
+		// Get Scoreboard
 		List<Score> scores = emRepo.findScoresByCompany(id);
+		
+		// Get company total from scoreboard
+		for (Score score : scores) {
+			companyTotal += score.getScore();
+		}
+		
+		// Create ModelAndView and add objects
 		ModelAndView mav = new ModelAndView("userscores");
 		mav.addObject("scoreboard", scores);
+		mav.addObject("total", companyTotal);
 		return mav;
 	}
 	

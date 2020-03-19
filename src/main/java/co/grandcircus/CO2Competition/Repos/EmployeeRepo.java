@@ -25,7 +25,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			") AS A " + 
 			"ON (carpool_id = A.carpool_carpool_id) " + 
 			"GROUP BY employees_employee_id " + 
-			"ORDER BY CO2 DESC;",
+			"ORDER BY score DESC;",
 			nativeQuery = true
 			)
 	public List<Score> findScoresByCompany(@Param("company_id") Long company_id);
@@ -37,7 +37,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			") AS A " + 
 			"ON (carpool_id = A.carpool_carpool_id) " + 
 			"GROUP BY employees_employee_id " + 
-			"ORDER BY CO2 DESC;",
+			"ORDER BY score DESC;",
 			nativeQuery = true
 			)
 	public Score findScoreByEmployee(@Param("employee_id") Long employee_id);

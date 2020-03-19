@@ -36,7 +36,10 @@
 				<td>${player.score}</td>
 			</tr>
  	</c:forEach>	
-
+			<tr class="table-primary">
+			<td><b>Company Total:</b></td>
+			<td><b>${total}</b></td>
+			</tr>
 			</tbody>
 
 		</table>
