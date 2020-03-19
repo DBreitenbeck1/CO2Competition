@@ -1,6 +1,7 @@
 package co.grandcircus.CO2Competition.Controllers;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -195,6 +196,55 @@ public class LoginController {
 		return mav;
 	}
 	
+	
+	//submit the carpool that user already chose
+	@RequestMapping("/submit-carpool")
+	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
+			@RequestParam(value="date",required=false) String date,
+			@RequestParam(value="time",required=false) String time,
+			@RequestParam(value="id", required=false) Long id) {
+		List<Employee> poolers = new ArrayList<>();  
+		Employee driver = emRepo.findById(id).orElse(null);
+		Employee passenger = emRepo.findByUsernameIgnoreCase(username);
+		Company company = driver.getCompany();
+		poolers.add(driver);
+		poolers.add(passenger);
+		
+		SearchResult result =apiServe.getResult(passenger.getAddress(), company.getAddress());
+		Distance distance= apiServe.getDistance(result);
+		Long d = distance.getValue();
+		double miles = d/1609.344;
+		CalculationService cs = new CalculationService();
+		double saved=cs.calculateCO2(miles, "car");
+		Carpool carpool = new Carpool();
+		carpool.setCompany(driver.getCompany());
+		date=date+" "+time;
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+	    Date dateobj = new Date();
+	    try {
+	    	dateobj=df.parse(date);
+	    } catch (ParseException e) {
+	    	e.printStackTrace();
+	    }
+		carpool.setDate(df.format(dateobj));
+		carpool.setCo2(saved);
+		carRepo.save(carpool);
+		carpool.setEmployees(poolers);
+		for(Employee pool: poolers) {
+			pool.addCarpool(carpool);
+			emRepo.save(pool);
+		}
+		carRepo.save(carpool);
+
+		ModelAndView mav = new ModelAndView("confirmation");
+		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
+		mav.addObject("company",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
+		mav.addObject("date",date);
+		mav.addObject("time",time);
+		mav.addObject("id", id);
+		return mav;
+	}
+	
 	@RequestMapping("/carpool")
 	public ModelAndView assignCarpool(
 			@RequestParam("id") Long id,
@@ -228,8 +278,7 @@ public class LoginController {
 			saved += e;
 			total +=e;
 		}
-	
-		
+
 		passengers.add(driver);
 		
 		Carpool carpool = new Carpool();
@@ -309,21 +358,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	//submit the carpool that user already chose
-	@RequestMapping("/submit-carpool")
-	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
-			@RequestParam(value="date",required=false) String date,
-			@RequestParam(value="time",required=false) String time,
-			@RequestParam(value="id", required=false) Long id) {
-		System.out.println("emid" +id);
-		ModelAndView mav = new ModelAndView("confirmation");
-		mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
-		mav.addObject("company",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
-		mav.addObject("date",date);
-		mav.addObject("time",time);
-		mav.addObject("id", id);
-		return mav;
-	}
+
 
 	@RequestMapping("/routes/{id}")
 	public ModelAndView showRoutes(@PathVariable ("id") Employee employee) {
@@ -431,8 +466,9 @@ public class LoginController {
 			cp.add(carpools.get(i));
 		}
 		}
-		ModelAndView mav = new ModelAndView("routes");
+		ModelAndView mav = new ModelAndView("pastRoutes");
 		mav.addObject("carpools", cp);
+		mav.addObject("emId", employee.getEmployeeId());
 		return mav;
 	}
 	
