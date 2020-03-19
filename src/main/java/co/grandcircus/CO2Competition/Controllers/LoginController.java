@@ -82,6 +82,20 @@ public class LoginController {
 		return new ModelAndView("redirect:/login");
 	}
 	
+	@RequestMapping("/register")
+	public ModelAndView showReg(Company compnay) {
+		return new ModelAndView ("employee-registration","company",coRepo.findAll());
+	}
+	
+	@PostMapping("/register")
+	public ModelAndView submitReg(Employee employee,Company company,RedirectAttributes red) {
+		emRepo.save(employee);
+//		coRepo.save(company);
+		red.addFlashAttribute("msg","Thank you for registering with us, "+employee.getName());
+
+		return new ModelAndView("redirect:/login");
+	}
+	
 	@RequestMapping("/employee/{id}")
 	public ModelAndView showDesk(@PathVariable ("id") Employee employee) {
 		System.out.println(employee);
