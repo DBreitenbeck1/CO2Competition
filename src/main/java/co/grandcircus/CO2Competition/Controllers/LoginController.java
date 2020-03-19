@@ -64,32 +64,26 @@ public class LoginController {
 		Employee employee = emRepo.findByUsernameIgnoreCase(username);
 		if(employee == null || !password.equals(employee.getPassword())) {
 			red.addFlashAttribute("msg","Incorrect username or password, please try again!");
-			return new ModelAndView("login");
+			return new ModelAndView("redirect:/login");
 		}
-		System.out.println(username);
+		
 		sesh.setAttribute("employee", employee);
-		System.out.println(username);
-
+		
 		ModelAndView mav = new ModelAndView ("redirect:/employee/" + employee.getEmployeeId());
-		mav.addObject("name",employee.getName());
+//		mav.addObject("name",employee.getName());
 //		mav.addObject("company",employee.getCompany());
 		return mav;
 	}
 	
-	@RequestMapping("/employee/{id}")
-	public ModelAndView showDesk(@PathVariable ("id") Employee employee) {
-		System.out.println(employee);
+	@RequestMapping("/employee")
+	public ModelAndView showDesk() {
 		ModelAndView mav = new ModelAndView ("employee-page");
-		mav.addObject("name", employee.getName());
-		mav.addObject("company", employee.getCompany().getName());
-		mav.addObject("emId",employee.getEmployeeId());
 		return mav;
 	}
 	
 	@RequestMapping("/carpool/{id}")
 	public ModelAndView showCarpool(@PathVariable("id") Employee employee) {
-		Company company =coRepo.findByName(employee.getCompany().getName());
-		System.out.println(company.getName());
+		Company company = coRepo.findByName(employee.getCompany().getName());
 		List<Employee> allEmps = company.getEmployees();
 		allEmps.remove(employee);
 		ModelAndView mav = new ModelAndView ("carpool");
@@ -109,7 +103,7 @@ public class LoginController {
 			@RequestParam String city,
 			@RequestParam String zip,
 			@RequestParam (value="co") String des, 
-			@RequestParam(value="em") String username,
+			@RequestParam (value="em") String username,
 			@RequestParam String street1,
 			@RequestParam String city1,
 			@RequestParam String zip1,
@@ -192,7 +186,6 @@ public class LoginController {
 		ModelAndView mav = new ModelAndView("summary");
 		mav.addObject("cp", carpool);
 		mav.addObject("company", carpool.getCompany().getName());
-		
 		return mav;
 	}
 	
@@ -456,19 +449,19 @@ public class LoginController {
 	
 	//Previous Routes:
 		//-displays the previous routes of the employee
-	@RequestMapping("/previous-routes/{id}")
-	public ModelAndView previousRoutes(@PathVariable ("id") Employee employee) {
+	@RequestMapping("/previous-routes")
+	public ModelAndView previousRoutes() {
+		Employee employee = (Employee)sesh.getAttribute("employee");
 		Company company = employee.getCompany();
 		List<Carpool> carpools = company.getCarpool();
-		List<Carpool> cp = new ArrayList();
+		List<Carpool> cp = new ArrayList<>();
 		for (int i =0; i<carpools.size(); i++) {
-		if (carpools.get(i).getEmployees().contains(employee)) {
-			cp.add(carpools.get(i));
-		}
+			if (carpools.get(i).getEmployees().contains(employee)) {
+				cp.add(carpools.get(i));
+			}
 		}
 		ModelAndView mav = new ModelAndView("pastRoutes");
 		mav.addObject("carpools", cp);
-		mav.addObject("emId", employee.getEmployeeId());
 		return mav;
 	}
 	

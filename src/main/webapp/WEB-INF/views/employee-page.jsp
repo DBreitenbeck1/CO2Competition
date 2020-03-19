@@ -44,11 +44,14 @@
 			<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request
 				a Carpool</a> <a href="/routes/${emId}" class="btn btn-primary"
 				type="submit">See Available Routes</a> <a
-				href="/previous-routes/${emId }" class="btn btn-primary"
-				type="submit">Previous Routes</a> <a href="/favorite-routes"
-				class="btn btn-primary" type="submit">Favorite Routes</a> <a
-				href="/summary" class="btn btn-primary" type="submit">Summary of
-				saved</a>
+				href="/previous-routes/${emId}" class="btn btn-primary"
+				type="submit">Previous Routes</a> 
+				
+				<!--  <a href="/favorite-routes"
+				class="btn btn-primary" type="submit">Favorite Routes</a> -->
+				
+				<a
+				href="/summary" class="btn btn-primary" type="submit">Leaderboard</a>
 
 
 

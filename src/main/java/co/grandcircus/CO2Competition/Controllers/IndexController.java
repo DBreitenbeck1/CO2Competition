@@ -2,6 +2,8 @@ package co.grandcircus.CO2Competition.Controllers;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -14,11 +16,15 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
+import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Objects.Score;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class IndexController {
+	
+	@Autowired
+	HttpSession httpSesh;
 
 	@Autowired
 	private ApiService apiServe;
@@ -33,38 +39,38 @@ public class IndexController {
 	public ModelAndView showIndex(RedirectAttributes redir) {
 		// Create ModelAndView
 		ModelAndView mav = new ModelAndView("index");
-
-		// Declare Variables
-		String address1 = "NoviMI";
-		String address2 = "DetroitMI";
-		String address3 = "ChicagoIL";
-		String start;
-		String midway;
-		String destination;
-		Distance distance;
-		
-		// Get Search Results
-		SearchResult result = apiServe.getResult(address1, address2, address3);
-
-		// Will catch thrown exception if there were no results found and redirect
-		try {
-			start = apiServe.getStart(result, 0);
-			midway = apiServe.getStart(result, 1);
-			destination = apiServe.getDest(result, 1);
-			distance = apiServe.getDistance(result);
-		} catch (IllegalArgumentException IAE) {
-			redir.addFlashAttribute("message", IAE.getMessage());
-			return new ModelAndView("redirect:/logtrip");
-		}
-		double CO2Savings = coCal.calculateSavings(address1, address2);
+//
+//		// Declare Variables
+//		String address1 = "NoviMI";
+//		String address2 = "DetroitMI";
+//		String address3 = "ChicagoIL";
+//		String start;
+//		String midway;
+//		String destination;
+//		Distance distance;
+//		
+//		// Get Search Results
+//		SearchResult result = apiServe.getResult(address1, address2, address3);
+//
+//		 Will catch thrown exception if there were no results found and redirect
+//		try {
+//			start = apiServe.getStart(result, 0);
+//			midway = apiServe.getStart(result, 1);
+//			destination = apiServe.getDest(result, 1);
+//			distance = apiServe.getDistance(result);
+//		} catch (IllegalArgumentException IAE) {
+//			redir.addFlashAttribute("message", IAE.getMessage());
+//			return new ModelAndView("redirect:/logtrip");
+//		}
+//		double CO2Savings = coCal.calculateSavings(address1, address2);
 //		double CO2Savings = coCal.smallCar(5.7);
-		
-		// Add Objects to ModelAndView
-		mav.addObject("co2savings", CO2Savings);
-		mav.addObject("start", start);
-		mav.addObject("midway", midway);
-		mav.addObject("destination", destination);
-		mav.addObject("distance", distance);
+//		
+//		 Add Objects to ModelAndView
+//		mav.addObject("co2savings", CO2Savings);
+//		mav.addObject("start", start);
+//		mav.addObject("midway", midway);
+//		mav.addObject("destination", destination);
+//		mav.addObject("distance", distance);
 		return mav;
 	}
 
@@ -99,13 +105,17 @@ public class IndexController {
 	}
 	
 	// Tester to see if Scoreboard will work, needs polishing
-	@RequestMapping("/company/{id}/scores")
-	public ModelAndView showScores(@PathVariable Long id) {
+	@RequestMapping("/summary")
+	public ModelAndView showScores() {
+		// Company ID
+		Employee emp = (Employee)httpSesh.getAttribute("employee");
+		Long companyId = emp.getCompany().getCompanyId();
+		
 		// Declare Variables
 		Double companyTotal = 0.0;
 		
 		// Get Scoreboard
-		List<Score> scores = emRepo.findScoresByCompany(id);
+		List<Score> scores = emRepo.findScoresByCompany(companyId);
 		
 		// Get company total from scoreboard
 		for (Score score : scores) {
