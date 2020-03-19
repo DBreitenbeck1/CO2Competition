@@ -76,6 +76,12 @@ public class LoginController {
 		return mav;
 	}
 	
+	@RequestMapping("/logout")
+	public ModelAndView showLogout(RedirectAttributes red) {
+		sesh.invalidate();
+		return new ModelAndView("redirect:/login");
+	}
+	
 	@RequestMapping("/employee/{id}")
 	public ModelAndView showDesk(@PathVariable ("id") Employee employee) {
 		System.out.println(employee);
