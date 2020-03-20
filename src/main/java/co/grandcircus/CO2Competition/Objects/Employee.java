@@ -25,6 +25,8 @@ public class Employee {
 	private String city;
 	private String zipCode;
 	private String vehicleType;
+	
+	
 	public String getVehicleType() {
 		return vehicleType;
 	}

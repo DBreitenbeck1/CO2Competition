@@ -6,6 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <meta charset="ISO-8859-1">
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -30,8 +31,7 @@
 	<h3>${dest}</h3>
 	<h3>${co2savings}</h3>
 
-	<div>
-	<a href="/register" class="btn btn-primary" type="submit">Register Here</a>
-	</div>
+	<a href="/register" class="btn btn-primary" type="submit">Register New User</a> 
+
 </body>
 </html>
