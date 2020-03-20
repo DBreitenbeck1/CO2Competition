@@ -15,18 +15,36 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long companyId;
-	
+
 	private String name;
 	private String streetAddress;
 	private String city;
 	private String zipCode;
-	
+	private Double goal;
+	private Double goalPercent;
+
+	public Double getGoal() {
+		return goal;
+	}
+
+	public void setGoal(Double goal) {
+		this.goal = goal;
+	}
+
+	public Double getGoalPercent() {
+		return goalPercent;
+	}
+
+	public void setGoalPercent(Double goalPercent) {
+		this.goalPercent = goalPercent;
+	}
+
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Carpool> carpool;
-	
+
 	public List<Carpool> getCarpool() {
 		return carpool;
 	}
@@ -40,8 +58,8 @@ public class Company {
 	}
 
 	public String getAddress() {
-	return this.streetAddress+", " +this.city+" "+this.zipCode;
-}
+		return this.streetAddress + ", " + this.city + " " + this.zipCode;
+	}
 
 	public Long getCompanyId() {
 		return companyId;
@@ -83,6 +101,13 @@ public class Company {
 		this.zipCode = zipCode;
 	}
 
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", goalPercent=" + goalPercent + ", employees="
+				+ employees + ", carpool=" + carpool + "]";
+	}
+
 	public List<Employee> getEmployees() {
 		return employees;
 	}
@@ -91,11 +116,4 @@ public class Company {
 		this.employees = employees;
 	}
 
-	@Override
-	public String toString() {
-		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", zipCode=" + zipCode + ", employees=" + employees + "]";
-	}
-	
-	
 }
