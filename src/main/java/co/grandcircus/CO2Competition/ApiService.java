@@ -1,5 +1,6 @@
 package co.grandcircus.CO2Competition;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -50,6 +51,22 @@ public class ApiService {
 		System.out.println(url);
 		return result;
 	}
+	
+	// Overloaded for Multiple waypoints
+		public SearchResult getMultipleResults(String startAddress, List<String> stops, String destAddress) throws IllegalArgumentException{
+			String midway="";
+			for(String address:stops) {
+				midway+=address+"|";
+			}
+			String url = ("https://maps.googleapis.com/maps/api/directions/json?origin="
+					+ startAddress + "&destination=" + destAddress
+					+ "&waypoints=" + midway
+					+ "&key=" + apiKey);
+			SearchResult result = rt.getForObject(url, SearchResult.class);
+			System.out.println(url);
+			return result;
+		}
+
 
 	// Overloaded to allow user to pick which leg they want
 	public Distance getDistance(SearchResult result, Integer index) {
@@ -85,6 +102,7 @@ public class ApiService {
 		return result.getRoutes();
 	}
 	
+	//Returns start address
 	public String getStart(SearchResult result, Integer index) throws IllegalArgumentException {
 		List<Route> routes = result.getRoutes();
 		try {
@@ -97,11 +115,15 @@ public class ApiService {
 		}
 	}
 
+	//Returns destination address
 	public String getDest(SearchResult result, Integer index) {
 		List<Route> routes = result.getRoutes();
 		Route r = routes.get(0);	
 		Leg leg = r.getLegs().get(index);
 		return leg.getEndAddress();	
 	}
+	
+	
+	
 	
 }
