@@ -1,23 +1,28 @@
 package co.grandcircus.CO2Competition.Entities;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+/*
+ * Step 3: We parse the individual legs, were most of the real data is stored
+ * 
+ */
 
 public class Leg {
+	//Each leg has one distance object..
 	@JsonProperty("distance")
 	Distance distance;
-	
-	@JsonProperty("duration")
-	Duration duration;
-	
+
+	//One start location object(latitude and longitude)..
 	@JsonProperty("start_location")
 	StartLocation startLocation;
 	
+	//One end location object(ditto)..
 	@JsonProperty("end_location")
 	EndLocation endLocation;
 	
+	
+	//And a string each for start and end address
 	@JsonProperty("start_address")
 	String startAddress;
-	
 	
 	@JsonProperty("end_address")
 	String endAddress;
@@ -30,13 +35,7 @@ public class Leg {
 		this.distance = distance;
 	}
 
-	public Duration getDuration() {
-		return duration;
-	}
 
-	public void setDuration(Duration duration) {
-		this.duration = duration;
-	}
 
 	public StartLocation getStartLocation() {
 		return startLocation;
@@ -73,10 +72,10 @@ public class Leg {
 
 	@Override
 	public String toString() {
-		return "Leg [distance=" + distance + ", duration=" + duration + ", startLocation=" + startLocation
-				+ ", endLocation=" + endLocation + "]";
+		return "Leg [distance=" + distance + ", startLocation=" + startLocation + ", endLocation=" + endLocation
+				+ ", startAddress=" + startAddress + ", endAddress=" + endAddress + "]";
 	}
-	
+
 	
 
 
