@@ -30,6 +30,8 @@
 	<h3>${dest}</h3>
 	<h3>${co2savings}</h3>
 
-
+	<div>
+	<a href="/register" class="btn btn-primary" type="submit">Register Here</a>
+	</div>
 </body>
 </html>

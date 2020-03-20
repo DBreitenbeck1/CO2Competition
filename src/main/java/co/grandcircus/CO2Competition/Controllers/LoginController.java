@@ -85,6 +85,20 @@ public class LoginController {
 		return new ModelAndView("redirect:/login");
 	}
 	
+	@RequestMapping("/register")
+	public ModelAndView showReg(Company compnay) {
+		return new ModelAndView ("employee-registration","company",coRepo.findAll());
+	}
+	
+	@PostMapping("/register")
+	public ModelAndView submitReg(Employee employee,Company company,RedirectAttributes red) {
+		emRepo.save(employee);
+//		coRepo.save(company);
+		red.addFlashAttribute("msg","Thank you for registering with us, "+employee.getName());
+
+		return new ModelAndView("redirect:/login");
+	}
+	
 	@RequestMapping("/employee/{id}")
 	public ModelAndView showDesk(@PathVariable ("id") Employee employee) {
 		System.out.println(employee);
@@ -215,19 +229,29 @@ public class LoginController {
 		poolers.add(passenger1);
 		poolers.add(passenger2);
 		Company company = passenger1.getCompany();
-
+		
+		
 		SearchResult result1 =apiServe.getResult(passenger1.getAddress(), company.getAddress());
 		SearchResult result2 =apiServe.getResult(passenger2.getAddress(), company.getAddress());
+
 		Distance d1= apiServe.getDistance(result1);
 		Distance d2= apiServe.getDistance(result2);
-		Distance distance;
-		if(d1.getValue()>d2.getValue()) {
-			distance = d2;
-		}else {
-			distance = d1;
-		}
 		
-		Long d = distance.getValue();
+		SearchResult result;
+		if(d1.getValue()>d2.getValue()) {
+			result = apiServe.getResult(passenger1.getAddress(), passenger2.getAddress(), company.getAddress());
+		}else {
+			result = apiServe.getResult( passenger2.getAddress(), passenger1.getAddress(), company.getAddress());
+		}
+	
+
+		Distance distance = apiServe.getDistance(result);
+		
+		
+		Long d = distance.getValue()- d2.getValue(); 
+		System.out.println(d2.getValue());
+			//	distance.getValue();
+		System.out.println(d);
 		double miles = d/1609.344;
 		CalculationService cs = new CalculationService();
 		double saved=cs.calculateCO2(miles, "car");
