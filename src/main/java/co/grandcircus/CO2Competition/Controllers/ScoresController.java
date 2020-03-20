@@ -34,7 +34,6 @@ public class ScoresController {
 	@RequestMapping("/userscores")
 	public ModelAndView showUserScores() {
 		ModelAndView mav = new ModelAndView("userscores");
-
 		return mav;
 	}
 

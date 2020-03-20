@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,25 +17,35 @@
 
 </head>
 <body>
-<main class="container">
-<section class="jumbotron">
+	<main class="container">
+		<section class="jumbotron">
 
-<form action="/find-carpool" method="post">
-<c:if test="${method eq 'tw'}">
-	<div>Home - ${employee.streetAddress}, ${employee.city}, ${employee.zipCode}</div>
-	<div>Work - ${employee.company.streetAddress}, ${employee.company.city}, ${employee.company.zipCode}</div>
-</c:if>
+			<form action="/submit-carpool" method="post">
+				<c:if test="${method eq 'To Work'}">
+					<div>Home - ${employee.streetAddress}, ${employee.city},
+						${employee.zipCode}</div>
+					<div>Work - ${employee.company.streetAddress},
+						${employee.company.city}, ${employee.company.zipCode}</div>
+				</c:if>
 
-<c:if test="${method eq 'bh'}">
-	<div>Work - ${employee.company.streetAddress}, ${employee.company.city}, ${employee.company.zipCode}</div>
-	<div>Home - ${employee.streetAddress}, ${employee.city}, ${employee.zipCode}</div>
-</c:if>
+				<c:if test="${method eq 'Back Home'}">
+					<div>Work - ${employee.company.streetAddress},
+						${employee.company.city}, ${employee.company.zipCode}</div>
+					<div>Home - ${employee.streetAddress}, ${employee.city},
+						${employee.zipCode}</div>
+				</c:if>
 
-<div>Select pickup date: <input type="date" name="date" required/></div>
-<div>Select pickup time: <input type="time" name="time" required/></div>
-<button class="btn btn-primary" type="submit">Find Carpool</button>
-</form>
-</section>
-</main>
+				<div>
+					Select pickup date: <input type="date" name="date" required />
+				</div>
+				<div>
+					Select pickup time: <input type="time" name="time" required />
+				</div>
+
+				<input type="hidden" value="${username}">
+				<button class="btn btn-primary" type="submit">Find Carpool</button>
+			</form>
+		</section>
+	</main>
 </body>
 </html>

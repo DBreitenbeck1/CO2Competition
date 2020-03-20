@@ -85,13 +85,15 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/carpool")
-	public ModelAndView showCarpool() {
+	public ModelAndView startCarpool() {
 		ModelAndView mav = new ModelAndView("carpool");
 		return mav;
 	}
 	
-	@RequestMapping("/tripdetailsFIXME")
+	// FIXME Sam
+	@RequestMapping("/tripdetails/{id}")
 	public ModelAndView showDetails(
+			@PathVariable ("id") Employee employee,
 			@RequestParam String street,
 			@RequestParam String city,
 			@RequestParam String zip,
@@ -109,48 +111,46 @@ public class LoginController {
 		SearchResult result = apiServe.getResult(address1, address2);
 		 Distance distance = apiServe.getDistance(result);
 		if (distance!=null) {
-	
-		mav.addObject("street", emRepo.findByUsernameIgnoreCase(username).getStreetAddress());
-		mav.addObject("city", emRepo.findByUsernameIgnoreCase(username).getCity());
-		mav.addObject("zip", emRepo.findByUsernameIgnoreCase(username).getZipCode());
-		mav.addObject("coName",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
-		mav.addObject("street1",emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress());
-		mav.addObject("city1", emRepo.findByUsernameIgnoreCase(username).getCompany().getCity());
-		mav.addObject("zip1", emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode());
-		mav.addObject("distance", distance);
-		mav.addObject("em", coCal.smallCar(distance.getValue() ));
-		
-		Employee employee = (Employee) sesh.getAttribute("employee");
-		employee.setCity(city);
-		employee.setStreetAddress(street);
-		employee.setZipCode(zip);
-		employee.getCompany().getStreetAddress();	
-		employee.getCompany().getStreetAddress();
-		
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-	    Date dateobj = new Date();
-	    Carpool carpool = new Carpool();
-		carpool.setCo2(coCal.smallCar(distance.getValue()));
-		carpool.setDate(df.format(dateobj));
-		//add userId
-//		List<Employee> em = new ArrayList<>();
-//		em.add(employee);
-		carRepo.save(carpool);
-//		Employee em = new Employee();
-//		em.getEmployeeId();
-		List<Carpool> c = new ArrayList<>();
-		c.add(carpool);
-//		carpool.setEmployees(em);
-		employee.setCarpool(c);
-		carpool.getCarpoolId();
-		employee.addItem(carpool);
-		
-		carRepo.save(carpool);
-		List<Employee> em = new ArrayList<>();
-		employee.addCarpool(carpool);
-		carpool.setEmployees(em);
-		carRepo.save(carpool);
-		emRepo.save(employee);
+			mav.addObject("street", emRepo.findByUsernameIgnoreCase(username).getStreetAddress());
+			mav.addObject("city", emRepo.findByUsernameIgnoreCase(username).getCity());
+			mav.addObject("zip", emRepo.findByUsernameIgnoreCase(username).getZipCode());
+			mav.addObject("coName",emRepo.findByUsernameIgnoreCase(username).getCompany().getName());
+			mav.addObject("street1",emRepo.findByUsernameIgnoreCase(username).getCompany().getStreetAddress());
+			mav.addObject("city1", emRepo.findByUsernameIgnoreCase(username).getCompany().getCity());
+			mav.addObject("zip1", emRepo.findByUsernameIgnoreCase(username).getCompany().getZipCode());
+			mav.addObject("distance", distance);
+			mav.addObject("em", coCal.smallCar(distance.getValue() ));
+			
+			employee.setCity(city);
+			employee.setStreetAddress(street);
+			employee.setZipCode(zip);
+			employee.getCompany().getStreetAddress();	
+			employee.getCompany().getStreetAddress();
+			
+			DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		    Date dateobj = new Date();
+		    Carpool carpool = new Carpool();
+			carpool.setCo2(coCal.smallCar(distance.getValue()));
+			carpool.setDate(df.format(dateobj));
+			//add userId
+	//		List<Employee> em = new ArrayList<>();
+	//		em.add(employee);
+			carRepo.save(carpool);
+	//		Employee em = new Employee();
+	//		em.getEmployeeId();
+			List<Carpool> c = new ArrayList<>();
+			c.add(carpool);
+	//		carpool.setEmployees(em);
+			employee.setCarpool(c);
+			carpool.getCarpoolId();
+			employee.addItem(carpool);
+			
+			carRepo.save(carpool);
+			List<Employee> em = new ArrayList<>();
+			employee.addCarpool(carpool);
+			carpool.setEmployees(em);
+			carRepo.save(carpool);
+			emRepo.save(employee);
 		} else {
 			mav.addObject("invalid", "No such address");
 		}
@@ -158,6 +158,7 @@ public class LoginController {
 		
 	}
 	
+	// What links to this page? --Sam
 	@RequestMapping("/carpoolsummary/{id}")
 	public ModelAndView showSummary(@PathVariable("id") Carpool carpool) {
 		ModelAndView mav = new ModelAndView("summary");
@@ -166,14 +167,14 @@ public class LoginController {
 		return mav;
 	}
 	
+	//FIXME Sam
 	//submit the carpool that the user already chose
 	@RequestMapping("/submit-carpool")
-	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
-			@RequestParam(required=false) String date,
-			@RequestParam(required=false) String time,
-			@RequestParam(value="id", required=false) Long id) {
-		List<Employee> poolers = new ArrayList<>();  
-		Employee passenger1 = emRepo.findById(id).orElse(null);
+	public ModelAndView submitCarpool(@RequestParam String username,
+			@RequestParam String date,
+			@RequestParam String time) {
+		List<Employee> poolers = new ArrayList<>(); 
+		Employee passenger1 = (Employee)sesh.getAttribute("employee");
 		Employee passenger2 = emRepo.findByUsernameIgnoreCase(username);
 		
 		poolers.add(passenger1);
@@ -225,7 +226,7 @@ public class LoginController {
 		mav.addObject("time",time);
 		mav.addObject("saved", saved);
 		mav.addObject("score", score);
-		mav.addObject("id", id);
+//		mav.addObject("id", id);
 		return mav;
 	}
 	
@@ -244,37 +245,45 @@ public class LoginController {
 		return mav;
 	}
 	
-	@RequestMapping("/ride{method}")
-	public ModelAndView showRideToDestination(@PathVariable String method) {		
+	@RequestMapping("/ride")
+	public ModelAndView showRideToDestination(
+			@RequestParam String method,
+			@RequestParam Double distanceFromCom,
+			@RequestParam Double distanceFromYou,
+			@RequestParam String username
+			) {
 		ModelAndView mav = new ModelAndView("show-origin");
 		mav.addObject("method", method);
+		mav.addObject("distanceFromCom",distanceFromCom);
+		mav.addObject("distanceFromYou",distanceFromYou);
+		mav.addObject("username",username);
 		return mav;
 	}
-
-	// How about we reframe "Select a carpool" into "Look at routes, pick one, schedule a time, and bingo"
-	// So we're not calling the API so many times
-	// and so that we can add a function to the "Display Routes" page instead of it just being informational
-	// --Sam
-	@RequestMapping("/find-carpool")
-	public ModelAndView findCarpool( 
-			@RequestParam("date") String date,
-			@RequestParam("time") String time) {
-		ModelAndView mav = new ModelAndView ("search-carpool");
-		Employee employee = (Employee)sesh.getAttribute("employee");
-		Company company = coRepo.findByName(employee.getCompany().getName());
-		List<Employee> employeeList = company.getEmployees();
-		employeeList.remove(emRepo.findById(employee.getEmployeeId()).orElse(null));
-		
-		List<Distance> distanceFromYou = rCalc.getDistances(employeeList, "fromUser");
-		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
-	
-		mav.addObject("date",date);
-		mav.addObject("time",time);
-		mav.addObject("employees", employeeList);
-		mav.addObject("distanceC", distanceFromCom);
-		mav.addObject("distanceY", distanceFromYou);
-		return mav;
-	}
+//
+//	// How about we reframe "Select a carpool" into "Look at routes, pick one, schedule a time, and bingo"
+//	// So we're not calling the API so many times
+//	// and so that we can add a function to the "Display Routes" page instead of it just being informational
+//	// --Sam
+//	@RequestMapping("/find-carpool")
+//	public ModelAndView findCarpool( 
+//			@RequestParam("date") String date,
+//			@RequestParam("time") String time) {
+//		ModelAndView mav = new ModelAndView ("search-carpool");
+//		Employee employee = (Employee)sesh.getAttribute("employee");
+//		Company company = coRepo.findByName(employee.getCompany().getName());
+//		List<Employee> employeeList = company.getEmployees();
+//		employeeList.remove(emRepo.findById(employee.getEmployeeId()).orElse(null));
+//		
+//		List<Distance> distanceFromYou = rCalc.getDistances(employeeList, "fromUser");
+//		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
+//	
+//		mav.addObject("date",date);
+//		mav.addObject("time",time);
+//		mav.addObject("employees", employeeList);
+//		mav.addObject("distanceC", distanceFromCom);
+//		mav.addObject("distanceY", distanceFromYou);
+//		return mav;
+//	}
 	
 	@RequestMapping("/routes")
 	public ModelAndView showRoutes() {
@@ -294,6 +303,7 @@ public class LoginController {
 		return mav;
 	}
 	
+	// FIXME Sam
 	//search for the carpool to ride back home
 	@RequestMapping("/find-carpool-back/{id}")
 	public ModelAndView carpoolBack(@PathVariable ("id") Employee employee,
@@ -326,9 +336,7 @@ public class LoginController {
 		return mav;
 	}
 	
-	
-	
-	
+	// FIXME Sam
 	//submit carpool to ride back home
 	//finding the name of the driver based on their username and sending information to jsp to show the confirmation page
 	@RequestMapping("/submit-carpool-back/{id}")
@@ -400,6 +408,7 @@ public class LoginController {
 	public ModelAndView previousRoutes() {
 		Employee employee = (Employee)sesh.getAttribute("employee");
 		Company company = coRepo.findByName(employee.getCompany().getName());
+
 		List<Carpool> carpools = company.getCarpool();
 		List<Carpool> carpoolsFiltered = new ArrayList<>();
 		

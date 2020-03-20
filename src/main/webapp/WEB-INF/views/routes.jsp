@@ -15,27 +15,37 @@
 <%@ include file="partials/header.jsp"%></head>
 <body>
 <div>
-<H2>Available Routes</H2>
+<H2>Available Carpools</H2>
 
-<table class ="table">
-  <tr>
-    <th>Employee Name</th>
-    <th>Starting Address</th>
-    <th>Distance from Office</th>
-    <th>Distance from You</th>
-  </tr>
- 
-  <c:forEach var="emp" items="${employees }" varStatus="empLoop"  >
+<div class="container">
+	<div class="row">
+	    <div class="col">Employee Name</div>
+	    <div class="col">Starting Address</div>
+	    <div class="col">Distance from Office</div>
+	    <div class="col">Distance from You</div>
+    </div>
   
-  <tr>
-    <td>${emp.name }</td>
-    <td>${emp.address }</td>
-     <td>${distanceC[empLoop.index].text }</td>
-      <td>${distanceY[empLoop.index].text }</td>
-  </tr>
-    </c:forEach>
-
-</table>
+  <c:forEach var="emp" items="${employees}" varStatus="empLoop"  >
+	 <div class="row">
+		  <form method="post" action="/ride" class="form-inline">
+			  <div class="form-group mr-2">
+  		   		<input type="hidden" value="${emp.username}" name="username">
+					  ${emp.name}</div>
+		      <div class="form-group mr-2">${emp.address}</div>
+		      <div class="form-group mr-2">
+		   		<input type="hidden" value="${distanceC[empLoop.index].value}" name="distanceFromCom">
+			     		${distanceC[empLoop.index].text}
+		      </div>
+		      <div class="form-group mr-2"> 
+		   		<input type="hidden" value="${distanceY[empLoop.index].value}" name="distanceFromYou">
+			     		${distanceY[empLoop.index].text}
+		     </div>
+		     <div class="form-group mr-2"><input type="submit" name="method" value="To Work"></div>
+		     <div class="form-group mr-2"><input type="submit" name="method" value="Back Home"></div>
+	      </form>
+	  </div>
+  </c:forEach>
+</div>
 
 
 <h2>Existing Carpools</h2>

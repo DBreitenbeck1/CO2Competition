@@ -35,10 +35,6 @@ public class RouteCalculator {
 		// from home to work and to each others house
 		if (method.equals("fromUser")) {
 			for (Employee e : employeeList) {
-				// Can we add some validation here to check if the driver is farther away from
-				// the passenger than the company?
-				// Or within a certain radius (ie. 10 miles?) -- Sam
-
 				result = apiServe.getResult(employeeAddress, e.getAddress());
 				distances.add(apiServe.getDistance(result));
 			}

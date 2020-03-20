@@ -119,6 +119,7 @@ public class IndexController {
 		
 		// Get company total from scoreboard
 		for (Score score : scores) {
+			System.out.println(score.getEmployee());
 			companyTotal += score.getScore();
 		}
 		
