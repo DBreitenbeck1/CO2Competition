@@ -6,12 +6,14 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+<title>Login || Green on the Go</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
+<%@ include file="partials/header.jsp"%>
 <style>
 
 input[type=text] {
@@ -51,9 +53,14 @@ h1 {
 	<main class="container">
 		<form method="post">
 			<section class="container">
-				<h1>Welcome to CO2 carpool competition</h1>
+				<h1>Welcome to Green on the Go</h1>
 			</section>
 			<section class="container-fluid">
+				<c:if test="${message ne null}">
+					<div class="alert alert-${messageType}">
+						<strong>${message}</strong>
+					</div>
+				</c:if>
 
 				<div>
 					<label class="control-label">Username:<input type="text"
@@ -66,7 +73,6 @@ h1 {
 
 			</section>
 			<div class="submit-div">
-
 				<button type="submit" class="btn btn-primary">Login</button>
 			</div>
 		</form>

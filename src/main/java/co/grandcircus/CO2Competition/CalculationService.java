@@ -1,5 +1,8 @@
 package co.grandcircus.CO2Competition;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class CalculationService {
 	
 	public Double calculateCO2(Double miles, String vehicle) {

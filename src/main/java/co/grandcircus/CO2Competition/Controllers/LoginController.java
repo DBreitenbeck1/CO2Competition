@@ -21,6 +21,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.CalculationService;
+import co.grandcircus.CO2Competition.RouteCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Carpool;
@@ -32,25 +33,22 @@ import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class LoginController {
-
 	@Autowired
 	private HttpSession sesh;
-	
 	@Autowired
 	private CarpoolRepo carRepo;
-	
 	@Autowired
 	private EmployeeRepo emRepo;
-	
 	@Autowired 
 	private CompanyRepo coRepo;
-	
 	@Autowired
 	private ApiService apiServe;
-	
+	@Autowired
 	private COCalculator coCal;
-	
+	@Autowired
 	private CalculationService calcServe;
+	@Autowired
+	private RouteCalculator rCalc;
 	
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
@@ -62,55 +60,38 @@ public class LoginController {
 			RedirectAttributes red) {
 
 		Employee employee = emRepo.findByUsernameIgnoreCase(username);
+
 		if(employee == null || !password.equals(employee.getPassword())) {
-			red.addFlashAttribute("msg","Incorrect username or password, please try again!");
+			red.addFlashAttribute("message","Incorrect username or password, please try again!");
+			red.addFlashAttribute("messageType","danger");
 			return new ModelAndView("redirect:/login");
 		}
 		
 		sesh.setAttribute("employee", employee);
-		
-		ModelAndView mav = new ModelAndView ("redirect:/employee/" + employee.getEmployeeId());
-//		mav.addObject("name",employee.getName());
-//		mav.addObject("company",employee.getCompany());
-		return mav;
+		return new ModelAndView ("redirect:/employee");
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping("/employee")
-	public ModelAndView showDesk() {
-=======
 	@RequestMapping("/logout")
 	public ModelAndView showLogout(RedirectAttributes red) {
 		sesh.invalidate();
+		red.addFlashAttribute("message","Successfully logged out.");
+		red.addFlashAttribute("messageType","success");
 		return new ModelAndView("redirect:/login");
 	}
 	
-	@RequestMapping("/employee/{id}")
-	public ModelAndView showDesk(@PathVariable ("id") Employee employee) {
-		System.out.println(employee);
->>>>>>> 6bf8a33dac5b297d190f52d9eeb459f967b8391a
-		ModelAndView mav = new ModelAndView ("employee-page");
+	@RequestMapping("/employee")
+	public ModelAndView showDesk() {
+		return new ModelAndView ("employee-page");
+	}
+	
+	@RequestMapping("/carpool")
+	public ModelAndView showCarpool() {
+		ModelAndView mav = new ModelAndView("carpool");
 		return mav;
 	}
 	
-	@RequestMapping("/carpool/{id}")
-	public ModelAndView showCarpool(@PathVariable("id") Employee employee) {
-		Company company = coRepo.findByName(employee.getCompany().getName());
-		List<Employee> allEmps = company.getEmployees();
-		allEmps.remove(employee);
-		ModelAndView mav = new ModelAndView ("carpool");
-		mav.addObject("emId",employee.getEmployeeId());
-		mav.addObject("name",employee.getName());
-		mav.addObject("company",coRepo.findAll());
-		mav.addObject("allEmployee", allEmps);
-		return mav;
-	}
-	
-	
-	
-	@RequestMapping("/tripdetails/{id}")
+	@RequestMapping("/tripdetailsFIXME")
 	public ModelAndView showDetails(
-			@PathVariable ("id") Employee employee,
 			@RequestParam String street,
 			@RequestParam String city,
 			@RequestParam String zip,
@@ -121,16 +102,6 @@ public class LoginController {
 			@RequestParam String zip1,
 			RedirectAttributes redir
 			) {
-		System.out.println("em**"+username);
-
-		// This needs better error checking, this is just a starter
-		boolean validStreet = !emRepo.findByUsernameIgnoreCase(username).getStreetAddress().isEmpty() || emRepo.findByUsernameIgnoreCase(username).getStreetAddress() != null;
-		boolean validCity = !emRepo.findByUsernameIgnoreCase(username).getCity().isEmpty() || emRepo.findByUsernameIgnoreCase(username).getCity() != null;
-		boolean validZip = !emRepo.findByUsernameIgnoreCase(username).getZipCode().isEmpty() || emRepo.findByUsernameIgnoreCase(username).getZipCode() != null;
-		if (!(validStreet && validCity && validZip)) {
-			redir.addFlashAttribute("message", "Invalid address input, please try again.");
-			return new ModelAndView("redirect:/logtrip");
-		}
 		ModelAndView mav = new ModelAndView("details");
 		String address1 = emRepo.findByUsernameIgnoreCase(username).getStreetAddress()+emRepo.findByUsernameIgnoreCase(username).getCity()+emRepo.findByUsernameIgnoreCase(username).getZipCode();
 		String address2 = street1+city1+zip1;
@@ -149,16 +120,12 @@ public class LoginController {
 		mav.addObject("distance", distance);
 		mav.addObject("em", coCal.smallCar(distance.getValue() ));
 		
+		Employee employee = (Employee) sesh.getAttribute("employee");
 		employee.setCity(city);
 		employee.setStreetAddress(street);
 		employee.setZipCode(zip);
+		employee.getCompany().getStreetAddress();	
 		employee.getCompany().getStreetAddress();
-	
-		employee.getCompany().getStreetAddress();
-		System.out.println(employee.getName());
-		System.out.println(employee.getAddress());
-		System.out.println(employee.getEmployeeId());
-		
 		
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 	    Date dateobj = new Date();
@@ -179,13 +146,11 @@ public class LoginController {
 		employee.addItem(carpool);
 		
 		carRepo.save(carpool);
-		System.out.println(carpool.getCarpoolId());
 		List<Employee> em = new ArrayList<>();
 		employee.addCarpool(carpool);
 		carpool.setEmployees(em);
 		carRepo.save(carpool);
 		emRepo.save(employee);
-		System.out.println(carpool.getCarpoolId());
 		} else {
 			mav.addObject("invalid", "No such address");
 		}
@@ -201,12 +166,11 @@ public class LoginController {
 		return mav;
 	}
 	
-	
-	//submit the carpool that user already chose
+	//submit the carpool that the user already chose
 	@RequestMapping("/submit-carpool")
 	public ModelAndView submitCarpool(@RequestParam(value="carpool")String username,
-			@RequestParam(value="date",required=false) String date,
-			@RequestParam(value="time",required=false) String time,
+			@RequestParam(required=false) String date,
+			@RequestParam(required=false) String time,
 			@RequestParam(value="id", required=false) Long id) {
 		List<Employee> poolers = new ArrayList<>();  
 		Employee passenger1 = emRepo.findById(id).orElse(null);
@@ -265,111 +229,72 @@ public class LoginController {
 		return mav;
 	}
 	
+	// What is this controller for? --Sam
 	@RequestMapping("/list-of-routes")
 	public ModelAndView showList() {
 		return new ModelAndView("list-of-routes","company",coRepo.findAll());
 	}
 	
+	// What is this controller for? --Sam
 	@RequestMapping("/details-list/{id}")
-	public ModelAndView showDetials(@PathVariable ("id") Company company) {
+	public ModelAndView showDetails(@PathVariable ("id") Company company) {
 		ModelAndView mav =  new ModelAndView("company-details");
 		mav.addObject("info",company.getEmployees());
 		mav.addObject("cName",company.getName());
 		return mav;
 	}
 	
-	//getting the information for ride to work 
-	@RequestMapping("/ridetw/{id}")
-	public ModelAndView showRideToWork(@PathVariable ("id") Employee employee) {
-		
+	@RequestMapping("/ride{method}")
+	public ModelAndView showRideToDestination(@PathVariable String method) {		
 		ModelAndView mav = new ModelAndView("show-origin");
-		mav.addObject("eCity",employee.getCity());
-		mav.addObject("eStreet",employee.getStreetAddress());
-		mav.addObject("eZip",employee.getZipCode());
-		mav.addObject("cCity", employee.getCompany().getCity());
-		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
-		mav.addObject("cZip",employee.getCompany().getZipCode());
-		mav.addObject("id",employee.getEmployeeId());
+		mav.addObject("method", method);
 		return mav;
 	}
-	
-	@RequestMapping("/find-carpool/{id}")
-	public ModelAndView findCarpool(@PathVariable("id") Employee employee, 
-			@RequestParam(value="eCity", required=false) String city
-			, @RequestParam("date") String date,
+
+	// How about we reframe "Select a carpool" into "Look at routes, pick one, schedule a time, and bingo"
+	// So we're not calling the API so many times
+	// and so that we can add a function to the "Display Routes" page instead of it just being informational
+	// --Sam
+	@RequestMapping("/find-carpool")
+	public ModelAndView findCarpool( 
+			@RequestParam("date") String date,
 			@RequestParam("time") String time) {
-		
 		ModelAndView mav = new ModelAndView ("search-carpool");
-		Company company = employee.getCompany();
-//		List<Employee> em = emRepo.findByCity(city);
-		List<Employee> employee1 = company.getEmployees();
-		employee1.remove(employee);
-		List<Distance> distanceFromYou = new ArrayList<>();
-		List<Distance> distanceFromCom = new ArrayList<>();
-		//find employee that work for this company and calculate their distances from home to work and to each others house
-		for (Employee e: employee1) {
-			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
-			distanceFromYou.add(apiServe.getDistance(result1));
-			SearchResult result2 = apiServe.getResult(e.getAddress(), company.getAddress());
-			distanceFromCom.add(apiServe.getDistance(result2));
-		}
-//		mav.addObject("list", em);
+		Employee employee = (Employee)sesh.getAttribute("employee");
+		Company company = coRepo.findByName(employee.getCompany().getName());
+		List<Employee> employeeList = company.getEmployees();
+		employeeList.remove(emRepo.findById(employee.getEmployeeId()).orElse(null));
+		
+		List<Distance> distanceFromYou = rCalc.getDistances(employeeList, "fromUser");
+		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
+	
 		mav.addObject("date",date);
 		mav.addObject("time",time);
-		mav.addObject("carpools", company.getCarpool());
-		mav.addObject("employees", employee1);
-		mav.addObject("company", company);
+		mav.addObject("employees", employeeList);
 		mav.addObject("distanceC", distanceFromCom);
 		mav.addObject("distanceY", distanceFromYou);
-		mav.addObject("emId",employee.getEmployeeId());
 		return mav;
 	}
 	
-
-
-	@RequestMapping("/routes/{id}")
-	public ModelAndView showRoutes(@PathVariable ("id") Employee employee) {
-		Company company = employee.getCompany();
-		List<Employee> emps = company.getEmployees();
-		emps.remove(employee);
-		List<Distance> distanceFromYou = new ArrayList<>();
-		List<Distance> distanceFromCom = new ArrayList<>();
-		for (Employee e: emps) {
-			SearchResult result1 = apiServe.getResult(employee.getAddress(), e.getAddress());
-			distanceFromYou.add(apiServe.getDistance(result1));
-			SearchResult result2 = apiServe.getResult(e.getAddress(), company.getAddress());
-			distanceFromCom.add(apiServe.getDistance(result2));
-		}
-		
-		
-		
+	@RequestMapping("/routes")
+	public ModelAndView showRoutes() {
+		Employee employee = (Employee) sesh.getAttribute("employee");
+		Company company = coRepo.findByName(employee.getCompany().getName());
+		List<Employee> employeeList = company.getEmployees();
+		employeeList.remove(employee);
+	
+		List<Distance> distanceFromYou = rCalc.getDistances(employeeList, "fromUser");
+		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
+	
 		ModelAndView mav = new ModelAndView("routes");
 		mav.addObject("carpools", company.getCarpool());
-		mav.addObject("employees", emps);
+		mav.addObject("employees", employeeList);
 		mav.addObject("distanceC", distanceFromCom);
 		mav.addObject("distanceY", distanceFromYou);
-
-		return mav;
-	}
-	
-	//show the start and end address which is work to home 
-	//and other setups on jsp to be picked up
-	@RequestMapping("/ridebh/{id}")
-	public ModelAndView showRideBackHome(@PathVariable ("id") Employee employee) {
-		
-		ModelAndView mav = new ModelAndView("show-endLocation");
-		mav.addObject("eCity", employee.getCity());
-		mav.addObject("eStreet",employee.getStreetAddress());
-		mav.addObject("eZip",employee.getZipCode());
-		mav.addObject("cCity", employee.getCompany().getCity());
-		mav.addObject("cStreet",employee.getCompany().getStreetAddress());
-		mav.addObject("cZip",employee.getCompany().getZipCode());
-		mav.addObject("id",employee.getEmployeeId());
 		return mav;
 	}
 	
 	//search for the carpool to ride back home
-	//
 	@RequestMapping("/find-carpool-back/{id}")
 	public ModelAndView carpoolBack(@PathVariable ("id") Employee employee,
 			@RequestParam("date") String date,
@@ -400,6 +325,9 @@ public class LoginController {
 		mav.addObject("id",employee.getEmployeeId());
 		return mav;
 	}
+	
+	
+	
 	
 	//submit carpool to ride back home
 	//finding the name of the driver based on their username and sending information to jsp to show the confirmation page
@@ -471,34 +399,16 @@ public class LoginController {
 	@RequestMapping("/previous-routes")
 	public ModelAndView previousRoutes() {
 		Employee employee = (Employee)sesh.getAttribute("employee");
-		Company company = employee.getCompany();
+		Company company = coRepo.findByName(employee.getCompany().getName());
 		List<Carpool> carpools = company.getCarpool();
-		List<Carpool> cp = new ArrayList<>();
-		for (int i =0; i<carpools.size(); i++) {
-			if (carpools.get(i).getEmployees().contains(employee)) {
-				cp.add(carpools.get(i));
+		List<Carpool> carpoolsFiltered = new ArrayList<>();
+		
+		for (Carpool car : carpools) {
+			if(car.getEmployees().contains(employee)) {
+				carpoolsFiltered.add(car);
 			}
 		}
-		ModelAndView mav = new ModelAndView("pastRoutes");
-		mav.addObject("carpools", cp);
-		return mav;
+		return new ModelAndView("pastRoutes", "carpools", carpoolsFiltered);
 	}
-	
-	
-	
-//	@RequestParam(value="carpool")String username,
-//	@RequestParam(value="date",required=false) String date,
-//	@RequestParam(value="time",required=false) String time,
-//	@PathVariable("id") Employee employee,
-//	@RequestParam(value="id", required=false) Long id) {
-//
-//ModelAndView mav = new ModelAndView("confirmationBack");
-//mav.addObject("name",emRepo.findByUsernameIgnoreCase(username).getName());
-//mav.addObject("address",employee.getCity());
-//mav.addObject("date",date);
-//mav.addObject("time",time);
-//mav.addObject("id", id);
-//return mav;
-//
 	
 }

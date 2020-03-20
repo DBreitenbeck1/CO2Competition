@@ -7,29 +7,21 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
-<title>CO2 Competition</title>
+<link rel="stylesheet" href="/style.css" />
+<%@ include file="partials/header.jsp"%><title>CO2 Competition</title>
 
 </head>
 <body>
-	<%@ include file="partials/header.jsp"%>
-	<c:if test="${message ne null}">
-		<div class="alert alert-warning">
-			<h4 class="alert-heading">Warning!</h4>
-			<p class="mb-0">${message}</p>
-		</div>
-
-	</c:if>
-	<h1>${distance.text}</h1>
-	<h2>${distance.value}</h2>
-	<h3>${start}</h3>
-	<h3>${midway}</h3>
-	<h3>${dest}</h3>
-	<h3>${co2savings}</h3>
-
+				<c:if test="${message ne null}">
+					<div class="alert alert-${messageType}">
+						<strong>${message}</strong>
+					</div>
+				</c:if>
 
 </body>
 </html>

@@ -6,25 +6,36 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Plan Carpool || Green on the Go</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
+<%@ include file="partials/header.jsp"%>
 
 </head>
 <body>
 <main class="container">
-<form action="/find-carpool/${id }">
 <section class="jumbotron">
 
-<div>Home - ${eCity }, ${eStreet }, ${eZip }</div>
-<div>Work - ${cCity }, ${cStreet }, ${cZip }</div>
+<form action="/find-carpool" method="post">
+<c:if test="${method eq 'tw'}">
+	<div>Home - ${employee.streetAddress}, ${employee.city}, ${employee.zipCode}</div>
+	<div>Work - ${employee.company.streetAddress}, ${employee.company.city}, ${employee.company.zipCode}</div>
+</c:if>
+
+<c:if test="${method eq 'bh'}">
+	<div>Work - ${employee.company.streetAddress}, ${employee.company.city}, ${employee.company.zipCode}</div>
+	<div>Home - ${employee.streetAddress}, ${employee.city}, ${employee.zipCode}</div>
+</c:if>
+
 <div>Select pickup date: <input type="date" name="date" required/></div>
 <div>Select pickup time: <input type="time" name="time" required/></div>
-
-</section>
-<input type="hidden" name="eCity" value="${eCity }"/>
-<button class="btn btn-primary" type="submit">Find carpool</button>
+<button class="btn btn-primary" type="submit">Find Carpool</button>
 </form>
+</section>
 </main>
 </body>
 </html>

@@ -6,21 +6,23 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Employee Page!</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+<title>Employee Home || Green on the Go</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
-
+<%@ include file="partials/header.jsp"%>
 </head>
 <body>
 	<main class="container">
 		<section class="jumbotron">
 
-			<h1>Welcome ${name }</h1>
-			<p>You are currently working at ${company }</p>
+			<h1>Welcome ${employee.name}!</h1>
+			<p>You are currently working at ${employee.company.name}.</p>
 
+<!-- Hey what's this cool list for??? --Sam -->
 			<ul>
 				<c:forEach items="${carpools }" var="cp">
 					<li><a href="/carpoolsummary/${cp.carpoolId }">${cp.carpoolId }</a>
@@ -32,33 +34,9 @@
 
 							</ul>
 						</c:forEach></li>
-
 				</c:forEach>
-
 			</ul>
-
 		</section>
-		<section class="jumbotron">
-
-
-			<a href="/carpool/${emId }" class="btn btn-primary" type="submit">Request
-				a Carpool</a> <a href="/routes/${emId}" class="btn btn-primary"
-				type="submit">See Available Routes</a> <a
-				href="/previous-routes/${emId}" class="btn btn-primary"
-				type="submit">Previous Routes</a> 
-				
-				<!--  <a href="/favorite-routes"
-				class="btn btn-primary" type="submit">Favorite Routes</a> -->
-				
-				<a
-				href="/summary" class="btn btn-primary" type="submit">Leaderboard</a>
-
-
-
-		</section>
-
 	</main>
-
-
 </body>
 </html>
