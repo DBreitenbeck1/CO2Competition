@@ -94,11 +94,17 @@ input[class=zip] {
 						required minlength="4"></label>
 				</div>
 
-
-				<select class="sel-select" required>
+				<select name="vehicleType" class="ve-select" required>
+				<c:forEach var="v" items="${employee }">
+				<option value="${v }">${v }</option>
+				</c:forEach>
+				
+				
+				</select>
+				<select name="company" class="sel-select" required>
 
 					<c:forEach var="co" items="${company }">
-						<option value="${co.name }">${co.name }</option>
+						<option value="${co.companyId }">${co.name }</option>
 					</c:forEach>
 				</select>
 			</section>

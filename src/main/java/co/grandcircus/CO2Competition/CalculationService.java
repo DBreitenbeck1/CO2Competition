@@ -6,12 +6,15 @@ public class CalculationService {
 		Double mpg;
 		// source: https://afdc.energy.gov/data/10310
 		switch(vehicle) {
-		case "car":
+		case "sedan":
 			mpg = 23.96;
 			break;
 		case "suv":
+
 			mpg = 22.04;
+			break;
 		case "truck":
+
 			mpg = 17.4;
 			break;
 		default:
@@ -25,6 +28,7 @@ public class CalculationService {
 		Double gallonsBurned = miles / mpg;
 		double CO2Burned = gallonsBurned * CO2;
 		CO2Burned = (int)(Math.round(CO2Burned *100))/100.00;
+
 		return CO2Burned;
 		
 	}

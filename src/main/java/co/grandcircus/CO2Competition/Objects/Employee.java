@@ -24,7 +24,14 @@ public class Employee {
 	private String streetAddress;
 	private String city;
 	private String zipCode;
-	
+	private String vehicleType;
+	public String getVehicleType() {
+		return vehicleType;
+	}
+
+	public void setVehicleType(String vehicleType) {
+		this.vehicleType = vehicleType;
+	}
 	@ManyToOne
 	private Company company;
 	

@@ -1,6 +1,7 @@
 package co.grandcircus.CO2Competition.Repos;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -16,6 +17,8 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	List<Employee> findByCity (String city);
 	Employee findByCompany(String companyname);
 	
+	@Query(value="SELECT vehicleType FROM Employee")
+	Set<String> findAllVehicleType();
 	
 	
 	@Query(value = "SELECT round(sum(co2),2) AS score, name AS employee FROM carpool INNER JOIN ( " + 

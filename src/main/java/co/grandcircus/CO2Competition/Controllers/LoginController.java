@@ -83,8 +83,12 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/register")
-	public ModelAndView showReg(Company compnay) {
-		return new ModelAndView ("employee-registration","company",coRepo.findAll());
+	public ModelAndView showReg(Company compnay,Employee employee) {
+		ModelAndView mav = new ModelAndView ("employee-registration");
+		
+		mav.addObject("company",coRepo.findAll());
+		mav.addObject("employee",emRepo.findAllVehicleType());
+		return mav;
 	}
 	
 	@PostMapping("/register")
@@ -226,7 +230,6 @@ public class LoginController {
 		List<Employee> poolers = new ArrayList<>();  
 		Employee passenger1 = emRepo.findById(id).orElse(null);
 		Employee passenger2 = emRepo.findByUsernameIgnoreCase(username);
-		
 		poolers.add(passenger1);
 		poolers.add(passenger2);
 		Company company = passenger1.getCompany();
@@ -245,8 +248,7 @@ public class LoginController {
 		Long d = distance.getValue();
 		double miles = d/1609.344;
 		CalculationService cs = new CalculationService();
-		double saved=cs.calculateCO2(miles, "car");
-		
+		double saved=cs.calculateCO2(miles, passenger2.getVehicleType());
 		double score = saved*10;
 		score = (int)(Math.round(score*100))/100.00;
 		
@@ -446,7 +448,7 @@ public class LoginController {
 		Long d = distance.getValue();
 		double miles = d/1609.344;
 		CalculationService cs = new CalculationService();
-		double saved=cs.calculateCO2(miles, "car");
+		double saved=cs.calculateCO2(miles, passenger2.getVehicleType());
 		
 		double score = saved*10;
 		score = (int)(Math.round(score*100))/100.00;
