@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="partials/header.jsp"%></head>
 <body>
-<div>
+<div class="container-fluid">
 <H2>Available Carpools</H2>
 
 <div class="container">
@@ -46,34 +46,6 @@
 	  </div>
   </c:forEach>
 </div>
-
-
-<h2>Existing Carpools</h2>
-<table class="table">
-  <tr>
-    <th>Id</th>
-    <th>Date</th>
-    <th>Passengers</th>
-    <th>CO2 Saved</th>
-  </tr>
-  <c:forEach var="cp" items="${carpools }">
-  <tr>
-    <td>${cp.carpoolId }</td>
-    <td>${cp.date }</td>
-    <td>
-    <ul>
-    <c:forEach var="pass" items ="${cp.employees }">
-    <li>${pass.name}</li>
-    </c:forEach>
-    </ul>
-    </td>
-     <th>${cp.co2}</th>
-  </tr>
-  </c:forEach>
-</table>
-
-
 </div>
-
 </body>
 </html>

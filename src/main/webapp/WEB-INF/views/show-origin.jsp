@@ -42,7 +42,7 @@
 					Select pickup time: <input type="time" name="time" required />
 				</div>
 
-				<input type="hidden" value="${username}">
+				<input type="hidden" value="${username}" name="username">
 				<button class="btn btn-primary" type="submit">Find Carpool</button>
 			</form>
 		</section>

@@ -15,9 +15,6 @@
 	        <a class="nav-link" href="/employee">Dashboard</a>
 	      </li>
 	      <li class="nav-item">
-	        <a class="nav-link" href="/carpool">Request a Carpool</a>
-	      </li>
-	      <li class="nav-item">
 	        <a class="nav-link" href="/routes">Available Routes</a>
 	      </li>
 	      <li class="nav-item">
