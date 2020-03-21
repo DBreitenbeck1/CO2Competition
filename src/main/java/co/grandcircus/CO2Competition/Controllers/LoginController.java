@@ -75,10 +75,6 @@ public class LoginController {
 		return mav;
 	}
 	
-<<<<<<< HEAD
-	@RequestMapping("/employee")
-	public ModelAndView showDesk() {
-=======
 	@RequestMapping("/logout")
 	public ModelAndView showLogout(RedirectAttributes red) {
 		sesh.invalidate();
@@ -86,12 +82,16 @@ public class LoginController {
 	}
 	
 	@RequestMapping("/register")
-	public ModelAndView showReg(Company compnay) {
-		return new ModelAndView ("employee-registration","company",coRepo.findAll());
+	public ModelAndView showReg(Company company,Employee employee) {
+		ModelAndView mav = new ModelAndView ("employee-registration");
+		
+		mav.addObject("company",coRepo.findAll());
+		mav.addObject("employee",emRepo.findAllVehicleType());
+		return mav;
 	}
 	
 	@PostMapping("/register")
-	public ModelAndView submitReg(Employee employee,Company company,RedirectAttributes red) {
+	public ModelAndView submitReg(Employee employee,RedirectAttributes red) {
 		emRepo.save(employee);
 //		coRepo.save(company);
 		red.addFlashAttribute("msg","Thank you for registering with us, "+employee.getName());
@@ -102,7 +102,6 @@ public class LoginController {
 	@RequestMapping("/employee/{id}")
 	public ModelAndView showDesk(@PathVariable ("id") Employee employee) {
 		System.out.println(employee);
->>>>>>> 6bf8a33dac5b297d190f52d9eeb459f967b8391a
 		ModelAndView mav = new ModelAndView ("employee-page");
 		return mav;
 	}
@@ -225,7 +224,6 @@ public class LoginController {
 		List<Employee> poolers = new ArrayList<>();  
 		Employee passenger1 = emRepo.findById(id).orElse(null);
 		Employee passenger2 = emRepo.findByUsernameIgnoreCase(username);
-		
 		poolers.add(passenger1);
 		poolers.add(passenger2);
 		Company company = passenger1.getCompany();
@@ -235,8 +233,9 @@ public class LoginController {
 		SearchResult result2 =apiServe.getResult(passenger2.getAddress(), company.getAddress());
 
 		Distance d1= apiServe.getDistance(result1);
+		System.out.println(d1);
 		Distance d2= apiServe.getDistance(result2);
-		
+		System.out.println(d2);
 		SearchResult result;
 		if(d1.getValue()>d2.getValue()) {
 			result = apiServe.getResult(passenger1.getAddress(), passenger2.getAddress(), company.getAddress());
@@ -246,7 +245,7 @@ public class LoginController {
 	
 
 		Distance distance = apiServe.getDistance(result);
-		
+		System.out.println(distance.getValue());
 		
 		Long d = distance.getValue()- d2.getValue(); 
 		System.out.println(d2.getValue());
@@ -254,8 +253,7 @@ public class LoginController {
 		System.out.println(d);
 		double miles = d/1609.344;
 		CalculationService cs = new CalculationService();
-		double saved=cs.calculateCO2(miles, "car");
-		
+		double saved=cs.calculateCO2(miles, passenger2.getVehicleType());
 		double score = saved*10;
 		score = (int)(Math.round(score*100))/100.00;
 		
@@ -455,7 +453,7 @@ public class LoginController {
 		Long d = distance.getValue();
 		double miles = d/1609.344;
 		CalculationService cs = new CalculationService();
-		double saved=cs.calculateCO2(miles, "car");
+		double saved=cs.calculateCO2(miles, passenger2.getVehicleType());
 		
 		double score = saved*10;
 		score = (int)(Math.round(score*100))/100.00;

@@ -28,6 +28,7 @@
     <th>Zip Code</th>
     <th>Distance from Work</th>
     <th>Distance from You</th>
+    <th>Type of vehicle</th>
   </tr>
   </thead>
   <tbody>
@@ -40,6 +41,7 @@
     <td>${m.zipCode }</td>
     <td>${distanceC [mloop.index].text}</td>
     <td>${distanceY [mloop.index].text}</td>
+    <td>${m.vehicleType }</td>
   </tr>
   </c:forEach>
   </tbody>

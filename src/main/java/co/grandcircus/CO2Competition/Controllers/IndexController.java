@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,6 +27,9 @@ public class IndexController {
 	@Autowired
 	HttpSession httpSesh;
 
+	@Value("${api_key}")
+	String apiKey;
+	
 	@Autowired
 	private ApiService apiServe;
 
@@ -71,6 +75,17 @@ public class IndexController {
 //		mav.addObject("midway", midway);
 //		mav.addObject("destination", destination);
 //		mav.addObject("distance", distance);
+		// Add Objects to ModelAndView
+//		String url = ( "https://maps.googleapis.com/maps/api/js?origin="
+//				+ address1 + "&destination=" + address2 + "&key=" + apiKey);
+//		
+//		
+//		mav.addObject("co2savings", CO2Savings);
+//		mav.addObject("start", start);
+//		mav.addObject("midway", midway);
+//		mav.addObject("destination", destination);
+//		mav.addObject("distance", distance);
+//		mav.addObject("url", url);
 		return mav;
 	}
 
