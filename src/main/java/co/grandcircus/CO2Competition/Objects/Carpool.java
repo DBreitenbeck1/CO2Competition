@@ -17,19 +17,14 @@ public class Carpool{
 	private Long carpoolId;
 	// to do change to object date
 	private String date;
-	private Double co2;
+	private Integer co2;
 	
 	@ManyToOne
 	private Company company;
 	
-	
-	
 	@ManyToMany(mappedBy="carpool")
 	private List<Employee> employees  ;
 	
-	
-	
-
 	public Company getCompany() {
 		return company;
 	}
@@ -54,11 +49,11 @@ public class Carpool{
 		this.date = date;
 	}
 
-	public Double getCo2() {
+	public Integer getCo2() {
 		return co2;
 	}
 
-	public void setCo2(Double co2) {
+	public void setCo2(Integer co2) {
 		this.co2 = co2;
 	}
 

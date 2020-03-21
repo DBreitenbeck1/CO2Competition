@@ -26,10 +26,10 @@ public class Employee {
 	private String city;
 	private String zipCode;
 	
-	@ManyToOne
+	@ManyToOne/*(fetch = FetchType.EAGER)*/
 	private Company company;
 	
-	@ManyToMany
+	@ManyToMany/*(fetch = FetchType.EAGER)*/
 	private List<Carpool> carpool;
 
 	public void addCarpool(Carpool carpool) {
@@ -113,12 +113,12 @@ public class Employee {
 	}
 	public void addItem (Carpool item) {carpool.add(item);}
 
-//	@Override
-//	public String toString() {
-//		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
-//				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
-//				+ ", company=" + company + ", carpool=" + carpool + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
+				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
+				+ ", company=" + company + ", carpool=" + carpool + "]";
+	}
 
 
 
