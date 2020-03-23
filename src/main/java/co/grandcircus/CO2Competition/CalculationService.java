@@ -28,6 +28,9 @@ public class CalculationService {
 		Double gallonsBurned = miles / mpg;
 		double CO2Burned = gallonsBurned * CO2;
 		CO2Burned = (int)(Math.round(CO2Burned *100))/100.00;
+		
+		// DELETE LATER
+		CO2Burned = CO2Burned * 10.0;
 		return CO2Burned;
 		
 	}

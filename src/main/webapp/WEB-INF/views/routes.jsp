@@ -14,35 +14,35 @@
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="partials/header.jsp"%></head>
 <body>
+
+
 <div class="container-fluid">
 <H2>Available Carpools</H2>
 
 <div class="container">
 	<div class="row">
-	    <div class="col">Employee Name</div>
-	    <div class="col">Starting Address</div>
-	    <div class="col">Distance from Office</div>
-	    <div class="col">Distance from You</div>
+	    <div class="col"><h5>Employee Name</h5></div>
+	    <div class="col"><h5>Starting Address</h5></div>
+	    <div class="col"><h5>Distance from Office</h5></div>
+	    <div class="col"><h5>Distance from You</h5></div>
+	    <div class="col"></div>
     </div>
   
   <c:forEach var="emp" items="${employees}" varStatus="empLoop"  >
 	 <div class="row">
-		  <form method="post" action="/ride" class="form-inline">
-			  <div class="form-group mr-2">
-  		   		<input type="hidden" value="${emp.username}" name="username">
-					  ${emp.name}</div>
-		      <div class="form-group mr-2">${emp.address}</div>
-		      <div class="form-group mr-2">
+			  <div class="col">${emp.name}</div>
+		      <div class="col">${emp.address}</div>
+		      <div class="col">${distanceC[empLoop.index].text}</div>
+		      <div class="col">${distanceY[empLoop.index].text}</div>
+   		      <div class="col">
+				<form method="post" action="/ride" class="form-inline">
+			    <input type="hidden" value="${emp.username}" name="username">
 		   		<input type="hidden" value="${distanceC[empLoop.index].value}" name="distanceFromCom">
-			     		${distanceC[empLoop.index].text}
-		      </div>
-		      <div class="form-group mr-2"> 
 		   		<input type="hidden" value="${distanceY[empLoop.index].value}" name="distanceFromYou">
-			     		${distanceY[empLoop.index].text}
-		     </div>
-		     <div class="form-group mr-2"><input type="submit" name="method" value="To Work"></div>
-		     <div class="form-group mr-2"><input type="submit" name="method" value="Back Home"></div>
-	      </form>
+		     	<input type="submit" name="method" value="To Work">
+				<input type="submit" name="method" value="Back Home">
+	 	        </form>
+			</div>
 	  </div>
   </c:forEach>
 </div>

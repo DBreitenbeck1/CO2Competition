@@ -2,6 +2,7 @@ package co.grandcircus.CO2Competition.Objects;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -26,14 +27,34 @@ public class Employee {
 	private String city;
 	private String zipCode;
 	
-	@ManyToOne/*(fetch = FetchType.EAGER)*/
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Company company;
 	
-	@ManyToMany/*(fetch = FetchType.EAGER)*/
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Carpool> carpool;
 
-	public void addCarpool(Carpool carpool) {
-		this.carpool.add(carpool);
+	// Added method for consistency principle --Sam
+	public boolean addCarpool(Carpool carpoolToAdd) {
+		// prevent endless loop
+		if (carpool.contains(carpoolToAdd)) {
+			return false;
+		} else {
+			// add new user to carpool
+			carpool.add(carpoolToAdd);
+			return true;
+		}
+	}
+
+	// added method for consistency principle --Sam
+	public boolean removeCarpool(Carpool carpoolToRemove) {
+		// prevent endless loop
+		if (!carpool.contains(carpoolToRemove)) {
+			return false;
+		} else {
+			// If item exists, remove it
+			carpool.remove(carpoolToRemove);
+			return true;
+		}
 	}
 	
 	public String getAddress() {

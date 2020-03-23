@@ -2,7 +2,9 @@ package co.grandcircus.CO2Competition.Objects;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,11 +21,11 @@ public class Carpool{
 	private String date;
 	private Integer co2;
 	
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.EAGER)
 	private Company company;
 	
-	@ManyToMany(mappedBy="carpool")
-	private List<Employee> employees  ;
+	@ManyToMany(mappedBy="carpool", fetch = FetchType.EAGER, cascade=CascadeType.PERSIST)
+	private List<Employee> employees;
 	
 	public Company getCompany() {
 		return company;
@@ -57,16 +59,34 @@ public class Carpool{
 		this.co2 = co2;
 	}
 
+	// Added method for consistency principle --Sam
+	public boolean addEmployee(Employee employeeToAdd) {
+		// prevent endless loop
+		if (employees.contains(employeeToAdd)) {
+			return false;
+		} else {
+			//add new user to carpool
+			employees.add(employeeToAdd);
+			return true;
+		}
+	}
+	
+	// added method for consistency principle --Sam
+	public boolean removeEmployee(Employee employeeToRemove) {
+		// prevent endless loop
+		if(!employees.contains(employeeToRemove)) {
+			return false;
+		} else {
+			// If item exists, remove it
+			employees.remove(employeeToRemove);
+			return true;
+		}
+	}
+
 	public List<Employee> getEmployees() {
 		return employees;
 	}
-	public void addItem (Employee item) {employees.add(item);}
-
 	
-	public void addEmployee(Employee employee) {
-		employees.add(employee);
-	}
-
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
 	}

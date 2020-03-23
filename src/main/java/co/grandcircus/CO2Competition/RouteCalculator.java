@@ -47,4 +47,15 @@ public class RouteCalculator {
 		}
 		return distances;
 	}
+	
+	public Distance getDistanceSingle() {
+		// Get Employee from Session
+		Employee employee = (Employee) sesh.getAttribute("employee");
+
+		// gets API results for route between employee and company
+		SearchResult result = apiServe.getResult(employee.getAddress(), employee.getCompany().getAddress());
+		
+		// gets distance of route and returns as distance item
+		return apiServe.getDistance(result);
+	}
 }
