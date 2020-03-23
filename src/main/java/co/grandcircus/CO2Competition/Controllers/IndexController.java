@@ -14,7 +14,9 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
+import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Score;
+import co.grandcircus.CO2Competition.Repos.CompanyRepo;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
@@ -27,8 +29,11 @@ public class IndexController {
 	private COCalculator coCal;
 
 	@Autowired
+	private CompanyRepo coRepo;
+
+	@Autowired
 	private EmployeeRepo emRepo;
-	
+
 	@RequestMapping("/")
 	public ModelAndView showIndex(RedirectAttributes redir) {
 		// Create ModelAndView
@@ -42,7 +47,7 @@ public class IndexController {
 		String midway;
 		String destination;
 		Distance distance;
-		
+
 		// Get Search Results
 		SearchResult result = apiServe.getResult(address1, address2, address3);
 
@@ -58,7 +63,7 @@ public class IndexController {
 		}
 		double CO2Savings = coCal.calculateSavings(address1, address2);
 //		double CO2Savings = coCal.smallCar(5.7);
-		
+
 		// Add Objects to ModelAndView
 		mav.addObject("co2savings", CO2Savings);
 		mav.addObject("start", start);
@@ -97,28 +102,28 @@ public class IndexController {
 		return mav;
 
 	}
-	
+
 	// Tester to see if Scoreboard will work, needs polishing
 	@RequestMapping("/company/{id}/scores")
 	public ModelAndView showScores(@PathVariable Long id) {
 		// Declare Variables
 		Double companyTotal = 0.0;
-		
+
 		// Get Scoreboard
 		List<Score> scores = emRepo.findScoresByCompany(id);
-		
+
 		// Get company total from scoreboard
 		for (Score score : scores) {
 			companyTotal += score.getScore();
 		}
-		
+
 		// Create ModelAndView and add objects
 		ModelAndView mav = new ModelAndView("userscores");
 		mav.addObject("scoreboard", scores);
 		mav.addObject("total", companyTotal);
 		return mav;
 	}
-	
+
 	// Tester to see if individual score will work, needs polishing
 	@RequestMapping("/user/{id}/score")
 	public ModelAndView showUserScore(@PathVariable Long id) {
@@ -126,6 +131,35 @@ public class IndexController {
 		ModelAndView mav = new ModelAndView("individualScoreTESTER");
 		mav.addObject("userscore", score);
 		return mav;
+	}
+
+	@RequestMapping("/company/total/{id}")
+	public ModelAndView companyTotal(@PathVariable Long id) {
+		// Declare Variables
+		Double companyTotal = 0.0;
+
+		Company company = coRepo.getOne(id);
+		Integer goal = company.getGoal();
+
+		// Get Scoreboard
+		List<Score> scores = emRepo.findScoresByCompany(id);
+
+		// Get company total from scoreboard
+		for (Score score : scores) {
+			companyTotal += score.getScore();
+
+		}
+		Integer goalPercent = (int) ((companyTotal / goal) * 100);
+
+		ModelAndView mav = new ModelAndView("companyscores");
+
+		mav.addObject("Score", goalPercent);
+		mav.addObject("Goal", goal);
+		mav.addObject("Total", companyTotal);
+
+		return mav;
+
+//		return new ModelAndView("companyscores", "Score", goalPercent);
 	}
 
 }

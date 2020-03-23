@@ -19,25 +19,24 @@ public class Company {
 	private String name;
 	private String streetAddress;
 	private String city;
-	private String zipCode;
-	private Double goal;
-	private Double goalPercent;
 
-	public Double getGoal() {
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
+				+ "]";
+	}
+
+	public Integer getGoal() {
 		return goal;
 	}
 
-	public void setGoal(Double goal) {
+	public void setGoal(Integer goal) {
 		this.goal = goal;
 	}
 
-	public Double getGoalPercent() {
-		return goalPercent;
-	}
-
-	public void setGoalPercent(Double goalPercent) {
-		this.goalPercent = goalPercent;
-	}
+	private String zipCode;
+	private Integer goal;
 
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
@@ -99,13 +98,6 @@ public class Company {
 
 	public void setZipCode(String zipCode) {
 		this.zipCode = zipCode;
-	}
-
-	@Override
-	public String toString() {
-		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", goalPercent=" + goalPercent + ", employees="
-				+ employees + ", carpool=" + carpool + "]";
 	}
 
 	public List<Employee> getEmployees() {
