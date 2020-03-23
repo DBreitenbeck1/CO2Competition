@@ -28,3 +28,10 @@ input[type=password] {
 h1 {
 	margin-top: 15px;
 }
+
+.p-h7{
+		text-align: justify;
+			text-justify: inter-word;
+		
+	
+}

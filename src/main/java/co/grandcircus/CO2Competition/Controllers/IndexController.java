@@ -119,5 +119,11 @@ public class IndexController {
 		return new ModelAndView("dashboard");
 
 	}
-
+	
+	@RequestMapping("/about")
+	public ModelAndView showAbout() {
+		return new ModelAndView ("about");
+		
+		
+	}
 }
