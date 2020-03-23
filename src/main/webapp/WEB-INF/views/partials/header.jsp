@@ -14,6 +14,8 @@
 	<div class="collapse navbar-collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="navbar-text text-blue" href="/">Home</a></li>
+			<li class="nav-item"><a class="navbar-text text-blue" href="/about">About</a></li>
+			
 			<!-- navbar buttons showing only if logged in -->
 			<c:if test="${employee ne null}">
 				<li class="nav-item"><a class="nav-link" href="/employee">Dashboard</a>

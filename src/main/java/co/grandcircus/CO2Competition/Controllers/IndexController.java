@@ -120,5 +120,11 @@ public class IndexController {
 		return new ModelAndView("employee-page");
 
 	}
-
+	
+	@RequestMapping("/about")
+	public ModelAndView showAbout() {
+		return new ModelAndView ("about");
+		
+		
+	}
 }
