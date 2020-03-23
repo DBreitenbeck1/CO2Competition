@@ -15,18 +15,66 @@ public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long companyId;
-	
+
 	private String name;
 	private String streetAddress;
 	private String city;
 	private String zipCode;
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
-	
+
 	@OneToMany(mappedBy = "company")
 	private List<Carpool> carpool;
-	
+
+	// Added method for consistency principle --Sam
+	public boolean addEmployee(Employee employeeToAdd) {
+		// prevent endless loop
+		if (employees.contains(employeeToAdd)) {
+			return false;
+		} else {
+			// add new user to carpool
+			employees.add(employeeToAdd);
+			return true;
+		}
+	}
+
+	// added method for consistency principle --Sam
+	public boolean removeEmployee(Employee employeeToRemove) {
+		// prevent endless loop
+		if (!employees.contains(employeeToRemove)) {
+			return false;
+		} else {
+			// If item exists, remove it
+			employees.remove(employeeToRemove);
+			return true;
+		}
+	}
+
+	// Added method for consistency principle --Sam
+	public boolean addCarpool(Carpool carpoolToAdd) {
+		// prevent endless loop
+		if (carpool.contains(carpoolToAdd)) {
+			return false;
+		} else {
+			// add new user to carpool
+			carpool.add(carpoolToAdd);
+			return true;
+		}
+	}
+
+	// added method for consistency principle --Sam
+	public boolean removeCarpool(Carpool carpoolToRemove) {
+		// prevent endless loop
+		if (!carpool.contains(carpoolToRemove)) {
+			return false;
+		} else {
+			// If item exists, remove it
+			carpool.remove(carpoolToRemove);
+			return true;
+		}
+	}
+
 	public List<Carpool> getCarpool() {
 		return carpool;
 	}
@@ -40,8 +88,8 @@ public class Company {
 	}
 
 	public String getAddress() {
-	return this.streetAddress+", " +this.city+" "+this.zipCode;
-}
+		return this.streetAddress + ", " + this.city + " " + this.zipCode;
+	}
 
 	public Long getCompanyId() {
 		return companyId;
@@ -96,6 +144,5 @@ public class Company {
 		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
 				+ city + ", zipCode=" + zipCode + ", employees=" + employees + "]";
 	}
-	
-	
+
 }

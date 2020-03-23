@@ -1,29 +1,22 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+<<<<<<< HEAD
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+=======
+>>>>>>> Remodel/HttpSession
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import co.grandcircus.CO2Competition.ApiService;
-import co.grandcircus.CO2Competition.COCalculator;
-import co.grandcircus.CO2Competition.Entities.Distance;
-import co.grandcircus.CO2Competition.Entities.SearchResult;
-import co.grandcircus.CO2Competition.Objects.Employee;
-import co.grandcircus.CO2Competition.Objects.Score;
-import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class IndexController {
 	
+<<<<<<< HEAD
 	@Autowired
 	HttpSession httpSesh;
 
@@ -142,15 +135,16 @@ public class IndexController {
 		mav.addObject("scoreboard", scores);
 		mav.addObject("total", companyTotal);
 		return mav;
+=======
+	@RequestMapping("/")
+	public ModelAndView showIndex() {
+		return new ModelAndView("index");
+>>>>>>> Remodel/HttpSession
 	}
 	
-	// Tester to see if individual score will work, needs polishing
-	@RequestMapping("/user/{id}/score")
-	public ModelAndView showUserScore(@PathVariable Long id) {
-		Score score = emRepo.findScoreByEmployee(id);
-		ModelAndView mav = new ModelAndView("individualScoreTESTER");
-		mav.addObject("userscore", score);
-		return mav;
+	@RequestMapping("/employee")
+	public ModelAndView showDesk() {
+		return new ModelAndView ("employee-page");
 	}
 
 }

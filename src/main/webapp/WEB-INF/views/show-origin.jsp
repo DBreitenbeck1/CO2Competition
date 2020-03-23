@@ -1,14 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<title>Plan Carpool || Green on the Go</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
+<%@ include file="partials/header.jsp"%>
 
 
 <style>
@@ -33,6 +38,7 @@ margin-top:20px;
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 <main class="container">
 <form action="/find-carpool/${id }">
 <section class="jumbotron">
@@ -41,11 +47,37 @@ margin-top:20px;
 <div class="work-div">Work - ${cCity }, ${cStreet }, ${cZip }</div>
 <div class="date-div">Select pickup date: <input type="date" name="date" required/></div>
 <div class="time-div">Select pickup time: <input type="time" name="time" required/></div>
+=======
+	<main class="container">
+		<section class="jumbotron">
 
-</section>
-<input type="hidden" name="eCity" value="${eCity }"/>
-<button class="btn btn-primary" type="submit">Find carpool</button>
-</form>
-</main>
+			<form action="/submit-carpool" method="post">
+				<c:if test="${method eq 'To Work'}">
+					<div>Home - ${employee.streetAddress}, ${employee.city},
+						${employee.zipCode}</div>
+					<div>Work - ${employee.company.streetAddress},
+						${employee.company.city}, ${employee.company.zipCode}</div>
+				</c:if>
+
+				<c:if test="${method eq 'Back Home'}">
+					<div>Work - ${employee.company.streetAddress},
+						${employee.company.city}, ${employee.company.zipCode}</div>
+					<div>Home - ${employee.streetAddress}, ${employee.city},
+						${employee.zipCode}</div>
+				</c:if>
+
+				<div>
+					Select pickup date: <input type="date" name="date" required />
+				</div>
+				<div>
+					Select pickup time: <input type="time" name="time" required />
+				</div>
+>>>>>>> Remodel/HttpSession
+
+				<input type="hidden" value="${username}" name="username">
+				<button class="btn btn-primary" type="submit">Find Carpool</button>
+			</form>
+		</section>
+	</main>
 </body>
 </html>

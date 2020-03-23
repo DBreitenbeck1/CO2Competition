@@ -24,10 +24,10 @@
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="co" items="${company }">
+  <c:forEach var="co" items="${company}">
   <tr>
-    <td><a href="/details-list/${co.companyId}">${co.name }</a></td>
-    <td>${co.city }</td>
+    <td><a href="/details-list/${co.companyId}">${co.name}</a></td>
+    <td>${co.city}</td>
   </tr>
   </c:forEach>
   </tbody>

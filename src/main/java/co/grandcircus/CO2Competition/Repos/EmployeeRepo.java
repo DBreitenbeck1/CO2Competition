@@ -20,7 +20,6 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	@Query(value="SELECT vehicleType FROM Employee")
 	Set<String> findAllVehicleType();
 	
-	
 	@Query(value = "SELECT round(sum(co2),2) AS score, name AS employee FROM carpool INNER JOIN ( " + 
 			"SELECT * FROM employee_carpool INNER JOIN (" + 
 			"SELECT employee.employee_id, name FROM employee WHERE company_company_id = :company_id " + 

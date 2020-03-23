@@ -2,7 +2,9 @@ package co.grandcircus.CO2Competition.Objects;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -26,6 +28,11 @@ public class Employee {
 	private String zipCode;
 	private String vehicleType;
 	
+	@ManyToOne(fetch = FetchType.EAGER)
+	private Company company;
+	
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	private List<Carpool> carpool;
 	
 	public String getVehicleType() {
 		return vehicleType;
@@ -34,14 +41,29 @@ public class Employee {
 	public void setVehicleType(String vehicleType) {
 		this.vehicleType = vehicleType;
 	}
-	@ManyToOne
-	private Company company;
 	
-	@ManyToMany
-	private List<Carpool> carpool;
+	// Added method for consistency principle --Sam
+	public boolean addCarpool(Carpool carpoolToAdd) {
+		// prevent endless loop
+		if (carpool.contains(carpoolToAdd)) {
+			return false;
+		} else {
+			// add new user to carpool
+			carpool.add(carpoolToAdd);
+			return true;
+		}
+	}
 
-	public void addCarpool(Carpool carpool) {
-		this.carpool.add(carpool);
+	// added method for consistency principle --Sam
+	public boolean removeCarpool(Carpool carpoolToRemove) {
+		// prevent endless loop
+		if (!carpool.contains(carpoolToRemove)) {
+			return false;
+		} else {
+			// If item exists, remove it
+			carpool.remove(carpoolToRemove);
+			return true;
+		}
 	}
 	
 	public String getAddress() {
@@ -121,12 +143,12 @@ public class Employee {
 	}
 	public void addItem (Carpool item) {carpool.add(item);}
 
-//	@Override
-//	public String toString() {
-//		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
-//				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
-//				+ ", company=" + company + ", carpool=" + carpool + "]";
-//	}
+	@Override
+	public String toString() {
+		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
+				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
+				+ ", company=" + company + ", carpool=" + carpool + "]";
+	}
 
 
 

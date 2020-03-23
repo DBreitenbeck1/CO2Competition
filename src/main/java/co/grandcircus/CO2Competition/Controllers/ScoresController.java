@@ -1,5 +1,7 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import co.grandcircus.CO2Competition.ApiService;
+import co.grandcircus.CO2Competition.Objects.Employee;
+import co.grandcircus.CO2Competition.Objects.Score;
 import co.grandcircus.CO2Competition.Repos.CarpoolRepo;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
@@ -20,21 +24,31 @@ public class ScoresController {
 	private HttpSession sesh;
 
 	@Autowired
-	private CarpoolRepo carRepo;
-
-	@Autowired
 	private EmployeeRepo emRepo;
 
-	@Autowired
-	private CompanyRepo coRepo;
-
-	@Autowired
-	private ApiService apiServe;
-
-	@RequestMapping("/userscores")
-	public ModelAndView showUserScores() {
+	// Shows scoreboard for the company of the logged in user --Sam
+	@RequestMapping("/summary")
+	public ModelAndView showScores() {
+		// Company ID
+		Employee emp = (Employee)sesh.getAttribute("employee");
+		Long companyId = emp.getCompany().getCompanyId();
+		
+		// Declare Variables
+		Double companyTotal = 0.0;
+		
+		// Get Scoreboard
+		List<Score> scores = emRepo.findScoresByCompany(companyId);
+		
+		// Get company total from scoreboard
+		for (Score score : scores) {
+			System.out.println(score.getEmployee());
+			companyTotal += score.getScore();
+		}
+		
+		// Create ModelAndView and add objects
 		ModelAndView mav = new ModelAndView("userscores");
-
+		mav.addObject("scoreboard", scores);
+		mav.addObject("total", companyTotal);
 		return mav;
 	}
 

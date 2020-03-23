@@ -5,61 +5,47 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel ="stylesheet" href ="/MyStyle.css"/>
-</head>
+<title>Routes || Green on the Go</title>
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/style.css" />
+<%@ include file="partials/header.jsp"%></head>
 <body>
-<div>
-<H2>Available Routes</H2>
 
-<table class ="table">
-  <tr>
-    <th>Employee Name</th>
-    <th>Starting Address</th>
-    <th>Distance from Office</th>
-    <th>Distance from You</th>
-  </tr>
- 
-  <c:forEach var="emp" items="${employees }" varStatus="empLoop"  >
+
+<div class="container-fluid">
+<H2>Available Carpools</H2>
+
+<div class="container">
+	<div class="row">
+	    <div class="col"><h5>Employee Name</h5></div>
+	    <div class="col"><h5>Starting Address</h5></div>
+	    <div class="col"><h5>Distance from Office</h5></div>
+	    <div class="col"><h5>Distance from You</h5></div>
+	    <div class="col"></div>
+    </div>
   
-  <tr>
-    <td>${emp.name }</td>
-    <td>${emp.address }</td>
-     <td>${distanceC[empLoop.index].text }</td>
-      <td>${distanceY[empLoop.index].text }</td>
-  </tr>
-    </c:forEach>
-
-</table>
-
-
-<h2>Existing Carpools</h2>
-<table class="table">
-  <tr>
-    <th>Id</th>
-    <th>Date</th>
-    <th>Passengers</th>
-    <th>CO2 Saved</th>
-  </tr>
-  <c:forEach var="cp" items="${carpools }">
-  <tr>
-    <td>${cp.carpoolId }</td>
-    <td>${cp.date }</td>
-    <td>
-    <ul>
-    <c:forEach var="pass" items ="${cp.employees }">
-    <li>${pass.name}</li>
-    </c:forEach>
-    </ul>
-    </td>
-     <th>${cp.co2}</th>
-  </tr>
+  <c:forEach var="emp" items="${employees}" varStatus="empLoop"  >
+	 <div class="row">
+			  <div class="col">${emp.name}</div>
+		      <div class="col">${emp.address}</div>
+		      <div class="col">${distanceC[empLoop.index].text}</div>
+		      <div class="col">${distanceY[empLoop.index].text}</div>
+   		      <div class="col">
+				<form method="post" action="/ride" class="form-inline">
+			    <input type="hidden" value="${emp.username}" name="username">
+		   		<input type="hidden" value="${distanceC[empLoop.index].value}" name="distanceFromCom">
+		   		<input type="hidden" value="${distanceY[empLoop.index].value}" name="distanceFromYou">
+		     	<input type="submit" name="method" value="To Work">
+				<input type="submit" name="method" value="Back Home">
+	 	        </form>
+			</div>
+	  </div>
   </c:forEach>
-</table>
-
-
 </div>
-
+</div>
 </body>
 </html>

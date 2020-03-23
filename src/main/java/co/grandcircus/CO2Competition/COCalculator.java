@@ -40,16 +40,40 @@ public class COCalculator {
 			String start,
 			String destination
 			) {
+
 		// Calculate distance
 		SearchResult result = apiServe.getResult(start, destination);
 		Distance distance = apiServe.getDistance(result);
-		
+
 		// call calculator method, assume medCar for now
 		double CO2Savings = medCar(distance.getValue());
-		
+
 		// return savings
 		return CO2Savings;
 	}
+	
+	// Takes in three strings, two start points and one end point, calculates the savings for each, and returns the lower amount
+	public Double calculateDifference(
+			String startUser,
+			String startPassenger,
+			String destination
+			) {
+		Double returnSavings;
+		
+		// Get points
+		double savingsUser = calculateSavings(startUser, destination);
+		double savingsPassenger = calculateSavings(startPassenger, destination);
+		
+		//Find lower amount
+		if (savingsUser < savingsPassenger) {
+			returnSavings = Math.round(savingsUser * 100) / 100.00;
+		} else {
+			returnSavings = Math.round(savingsUser * 100) / 100.00;
+		}
+		
+		return returnSavings;		
+	}
+	
 	
 //	public double calculateSavings(
 //			String start,
@@ -67,6 +91,6 @@ public class COCalculator {
 //		return 0.0;
 //	}
 	
-	
+
 	
 }

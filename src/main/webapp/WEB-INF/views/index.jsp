@@ -8,6 +8,7 @@
 <head>
 
 <meta charset="ISO-8859-1">
+<<<<<<< HEAD
 <link href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cerulean/bootstrap.min.css" rel="stylesheet" integrity="sha384-LV/SIoc08vbV9CCeAwiz7RJZMI5YntsH8rGov0Y2nysmepqMWVvJqds6y0RaxIXT" crossorigin="anonymous">
 <link href='https://fonts.googleapis.com/css?family=Merienda' rel='stylesheet'>
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -21,6 +22,15 @@ margin-top: 150px;
     font-weight:bold;
     
 }
+=======
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
+	crossorigin="anonymous">
+<link rel="stylesheet" href="/style.css" />
+<%@ include file="partials/header.jsp"%><title>CO2 Competition</title>
+>>>>>>> Remodel/HttpSession
 
 h1{
  font-family: 'Merienda';font-size: 22px;
@@ -52,6 +62,7 @@ width:22%;
 </style>
 </head>
 <body>
+<<<<<<< HEAD
 	<%@ include file="partials/header.jsp"%>
 	<c:if test="${message ne null}">
 		<div class="alert alert-warning">
@@ -80,6 +91,13 @@ width:22%;
 	 <img src="Carpool App Image.png" />
 	 </div>
 </section>
+=======
+				<c:if test="${message ne null}">
+					<div class="alert alert-${messageType}">
+						<strong>${message}</strong>
+					</div>
+				</c:if>
+>>>>>>> Remodel/HttpSession
 
 </body>
 </html>
