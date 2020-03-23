@@ -17,37 +17,29 @@
 
 
 <style>
-.home-div{
+.home-div {
+	margin-top: -100px;
+	margin-left: 35px;
+}
 
-margin-top:-100px;
-margin-left:35px;
+.work-div {
+	margin-left: 35px;
+	margin-top: 50px;
 }
-.work-div{
-margin-left:35px;
-margin-top:50px;
-}
-.date-div{
-margin-left:35px;
-margin-top:40px;
-}
-.time-div{
-margin-left:35px;
-margin-top:20px;
 
+.date-div {
+	margin-left: 35px;
+	margin-top: 40px;
+}
+
+.time-div {
+	margin-left: 35px;
+	margin-top: 20px;
 }
 </style>
 </head>
 <body>
-<<<<<<< HEAD
-<main class="container">
-<form action="/find-carpool/${id }">
-<section class="jumbotron">
-<img src="http://mapsdirection.live/livelp/landerb/source/pin.png"/>
-<div class="home-div">Home - ${eCity }, ${eStreet }, ${eZip }</div>
-<div class="work-div">Work - ${cCity }, ${cStreet }, ${cZip }</div>
-<div class="date-div">Select pickup date: <input type="date" name="date" required/></div>
-<div class="time-div">Select pickup time: <input type="time" name="time" required/></div>
-=======
+
 	<main class="container">
 		<section class="jumbotron">
 
@@ -72,7 +64,7 @@ margin-top:20px;
 				<div>
 					Select pickup time: <input type="time" name="time" required />
 				</div>
->>>>>>> Remodel/HttpSession
+
 
 				<input type="hidden" value="${username}" name="username">
 				<button class="btn btn-primary" type="submit">Find Carpool</button>

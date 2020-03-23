@@ -18,36 +18,24 @@
 </head>
 <body>
 
-	<h1 class="Jumborton">Company Scores:</h1>
+	<h1 class="Jumborton">Company Goal:</h1>
 
 	<section class="lead">
-		<table class="text-muted">
-			<thead>
-				<tr>
-					<th>Company</th>
-					<th>Score</th>
-				</tr>
-			</thead>
 
-			<tbody>
-				<!-- 
-		<c:forEach var="" items="${}">
-			<tr class="table-primary">
-				<td>${}</td>
-				<td>${}</td>
-			</tr>
-		</c:forEach>
--->
-			</tbody>
+		<h3>Current company total is: ${Total}</h3>
+		<h3>Current company goal is: ${Goal}</h3>
 
-		</table>
 
 	</section>
-	<!-- if we want to make a progress bar to a goal stretch 
+
 	<div class="progress">
-  <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%"></div>
-</div>
--->
+		<div class="progress-bar progress-bar-striped progress-bar-animated"
+			role="progressbar" aria-valuenow="75" aria-valuemin="0"
+			aria-valuemax="100" style="width: ${Score}%"></div>
+	</div>
+
+	<h3>${Score }% of the way there!</h3>
+
 
 </body>
 </html>

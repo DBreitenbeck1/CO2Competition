@@ -19,7 +19,18 @@ public class Company {
 	private String name;
 	private String streetAddress;
 	private String city;
+
+	public Integer getGoal() {
+		return goal;
+	}
+
+	public void setGoal(Integer goal) {
+		this.goal = goal;
+	}
+
 	private String zipCode;
+
+	private Integer goal;
 
 	@OneToMany(mappedBy = "company")
 	private List<Employee> employees;
@@ -142,7 +153,8 @@ public class Company {
 	@Override
 	public String toString() {
 		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", zipCode=" + zipCode + ", employees=" + employees + "]";
+				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
+				+ "]";
 	}
 
 }
