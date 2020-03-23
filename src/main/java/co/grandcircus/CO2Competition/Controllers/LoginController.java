@@ -42,7 +42,7 @@ public class LoginController {
 		}
 
 		sesh.setAttribute("employee", employee);
-		return new ModelAndView("redirect:/employee");
+		return new ModelAndView("redirect:/dashboard");
 	}
 
 	@RequestMapping("/logout")

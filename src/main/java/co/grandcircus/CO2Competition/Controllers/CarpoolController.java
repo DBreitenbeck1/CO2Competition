@@ -62,7 +62,7 @@ public class CarpoolController {
 	@RequestMapping("/ride")
 	public ModelAndView showRideToDestination(@RequestParam String method, @RequestParam Double distanceFromCom,
 			@RequestParam Double distanceFromYou, @RequestParam String username) {
-		ModelAndView mav = new ModelAndView("show-origin");
+		ModelAndView mav = new ModelAndView("ride");
 		mav.addObject("method", method);
 		mav.addObject("distanceFromCom", distanceFromCom);
 		mav.addObject("distanceFromYou", distanceFromYou);

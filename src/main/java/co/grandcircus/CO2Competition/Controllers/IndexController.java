@@ -1,28 +1,30 @@
 package co.grandcircus.CO2Competition.Controllers;
 
-<<<<<<< HEAD
-import java.util.List;
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-=======
->>>>>>> Remodel/HttpSession
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import co.grandcircus.CO2Competition.ApiService;
+import co.grandcircus.CO2Competition.COCalculator;
+import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
+import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class IndexController {
-	
-<<<<<<< HEAD
+
 	@Autowired
 	HttpSession httpSesh;
 
 	@Value("${api_key}")
 	String apiKey;
-	
+
 	@Autowired
 	private ApiService apiServe;
 
@@ -31,11 +33,7 @@ public class IndexController {
 
 	@Autowired
 	private EmployeeRepo emRepo;
-	
-	@RequestMapping("/")
-	public ModelAndView showIndex(RedirectAttributes redir) {
-		// Create ModelAndView
-		ModelAndView mav = new ModelAndView("index");
+
 //
 //		// Declare Variables
 //		String address1 = "NoviMI";
@@ -68,7 +66,8 @@ public class IndexController {
 //		mav.addObject("midway", midway);
 //		mav.addObject("destination", destination);
 //		mav.addObject("distance", distance);
-		// Add Objects to ModelAndView
+
+	// Add Objects to ModelAndView
 //		String url = ( "https://maps.googleapis.com/maps/api/js?origin="
 //				+ address1 + "&destination=" + address2 + "&key=" + apiKey);
 //		
@@ -79,8 +78,6 @@ public class IndexController {
 //		mav.addObject("destination", destination);
 //		mav.addObject("distance", distance);
 //		mav.addObject("url", url);
-		return mav;
-	}
 
 	@RequestMapping("/logtrip")
 	public ModelAndView logTripForm() {
@@ -111,40 +108,16 @@ public class IndexController {
 		return mav;
 
 	}
-	
-	// Tester to see if Scoreboard will work, needs polishing
-	@RequestMapping("/summary")
-	public ModelAndView showScores() {
-		// Company ID
-		Employee emp = (Employee)httpSesh.getAttribute("employee");
-		Long companyId = emp.getCompany().getCompanyId();
-		
-		// Declare Variables
-		Double companyTotal = 0.0;
-		
-		// Get Scoreboard
-		List<Score> scores = emRepo.findScoresByCompany(companyId);
-		
-		// Get company total from scoreboard
-		for (Score score : scores) {
-			companyTotal += score.getScore();
-		}
-		
-		// Create ModelAndView and add objects
-		ModelAndView mav = new ModelAndView("userscores");
-		mav.addObject("scoreboard", scores);
-		mav.addObject("total", companyTotal);
-		return mav;
-=======
+
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
 		return new ModelAndView("index");
->>>>>>> Remodel/HttpSession
 	}
-	
-	@RequestMapping("/employee")
+
+	@RequestMapping("/dashboard")
 	public ModelAndView showDesk() {
-		return new ModelAndView ("employee-page");
+		return new ModelAndView("dashboard");
+
 	}
 
 }

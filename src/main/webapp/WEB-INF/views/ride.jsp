@@ -17,23 +17,24 @@
 
 
 <style>
-.home-div{
+.home-div {
+	margin-top: -100px;
+	margin-left: 35px;
+}
 
-margin-top:-100px;
-margin-left:35px;
+.work-div {
+	margin-left: 35px;
+	margin-top: 50px;
 }
-.work-div{
-margin-left:35px;
-margin-top:50px;
-}
-.date-div{
-margin-left:35px;
-margin-top:40px;
-}
-.time-div{
-margin-left:35px;
-margin-top:20px;
 
+.date-div {
+	margin-left: 35px;
+	margin-top: 40px;
+}
+
+.time-div {
+	margin-left: 35px;
+	margin-top: 20px;
 }
 </style>
 </head>
@@ -63,9 +64,8 @@ margin-top:20px;
 				<div>
 					Select pickup time: <input type="time" name="time" required />
 				</div>
-
 				<input type="hidden" value="${username}" name="username">
-				<button class="btn btn-primary" type="submit">Find Carpool</button>
+				<button class="btn btn-primary" type="submit">Log Carpool</button>
 			</form>
 		</section>
 	</main>
