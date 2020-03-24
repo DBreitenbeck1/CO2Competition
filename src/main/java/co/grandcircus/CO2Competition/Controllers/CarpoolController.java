@@ -50,6 +50,8 @@ public class CarpoolController {
 		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
 
 		ModelAndView mav = new ModelAndView("routes");
+		mav.addObject("employ", employee);
+		mav.addObject("company", company);
 		mav.addObject("carpools", company.getCarpool());
 		mav.addObject("employees", employeeList);
 		mav.addObject("distanceC", distanceFromCom);
