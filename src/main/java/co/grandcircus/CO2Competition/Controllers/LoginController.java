@@ -52,21 +52,36 @@ public class LoginController {
 		red.addFlashAttribute("messageType", "success");
 		return new ModelAndView("redirect:/login");
 	}
-	
+
 	@RequestMapping("/register")
-	public ModelAndView showReg(Company company,Employee employee) {
-		ModelAndView mav = new ModelAndView ("employee-registration");
-		
-		mav.addObject("company",coRepo.findAll());
-		mav.addObject("employee",emRepo.findAllVehicleType());
+	public ModelAndView showReg(Company company, Employee employee) {
+		ModelAndView mav = new ModelAndView("employee-registration");
+
+		mav.addObject("company", coRepo.findAll());
+		mav.addObject("employee", emRepo.findAllVehicleType());
 		return mav;
 	}
-	
+
 	@PostMapping("/register")
-	public ModelAndView submitReg(Employee employee,RedirectAttributes red) {
+	public ModelAndView submitReg(Employee employee, RedirectAttributes red) {
 		emRepo.save(employee);
 //		coRepo.save(company);
-		red.addFlashAttribute("msg","Thank you for registering with us, "+employee.getName());
+		red.addFlashAttribute("msg", "Thank you for registering with us, " + employee.getName());
+
+		return new ModelAndView("redirect:/login");
+	}
+
+	@RequestMapping("/registercompany")
+	public ModelAndView showCompanyReg() {
+		ModelAndView mav = new ModelAndView("registercompany");
+		return mav;
+	}
+
+	@PostMapping("/registercompany")
+	public ModelAndView submitCompany(Company company, RedirectAttributes red) {
+		coRepo.save(company);
+//		coRepo.save(company);
+		red.addFlashAttribute("msg", "Enjoy your day, " + company.getName());
 
 		return new ModelAndView("redirect:/login");
 	}

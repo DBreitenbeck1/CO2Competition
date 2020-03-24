@@ -19,6 +19,31 @@ public class Company {
 	private String name;
 	private String streetAddress;
 	private String city;
+	private String username;
+	private String password;
+
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+				+ city + ", username=" + username + ", password=" + password + ", zipCode=" + zipCode + ", goal=" + goal
+				+ ", employees=" + employees + ", carpool=" + carpool + "]";
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Integer getGoal() {
 		return goal;
@@ -148,13 +173,6 @@ public class Company {
 
 	public void setEmployees(List<Employee> employees) {
 		this.employees = employees;
-	}
-
-	@Override
-	public String toString() {
-		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
-				+ "]";
 	}
 
 }
