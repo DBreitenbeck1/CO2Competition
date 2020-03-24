@@ -32,8 +32,13 @@
 	 <div class="row">
 			  <div class="col">${emp.name}</div>
 		      <div class="col">${emp.address}</div>
-		      <div class="col">${distanceC[empLoop.index].text}</div>
-		      <div class="col">${distanceY[empLoop.index].text}</div>
+		      <div class="col"><a href="#" onClick="window.open('https://www.google.com/maps/dir/${emp.address}/${company.address}/', '_blank', 'width=900%,height=500%')">
+     ${distanceC [empLoop.index].text}</a></td>
+    </div>
+
+ <div class="col"><a href="#" onClick="window.open('https://www.google.com/maps/dir/${emp.address}/${employ.address}/', '_blank', 'width=900%,height=500%')">
+    ${distanceY[empLoop.index].text}</a>
+		    </div>
    		      <div class="col">
 				<form method="post" action="/ride" class="form-inline">
 			    <input type="hidden" value="${emp.username}" name="username">
