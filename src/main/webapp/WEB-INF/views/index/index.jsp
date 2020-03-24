@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="partials/header.jsp"%>
+<%@ include file="../partials/header.jsp"%>
 
 <meta charset="ISO-8859-1">
 

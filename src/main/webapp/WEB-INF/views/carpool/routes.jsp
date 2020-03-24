@@ -12,7 +12,7 @@
 	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
-<%@ include file="partials/header.jsp"%></head>
+<%@ include file="../partials/header.jsp"%></head>
 <body>
 
 

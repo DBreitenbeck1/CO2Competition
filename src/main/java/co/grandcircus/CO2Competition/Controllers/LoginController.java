@@ -26,7 +26,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
-		return new ModelAndView("login");
+		return new ModelAndView("login/login");
 	}
 
 	@PostMapping("/login")
@@ -55,7 +55,7 @@ public class LoginController {
 	
 	@RequestMapping("/register")
 	public ModelAndView showReg(Company company,Employee employee) {
-		ModelAndView mav = new ModelAndView ("employee-registration");
+		ModelAndView mav = new ModelAndView ("login/employee-registration");
 		
 		mav.addObject("company",coRepo.findAll());
 		mav.addObject("employee",emRepo.findAllVehicleType());

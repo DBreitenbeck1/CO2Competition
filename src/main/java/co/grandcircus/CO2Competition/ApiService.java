@@ -48,7 +48,6 @@ public class ApiService {
 				+ "&waypoints=" + midway
 				+ "&key=" + apiKey);
 		SearchResult result = rt.getForObject(url, SearchResult.class);
-		System.out.println(url);
 		return result;
 	}
 	
@@ -63,7 +62,6 @@ public class ApiService {
 					+ "&waypoints=" + midway
 					+ "&key=" + apiKey);
 			SearchResult result = rt.getForObject(url, SearchResult.class);
-			System.out.println(url);
 			return result;
 		}
 

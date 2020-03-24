@@ -24,6 +24,8 @@ import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
 public class CarpoolController {
+	//adding a comment to test
+	
 	@Autowired
 	private HttpSession sesh;
 	@Autowired
@@ -48,7 +50,7 @@ public class CarpoolController {
 		List<Distance> distanceFromYou = rCalc.getDistances(employeeList, "fromUser");
 		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
 
-		ModelAndView mav = new ModelAndView("routes");
+		ModelAndView mav = new ModelAndView("carpool/routes");
 		mav.addObject("carpools", company.getCarpool());
 		mav.addObject("employees", employeeList);
 		mav.addObject("distanceC", distanceFromCom);
@@ -62,7 +64,7 @@ public class CarpoolController {
 	@RequestMapping("/ride")
 	public ModelAndView showRideToDestination(@RequestParam String method, @RequestParam Double distanceFromCom,
 			@RequestParam Double distanceFromYou, @RequestParam String username) {
-		ModelAndView mav = new ModelAndView("ride");
+		ModelAndView mav = new ModelAndView("carpool/ride");
 		mav.addObject("method", method);
 		mav.addObject("distanceFromCom", distanceFromCom);
 		mav.addObject("distanceFromYou", distanceFromYou);
@@ -103,7 +105,7 @@ public class CarpoolController {
 		// Save to database
 		carRepo.save(carpool);
 
-		ModelAndView mav = new ModelAndView("confirmation");
+		ModelAndView mav = new ModelAndView("carpool/confirmation");
 		mav.addObject("name", passenger.getName());
 		mav.addObject("destination", company.getName());
 		mav.addObject("date",date);
@@ -126,7 +128,7 @@ public class CarpoolController {
 		
 		
 		// creates new ModelAndView and assigns mapping
-		ModelAndView mav = new ModelAndView("show-origin");
+		ModelAndView mav = new ModelAndView("carpool/show-origin");
 		mav.addObject("method", method);
 		mav.addObject("distanceFromCom", distanceFromCom);
 		mav.addObject("distanceFromYou", null);
@@ -166,7 +168,7 @@ public class CarpoolController {
 				carpoolsFiltered.add(car);
 			}
 		}
-		return new ModelAndView("pastRoutes", "carpools", carpoolsFiltered);
+		return new ModelAndView("carpool/pastRoutes", "carpools", carpoolsFiltered);
 	}
 	
 
