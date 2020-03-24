@@ -128,7 +128,9 @@ public class ScoresController {
 			int total = 0;
 			for(Carpool c : weekCPs) {
 				if(c.getEmployees().contains(e)) {
-					total+=(int)(c.getCo2()*10)/c.getEmployees().size();
+					int save = c.getCo2();
+					
+					total+=(save/c.getEmployees().size());
 				}	
 			}
 			weeklyTotals.put(e.getName(), total);
@@ -168,7 +170,11 @@ public class ScoresController {
 			int total = 0;
 			for(Carpool c:monthCPs) {
 				if(c.getEmployees().contains(e)) {
-					total+=(int)(c.getCo2()*10)/c.getEmployees().size();
+					System.out.println(e.getName());
+					int save = c.getCo2();
+					System.out.println(save);
+					total+=(save/c.getEmployees().size());
+					System.out.println(total);
 				}
 				
 			}
