@@ -25,7 +25,9 @@
 	        <a class="nav-link" href="/favorite-routes">Favorite Routes</a>
 	      </li>
 	 -->
-				<li class="nav-item"><a class="nav-link" href="/summary">Leaderboard</a>
+				<li class="nav-item"><a class="nav-link" href="/summary">Leaderboard - All time</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="/summary-week">Leaderboard - Weekly</a>
 				</li>
 			</c:if>
 		</ul>

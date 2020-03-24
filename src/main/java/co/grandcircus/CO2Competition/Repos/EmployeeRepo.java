@@ -3,12 +3,12 @@ package co.grandcircus.CO2Competition.Repos;
 import java.util.List;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import co.grandcircus.CO2Competition.Objects.Carpool;
+import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Objects.Score;
 
@@ -46,6 +46,12 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			)
 	public Score findScoreByEmployee(@Param("employee_id") Long employee_id);
 	
+	List<Employee> findByCompany(Company company);
 	
+	List<Employee> findByCompanyOrderByScoreDesc(Company company);
+	
+	//List<Employee> findByCompanyOrderByScoreDesc(Company company);
+	
+	List<Employee> findByCarpoolContains(Carpool carpool);
 	
 }
