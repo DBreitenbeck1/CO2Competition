@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>User Registration || Green on the Go</title>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -96,7 +96,7 @@ input[class=zip] {
 				</div>
 
 				<select name="vehicleType" class="ve-select" required>
-				<c:forEach var="v" items="${employee }">
+				<c:forEach var="v" items="${vehicleTypes}">
 				<option value="${v }">${v }</option>
 				</c:forEach>
 				
@@ -104,7 +104,7 @@ input[class=zip] {
 				</select>
 				<select name="company" class="sel-select" required>
 
-					<c:forEach var="co" items="${company }">
+					<c:forEach var="co" items="${companies }">
 						<option value="${co.companyId }">${co.name }</option>
 					</c:forEach>
 				</select>

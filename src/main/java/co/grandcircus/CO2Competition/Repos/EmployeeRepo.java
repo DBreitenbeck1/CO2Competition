@@ -4,9 +4,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
+import co.grandcircus.CO2Competition.Objects.Carpool;
+import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Objects.Score;
 
@@ -19,6 +23,24 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	
 	List<Employee> findByCompanyName(String name);
 	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE `CO2_competition`.`employee` SET `city` = :city, `name` = :name,"
+			+ " `password` = :password, `street_address` = :streetAddress, `username` = :username,"
+			+ " `zip_code` = :zipCode, `company_company_id` = :companyId, `vehicle_type` = :vehicleType "
+			+ "WHERE (`employee_id` = :employeeId);",
+			nativeQuery = true)
+	void update(
+			@Param("city") String city,
+			@Param("name") String name,
+			@Param("password") String password,
+			@Param("streetAddress") String streetAddress,
+			@Param("username") String username,
+			@Param("zipCode") String zipCode,
+			@Param("companyId") Long companyId,
+			@Param("vehicleType") String vehicleType,
+			@Param("employeeId") Long employeeId
+			);
 	
 	@Query(value="SELECT vehicleType FROM Employee")
 	Set<String> findAllVehicleType();
@@ -47,7 +69,14 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			)
 	public Score findScoreByEmployee(@Param("employee_id") Long employee_id);
 	
+	List<Employee> findByCompany(Company company);
+	
+	List<Employee> findByCompanyOrderByScoreDesc(Company company);
+	
+	//List<Employee> findByCompanyOrderByScoreDesc(Company company);
 	
 	@Query(value="SELECT sum(total_score) AS score FROM employee WHERE company_company_id = :company_id", nativeQuery = true)
 	public List<Score> findScoreByTotalScore(@Param("company_id") Long company_id);
+	List<Employee> findByCarpoolContains(Carpool carpool);
+	
 }

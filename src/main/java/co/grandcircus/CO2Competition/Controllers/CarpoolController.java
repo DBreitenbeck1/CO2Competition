@@ -1,7 +1,10 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -50,7 +53,7 @@ public class CarpoolController {
 
 		List<Distance> distanceFromYou = rCalc.getDistances(employeeList, "fromUser");
 		List<Distance> distanceFromCom = rCalc.getDistances(employeeList, "fromWork");
-		ModelAndView mav = new ModelAndView("routes");
+		ModelAndView mav = new ModelAndView("carpool/routes");
 		mav.addObject("employ", employee);
 		mav.addObject("company", company);
 		mav.addObject("carpools", company.getCarpool());
@@ -164,21 +167,27 @@ public class CarpoolController {
 	
 	
 	// Previous Routes:
-	// -displays the previous routes of the employee
+	// -displays the previous routes of the employee 
+	//Marks off which ones are completed and which are still to be done
 	@RequestMapping("/previous-routes")
 	public ModelAndView previousRoutes() {
-		Employee employee = (Employee) sesh.getAttribute("employee");
+		Employee user = (Employee) sesh.getAttribute("employee");
+		Employee employee = emRepo.findByUsernameIgnoreCase(user.getUsername());
 		Company company = coRepo.findByName(employee.getCompany().getName());
 
-		List<Carpool> carpools = company.getCarpool();
-		List<Carpool> carpoolsFiltered = new ArrayList<>();
-
-		for (Carpool car : carpools) {
-			if (car.getEmployees().contains(employee)) {
-				carpoolsFiltered.add(car);
-			}
-		}
-		return new ModelAndView("carpool/pastRoutes", "carpools", carpoolsFiltered);
+		//defines current date
+		LocalDate now = LocalDate.now();
+		DateTimeFormatter dateForm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+		String today = now.format(dateForm) + " 00:00";		
+		
+		//retrieves the user's carpools and orders by date
+		List<Carpool> carpools = carRepo.findByEmployeesContainingOrderByDateDesc(employee);
+		
+		ModelAndView mav = new ModelAndView("carpool/pastRoutes");
+		mav.addObject("carpools", carpools);
+		mav.addObject("today",today);
+		
+		return mav;
 	}
 	
 

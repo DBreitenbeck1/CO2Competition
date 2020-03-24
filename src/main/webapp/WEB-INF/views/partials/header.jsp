@@ -10,8 +10,12 @@
 	</div>
 	<div class="collapse navbar-collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="navbar-text text-blue" href="/">Home</a></li>
-			<li class="nav-item"><a class="navbar-text text-blue" href="/about">About</a></li>
+			<li class="nav-item">
+				<a class="nav-link" href="/">Home</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/about">About</a>
+			</li>
 			
 			<!-- navbar buttons showing only if logged in -->
 			<c:if test="${employee ne null}">
@@ -25,7 +29,12 @@
 	        <a class="nav-link" href="/favorite-routes">Favorite Routes</a>
 	      </li>
 	 -->
-				<li class="nav-item"><a class="nav-link" href="/summary">Leaderboard</a>
+	 
+	 				<li class="nav-item"><a class="nav-link" href="/previous-routes">Your Carpools</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="/summary">Leaderboard - All time</a>
+				</li>
+				<li class="nav-item"><a class="nav-link" href="/summary-week">Leaderboard - Weekly</a>
 				</li>
 			</c:if>
 		</ul>
@@ -36,6 +45,8 @@
 				<a class="navbar-text text-blue">Welcome ${employee.name}!</a>
 			</div>
 			<div class="text-right">
+				<a class="navbar-text text-blue" href="/updateuser">Settings</a>
+				<a class=navbar-text text-blue"> || </a>
 				<a class="navbar-text text-blue" href="/logout">Logout</a>
 			</div>
 
@@ -43,9 +54,14 @@
 	</c:if>
 	<c:if test="${employee eq null}">
 		<!-- Right side, login button // user name and score and logout button -->
-		<a class="navbar-text text-white" href="/login">Login</a>
-		<a class="navbar-text text-blue" href="/register">Register New
-			User</a>
+		<ul class="navbar-nav mr-auto">
+			<li class="nav-item">
+				<a class="nav-link" href="/login">Login</a>
+			</li>
+			<li class="nav-item">
+				<a class="nav-link" href="/register">Register</a>
+			</li>
+		</ul>
 	</c:if>
 </nav>
 
