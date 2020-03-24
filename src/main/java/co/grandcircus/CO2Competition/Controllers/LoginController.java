@@ -73,7 +73,7 @@ public class LoginController {
 
 	@RequestMapping("/registercompany")
 	public ModelAndView showCompanyReg() {
-		ModelAndView mav = new ModelAndView("registercompany");
+		ModelAndView mav = new ModelAndView("login/registercompany");
 		return mav;
 	}
 
