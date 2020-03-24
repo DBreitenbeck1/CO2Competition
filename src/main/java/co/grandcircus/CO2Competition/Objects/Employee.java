@@ -1,5 +1,6 @@
 package co.grandcircus.CO2Competition.Objects;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -13,8 +14,10 @@ import javax.persistence.ManyToOne;
 
 @Entity
 
-public class Employee {
+public class Employee implements Serializable {
 
+	// Serializable attribute - Allows user to stay logged in when server refreshes -- Sam
+	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long employeeId;
@@ -27,6 +30,7 @@ public class Employee {
 	private String city;
 	private String zipCode;
 	private String vehicleType;
+	private Integer score =0; 
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Company company;
@@ -34,6 +38,20 @@ public class Employee {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Carpool> carpool;
 	
+	
+	public void addToScore(int add) {
+		this.score +=add;
+	}
+	
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public String getVehicleType() {
 		return vehicleType;
 	}

@@ -8,9 +8,6 @@
 			<small class="text-white">A CO2 Savings Competition</small>
 		</div>
 	</div>
-</nav>
-<nav class="navbar navbar-expand-lg navbar-white bg-white">
-
 	<div class="collapse navbar-collapse" id="navbarColor02">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="navbar-text text-blue" href="/">Home</a></li>
@@ -18,13 +15,13 @@
 			
 			<!-- navbar buttons showing only if logged in -->
 			<c:if test="${employee ne null}">
-				<li class="nav-item"><a class="nav-link" href="/employee">Dashboard</a>
+				<li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/routes">Available
 						Routes</a></li>
-				<li class="nav-item"><a class="nav-link"
+				<!--  <li class="nav-item"><a class="nav-link"
 					href="/previous-routes">Previous Routes</a></li>
-				<!--  <li class="nav-item">
+				<li class="nav-item">
 	        <a class="nav-link" href="/favorite-routes">Favorite Routes</a>
 	      </li>
 	 -->

@@ -1,5 +1,6 @@
 package co.grandcircus.CO2Competition.Objects;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.persistence.OneToMany;
 
 @Entity
 
-public class Company {
+public class Company implements Serializable {
+
+	// Serializable attribute - Allows user to stay logged in when server refreshes -- Sam
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

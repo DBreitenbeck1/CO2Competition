@@ -26,7 +26,7 @@ public class LoginController {
 
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
-		return new ModelAndView("login");
+		return new ModelAndView("login/login");
 	}
 
 	@PostMapping("/login")
@@ -42,7 +42,7 @@ public class LoginController {
 		}
 
 		sesh.setAttribute("employee", employee);
-		return new ModelAndView("redirect:/employee");
+		return new ModelAndView("redirect:/dashboard");
 	}
 
 	@RequestMapping("/logout")

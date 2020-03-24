@@ -13,7 +13,7 @@
 <meta charset="ISO-8859-1">
 <title>Company Scores!</title>
 
-<%@ include file="partials/header.jsp"%>
+<%@ include file="../partials/header.jsp"%>
 
 </head>
 <body>

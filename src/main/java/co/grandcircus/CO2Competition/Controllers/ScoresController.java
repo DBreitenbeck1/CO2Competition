@@ -44,12 +44,11 @@ public class ScoresController {
 
 		// Get company total from scoreboard
 		for (Score score : scores) {
-			System.out.println(score.getEmployee());
 			companyTotal += score.getScore();
 		}
 
 		// Create ModelAndView and add objects
-		ModelAndView mav = new ModelAndView("userscores");
+		ModelAndView mav = new ModelAndView("scores/userscores");
 		mav.addObject("scoreboard", scores);
 		mav.addObject("total", companyTotal);
 		return mav;
@@ -74,7 +73,7 @@ public class ScoresController {
 		}
 		Integer goalPercent = (int) ((companyTotal / goal) * 100);
 
-		ModelAndView mav = new ModelAndView("companyscores");
+		ModelAndView mav = new ModelAndView("scores/companyscores");
 
 		mav.addObject("Score", goalPercent);
 		mav.addObject("Goal", goal);

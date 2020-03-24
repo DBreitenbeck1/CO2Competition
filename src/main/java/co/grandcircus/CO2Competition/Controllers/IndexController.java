@@ -111,19 +111,18 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
-		return new ModelAndView("index");
+		return new ModelAndView("index/index");
 	}
 
-	@RequestMapping("/employee")
-
+	@RequestMapping("/dashboard")
 	public ModelAndView showDesk() {
-		return new ModelAndView("employee-page");
+		return new ModelAndView("index/dashboard");
 
 	}
 	
 	@RequestMapping("/about")
 	public ModelAndView showAbout() {
-		return new ModelAndView ("about");
+		return new ModelAndView ("index/about");
 		
 		
 	}

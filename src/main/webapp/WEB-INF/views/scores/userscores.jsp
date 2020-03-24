@@ -12,7 +12,7 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
 
-<%@ include file="partials/header.jsp"%>
+<%@ include file="../partials/header.jsp"%>
 <meta charset="ISO-8859-1">
 <title>User Scores!</title>
 

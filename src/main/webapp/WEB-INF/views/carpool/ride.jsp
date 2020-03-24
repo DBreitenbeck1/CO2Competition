@@ -13,7 +13,7 @@
 	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
-<%@ include file="partials/header.jsp"%>
+<%@ include file="../partials/header.jsp"%>
 
 
 <style>
@@ -64,10 +64,8 @@
 				<div>
 					Select pickup time: <input type="time" name="time" required />
 				</div>
-
-
 				<input type="hidden" value="${username}" name="username">
-				<button class="btn btn-primary" type="submit">Find Carpool</button>
+				<button class="btn btn-primary" type="submit">Log Carpool</button>
 			</form>
 		</section>
 	</main>
