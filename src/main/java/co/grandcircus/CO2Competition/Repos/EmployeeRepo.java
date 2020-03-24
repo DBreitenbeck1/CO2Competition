@@ -3,11 +3,11 @@ package co.grandcircus.CO2Competition.Repos;
 import java.util.List;
 import java.util.Set;
 
-import javax.transaction.Transactional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Objects.Score;
@@ -18,6 +18,25 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	Employee findByUsernameIgnoreCase(String username);
 	List<Employee> findByCity (String city);
 	Employee findByCompany(String companyname);
+	
+	@Transactional
+	@Modifying
+	@Query(value = "UPDATE `CO2_competition`.`employee` SET `city` = :city, `name` = :name,"
+			+ " `password` = :password, `street_address` = :streetAddress, `username` = :username,"
+			+ " `zip_code` = :zipCode, `company_company_id` = :companyId, `vehicle_type` = :vehicleType "
+			+ "WHERE (`employee_id` = :employeeId);",
+			nativeQuery = true)
+	void update(
+			@Param("city") String city,
+			@Param("name") String name,
+			@Param("password") String password,
+			@Param("streetAddress") String streetAddress,
+			@Param("username") String username,
+			@Param("zipCode") String zipCode,
+			@Param("companyId") Long companyId,
+			@Param("vehicleType") String vehicleType,
+			@Param("employeeId") Long employeeId
+			);
 	
 	@Query(value="SELECT vehicleType FROM Employee")
 	Set<String> findAllVehicleType();

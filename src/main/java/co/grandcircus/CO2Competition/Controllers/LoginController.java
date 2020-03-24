@@ -24,6 +24,7 @@ public class LoginController {
 	@Autowired
 	private CompanyRepo coRepo;
 
+
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
 		return new ModelAndView("login/login");
@@ -100,7 +101,8 @@ public class LoginController {
 	// or if user was successfully updated
 	@PostMapping("/updateuser")
 	public ModelAndView submitUpdateUser(@RequestParam String current,
-			@RequestParam(required = false) String passwordConfirm, @RequestParam Employee updatedEmployee,
+			@RequestParam(required = false) String passwordConfirm,
+			Employee updatedEmployee,
 			RedirectAttributes redir) {
 		Employee employee = (Employee) sesh.getAttribute("employee");
 		// if password matches
@@ -115,11 +117,23 @@ public class LoginController {
 				redir.addFlashAttribute("messageType", "warning");
 				return new ModelAndView("redirect:/updateuser");
 			}
+		} else {
+			updatedEmployee.setPassword(employee.getPassword());
 		}
 
 		// update
-		emRepo.save(updatedEmployee);
-		
+		emRepo.update(
+				updatedEmployee.getCity(), 
+				updatedEmployee.getName(), 
+				updatedEmployee.getPassword(), 
+				updatedEmployee.getStreetAddress(), 
+				updatedEmployee.getUsername(), 
+				updatedEmployee.getZipCode(), 
+				updatedEmployee.getCompany().getCompanyId(), 
+				updatedEmployee.getVehicleType(),
+				employee.getEmployeeId());
+		sesh.removeAttribute("employee");
+		sesh.setAttribute("employee", updatedEmployee);
 		// redirect
 		redir.addFlashAttribute("message", "Changes confirmed!");
 		redir.addFlashAttribute("messageType", "success");
