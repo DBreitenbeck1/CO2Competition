@@ -12,6 +12,53 @@
 <link rel="stylesheet" href="/style.css" />
 <meta charset="ISO-8859-1">
 <title>Register a company</title>
+<style>
+.dropbtn {
+	background-color: #4CAF50;
+	color: white;
+	padding: 16px;
+	font-size: 16px;
+	border: none;
+}
+
+input[class=name] {
+	margin-left: 10px;
+}
+
+input[class=last] {
+	margin-left: 12px;
+}
+
+input[class=user] {
+	margin-left: 15px;
+}
+
+input[class=pass] {
+	margin-left: 20px;
+}
+
+input[class=city] {
+	margin-left: 59px;
+	margin-top: 10px;
+}
+
+input[class=street] {
+	margin-left: 45px;
+}
+
+input[class=zip] {
+	margin-left: 25px;
+}
+
+.add-div {
+	margin-top: 10px;
+}
+
+.sel-select {
+	margin-top: 15px;
+}
+</style>
+
 </head>
 <body>
 
@@ -37,7 +84,7 @@
 						required minlength="4"></label>
 				</div>
 				<div>
-					<label>Street Adress:<input class="street" type="text"
+					<label>Street Address:<input class="street" type="text"
 						name="streetAddress" required minlength="4"></label>
 				</div>
 				<div>
