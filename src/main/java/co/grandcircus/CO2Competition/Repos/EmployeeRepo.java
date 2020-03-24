@@ -9,6 +9,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
+import co.grandcircus.CO2Competition.Objects.Carpool;
+import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Objects.Score;
 
@@ -65,6 +67,12 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			)
 	public Score findScoreByEmployee(@Param("employee_id") Long employee_id);
 	
+	List<Employee> findByCompany(Company company);
 	
+	List<Employee> findByCompanyOrderByScoreDesc(Company company);
+	
+	//List<Employee> findByCompanyOrderByScoreDesc(Company company);
+	
+	List<Employee> findByCarpoolContains(Carpool carpool);
 	
 }

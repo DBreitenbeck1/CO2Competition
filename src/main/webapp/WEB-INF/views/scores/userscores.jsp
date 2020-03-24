@@ -32,10 +32,10 @@
 
 			<tbody>
 
-				<c:forEach var="player" items="${scoreboard}">
+				<c:forEach var="emp" items="${empscores}">
 					<tr class="table-primary">
-						<td>${player.employee}</td>
-						<td>${player.score}</td>
+						<td>${emp.name}</td>
+						<td>${emp.score}</td>
 					</tr>
 				</c:forEach>
 				<tr class="table-primary">
