@@ -13,7 +13,7 @@
 <meta charset="ISO-8859-1">
 <title>Company Scores!</title>
 
-<%@ include file="partials/header.jsp"%>
+<%@ include file="../partials/header.jsp"%>
 
 </head>
 <body>
@@ -21,9 +21,11 @@
 	<h1 class="Jumborton">Company Goal:</h1>
 
 	<section class="lead">
+		<div>
 
-		<h3>Current company total is: ${Total}</h3>
-		<h3>Current company goal is: ${Goal}</h3>
+			<h3>Current company total is: ${Total}</h3>
+			<h3>Current company goal is: ${Goal}</h3>
+		</div>
 
 
 	</section>
@@ -34,7 +36,7 @@
 			aria-valuemax="100" style="width: ${Score}%"></div>
 	</div>
 
-	<h3>${Score }% of the way there!</h3>
+	<h3>${Score }%of the way there!</h3>
 
 
 </body>

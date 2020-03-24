@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="partials/header.jsp"%>
+<%@ include file="../partials/header.jsp"%>
 
 <meta charset="ISO-8859-1">
 
@@ -21,7 +21,7 @@
 <title>CO2 Competition</title>
 <style>
 .carpool-div {
-	margin-top: 150px;
+	margin-top: 100px;
 	margin-left: 100px;
 	font-weight: bold;
 }
@@ -52,7 +52,7 @@ img {
 	padding: 5px;
 	width: 548px;
 	margin-left: 970px;
-	margin-top: -310px;
+	margin-top: -520px;
 	opacity: 0.8;
 }
 
@@ -63,6 +63,10 @@ img {
 
 button {
 	width: 22%;
+}
+.score-div{
+margin-left:100px;
+margin-top:50px;
 }
 </style>
 </head>
@@ -76,16 +80,35 @@ button {
 		<div class="carpool-div">
 			<h1>Make your ride to work</h1>
 			<h1>mean more.</h1>
-			<c:forEach var="c" items="${ems }" varStatus="m">
-	<p>${c.name}</p>
-	</c:forEach>
+						
 			<c:if test="${employee eq null}">
-			<div class="btn-div">
-				<a href="/login"><button class="btn btn-primary" type="submit">Login</button></a>
-			</div>
+				<div class="btn-div">
+					<a href="/login"><button class="btn btn-primary" type="submit">Login</button></a>
+				</div>
 			</c:if>
 		</div>
+	<div class="score-div">
+	<h3>Our Top Clients</h3>
+	<table>
+	<thead>
+  <tr class="table-primary">
+    <th>Company</th>
+    <th>Score</th>
+  </tr>
+  </thead>
+  <tbody>
+  <c:forEach var="c" items="${com}" varStatus="status">
+
+  <tr class="table-primary">
+    <td>${c.name }</td>
+    <td>${em[status.index].score}</td>
+  </tr>
+  </c:forEach>
+  </tbody>
+</table>
+
 	
+	</div>
 		<div class="img-div">
 			<img src="Carpool App Image.png" />
 		</div>

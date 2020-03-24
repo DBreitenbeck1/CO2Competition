@@ -1,5 +1,6 @@
 package co.grandcircus.CO2Competition.Objects;
 
+import java.io.Serializable;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.persistence.OneToMany;
 
 @Entity
 
-public class Company {
+public class Company implements Serializable {
+
+	// Serializable attribute - Allows user to stay logged in when server refreshes -- Sam
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,6 +23,31 @@ public class Company {
 	private String name;
 	private String streetAddress;
 	private String city;
+	private String username;
+	private String password;
+
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+				+ city + ", username=" + username + ", password=" + password + ", zipCode=" + zipCode + ", goal=" + goal
+				+ ", employees=" + employees + ", carpool=" + carpool + "]";
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
 	public Integer getGoal() {
 		return goal;
@@ -156,5 +185,6 @@ public class Company {
 //				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
 //				+ "]";
 //	}
+
 
 }
