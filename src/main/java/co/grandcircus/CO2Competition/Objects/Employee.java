@@ -27,6 +27,7 @@ public class Employee {
 	private String city;
 	private String zipCode;
 	private String vehicleType;
+	private Integer score =0; 
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	private Company company;
@@ -34,6 +35,20 @@ public class Employee {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Carpool> carpool;
 	
+	
+	public void addToScore(int add) {
+		this.score +=add;
+	}
+	
+
+	public Integer getScore() {
+		return score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
 	public String getVehicleType() {
 		return vehicleType;
 	}

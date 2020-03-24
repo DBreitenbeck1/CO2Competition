@@ -40,7 +40,8 @@ public class CarpoolController {
 	// Shows available routes, form directs to /ride
 	@RequestMapping("/routes")
 	public ModelAndView showRoutes() {
-		Employee employee = (Employee) sesh.getAttribute("employee");
+		Employee user = (Employee) sesh.getAttribute("employee");
+		Employee employee = emRepo.findByUsernameIgnoreCase(user.getUsername());
 		Company company = coRepo.findByName(employee.getCompany().getName());
 		List<Employee> employeeList = company.getEmployees();
 		employeeList.remove(employee);
@@ -88,6 +89,8 @@ public class CarpoolController {
 		// User scores 1 pt for 0.10 lbs/CO2 Saved
 		Integer score = (int)(savings * 10);
 		
+		Integer userScore = score/poolers.size();
+		
 		// Create new Carpool object to save to database
 		Carpool carpool = new Carpool();
 		carpool.setCompany(company);
@@ -97,7 +100,13 @@ public class CarpoolController {
 		// Tie Carpool to employees
 		carpool.setEmployees(poolers);
 		for (Employee pooler : poolers) {
+			if (pooler.getScore() != null) {
+			pooler.addToScore(userScore);
+			}  else {
+				pooler.setScore(userScore);
+			}
 			pooler.addCarpool(carpool);
+			emRepo.save(pooler);
 		}
 		
 		// Save to database
