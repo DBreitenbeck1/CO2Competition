@@ -23,6 +23,7 @@ public interface CarpoolRepo extends JpaRepository<Carpool, Long> {
 
 	List<Carpool> findByEmployeesContainingAndDateBetweenOrderByDateDesc(Employee employee, String date1, String date2);
 
+	List<Carpool> findByEmployeesContainingOrderByDateDesc(Employee employee);
 	
 
 }

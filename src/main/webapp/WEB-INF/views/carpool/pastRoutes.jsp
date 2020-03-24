@@ -27,7 +27,9 @@
 				<th>CO2 Saved</th>
 			</tr>
 			<c:forEach var="cp" items="${carpools}">
-				<tr>
+			<c:choose>
+			<c:when test="${cp.date>today }">
+				<tr bgcolor=lightyellow>
 					<td>${cp.carpoolId}</td>
 					<td>${cp.date}</td>
 					<td>
@@ -39,6 +41,23 @@
 					</td>
 					<th>${cp.co2}</th>
 				</tr>
+				</c:when>
+				
+				<c:when test="${cp.date<today }">
+				<tr bgcolor=lightgreen>
+					<td>${cp.carpoolId}</td>
+					<td>${cp.date}</td>
+					<td>
+						<ul>
+							<c:forEach var="pass" items="${cp.employees}">
+								<li>${pass.name}</li>
+							</c:forEach>
+						</ul>
+					</td>
+					<th>${cp.co2}</th>
+				</tr>
+				</c:when>
+				</c:choose>
 			</c:forEach>
 		</table>
 	</div>
