@@ -1,5 +1,9 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Stream;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +18,9 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
+import co.grandcircus.CO2Competition.Objects.Company;
+import co.grandcircus.CO2Competition.Objects.Employee;
+import co.grandcircus.CO2Competition.Repos.CompanyRepo;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
 @Controller
@@ -33,7 +40,9 @@ public class IndexController {
 
 	@Autowired
 	private EmployeeRepo emRepo;
-
+	
+	@Autowired
+	private CompanyRepo coRepo;
 //
 //		// Declare Variables
 //		String address1 = "NoviMI";
@@ -111,7 +120,29 @@ public class IndexController {
 
 	@RequestMapping("/")
 	public ModelAndView showIndex() {
-		return new ModelAndView("index");
+//		List<Company> company= coRepo.findAll();
+//		List<Employee> em = new ArrayList<Employee>();
+//
+//		for (int i = 0; i<company.size(); i++) {
+//			em.add(emRepo.findByCompanyId(company.get(i).getCompanyId()));
+//			System.out.println("em"+em.toString()+"i"+i);
+//			
+//		}
+//		ModelAndView mav = new ModelAndView ("index");
+//		mav.addObject("ems",em);
+//		return mav;
+		List<Company> company= coRepo.findAll();
+		List<Employee> em = new ArrayList<>();
+		for (int i = 0; i<company.size(); i++) {
+		   List<Employee> emp = company.get(i).getEmployees();
+		      for (int j=0; j<emp.size(); j++){
+		             em.add(emp.get(j));
+		      }
+		}
+		ModelAndView mav = new ModelAndView ("index");
+		mav.addObject("ems",em);
+		System.out.println("em"+em);
+		return mav;
 	}
 
 	@RequestMapping("/dashboard")
@@ -126,4 +157,18 @@ public class IndexController {
 		
 		
 	}
+	
+//	@RequestMapping("/top-companies")
+//	public ModelAndView compareCompanies() {
+//		
+//		List<Company> company= coRepo.findAll();
+//		List<Employee> em = null;
+//		for (int i = 0; i<company.size(); i++) {
+//			em = emRepo.findAllEmployeeByCompanyId(company.get(i).getCompanyId());
+//			System.out.println("em"+em);
+//		}
+//		ModelAndView mav = new ModelAndView ("top-companies");
+//		mav.addObject("ems",em);
+//		return mav;
+//	}
 }

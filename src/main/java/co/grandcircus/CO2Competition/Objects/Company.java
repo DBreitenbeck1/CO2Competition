@@ -150,11 +150,11 @@ public class Company {
 		this.employees = employees;
 	}
 
-	@Override
-	public String toString() {
-		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
-				+ "]";
-	}
+//	@Override
+//	public String toString() {
+//		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+//				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
+//				+ "]";
+//	}
 
 }

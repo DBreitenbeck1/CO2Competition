@@ -45,5 +45,8 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	public Score findScoreByEmployee(@Param("employee_id") Long employee_id);
 	
 	
-	
+//	@Query(value="SELECT employee_id FROM employee WHERE company_company_id= :companyId",nativeQuery = true
+//)
+//	public List<Employee> findAllEmployeeByCompanyId(@Param("companyId") Long companyId);
+//	
 }

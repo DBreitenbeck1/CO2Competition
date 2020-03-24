@@ -76,14 +76,16 @@ button {
 		<div class="carpool-div">
 			<h1>Make your ride to work</h1>
 			<h1>mean more.</h1>
-			
+			<c:forEach var="c" items="${ems }" varStatus="m">
+	<p>${c.name}</p>
+	</c:forEach>
 			<c:if test="${employee eq null}">
 			<div class="btn-div">
 				<a href="/login"><button class="btn btn-primary" type="submit">Login</button></a>
 			</div>
 			</c:if>
 		</div>
-
+	
 		<div class="img-div">
 			<img src="Carpool App Image.png" />
 		</div>

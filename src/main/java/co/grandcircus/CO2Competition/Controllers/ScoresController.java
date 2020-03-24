@@ -84,5 +84,7 @@ public class ScoresController {
 
 //		return new ModelAndView("companyscores", "Score", goalPercent);
 	}
+	
+	
 
 }
