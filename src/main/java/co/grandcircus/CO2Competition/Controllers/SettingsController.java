@@ -30,7 +30,6 @@ public class SettingsController {
 	@RequestMapping("/updateuser")
 	public ModelAndView updateUser() {
 		Employee user = (Employee) sesh.getAttribute("employee");
-		Employee admin = user.getCompany().getAdmin();
 
 		ModelAndView mav = new ModelAndView("settings/employee-update");
 		mav.addObject("companies", coRepo.findAll());
@@ -38,7 +37,7 @@ public class SettingsController {
 		mav.addObject("employeeToEdit", user);
 		
 		// CHECK IF USER IS ADMIN
-		if (user.getUsername().equals(admin.getUsername())) {
+		if (user.isAdmin()) {
 			mav.addObject("admin", "true");
 			mav.addObject("employeeList", emRepo.findByCompanyName(user.getCompany().getName()));
 		}		
@@ -65,10 +64,25 @@ public class SettingsController {
 	// Handles admin change
 	@PostMapping("/newadmin")
 	public ModelAndView newAdmin(@RequestParam("id") Long id,
+			@RequestParam String current,
 			RedirectAttributes redir) {
+		// if password does not match
+		Employee employee = (Employee) sesh.getAttribute("employee");
+		if (!current.equals(employee.getPassword())) {
+			redir.addFlashAttribute("message", "Unable to confirm password.");
+			redir.addFlashAttribute("messageType", "danger");
+			return new ModelAndView("redirect:/updateuser");
+		}
+		
+		// if password is correct, handle update
 		Employee newAdmin = emRepo.findById(id).orElse(null);
 		Company company = newAdmin.getCompany();
 		coRepo.updateAdmin(id, company.getCompanyId());
+		
+		//refreshes session employee
+		sesh.removeAttribute("employee");
+		sesh.setAttribute("employee", emRepo.getOne(employee.getEmployeeId()));
+		
 		redir.addFlashAttribute("message", "Sucessfully changed admin to " + newAdmin.getName());
 		redir.addFlashAttribute("messageType", "success");			
 		return new ModelAndView("redirect:/updateuser");

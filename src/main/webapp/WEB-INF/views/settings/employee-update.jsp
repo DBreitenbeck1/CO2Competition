@@ -120,6 +120,9 @@
 							<option value="${e.employeeId}">${e.name}</option>
 						</c:forEach>
 					</select>
+					<label>Enter Current Password:<input class="form-control"
+					type="password" name="current" required></label>
+					
 				<button type="submit" class="btn btn-danger">CHANGE ADMIN</button>
 
 				</form>
