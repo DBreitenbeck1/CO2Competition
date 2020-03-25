@@ -13,52 +13,6 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%>
-<style>
-.dropbtn {
-	background-color: #4CAF50;
-	color: white;
-	padding: 16px;
-	font-size: 16px;
-	border: none;
-}
-
-input[class=name] {
-	margin-left: 10px;
-}
-
-input[class=last] {
-	margin-left: 12px;
-}
-
-input[class=user] {
-	margin-left: 15px;
-}
-
-input[class=pass] {
-	margin-left: 20px;
-}
-
-input[class=city] {
-	margin-left: 59px;
-	margin-top: 10px;
-}
-
-input[class=street] {
-	margin-left: 45px;
-}
-
-input[class=zip] {
-	margin-left: 25px;
-}
-
-.add-div {
-	margin-top: 10px;
-}
-
-.sel-select {
-	margin-top: 15px;
-}
-</style>
 </head>
 <body>
 	<main class="container">
@@ -69,42 +23,41 @@ input[class=zip] {
 			</div>
 		</c:if>
 
-		<form method="post">
-			<section class="jumbotron">
-
-				<div>
+				<div class="jumbotron">
 					<div class="container-fluid">
 						<h3>Update Account</h3>
 					</div>
-					<label>Name:<input class="name" type="text" name="name"
+			<form method="post" onsubmit="passwordValidate()">
+					<label>Name:<input class="form-control" type="text" name="name"
 						required minlength="3" value="${employee.name}"></label>
-				</div>
+				
 				<div>
-					<label>Username:<input class="user" type="text"
-						name="username" required minlength="4"
+					<label>Username:<input class="form-control" type="text"
+						name="username" required 
 						value="${employee.username}"></label>
 				</div>
 				<div>
-					<label>New Password:<input class="pass" type="password"
-						name="password" minlength="4" value=""></label>
+					<label>New Password:<input id="psw" class="form-control" type="password"
+						name="password" onchange="validate()"></label>
+						<div id="feedback" class="invalid-feedback">Password must be at least 4 characters long and include at least one numeric digit.</div>
 				</div>
 				<div>
-					<label>Confirm New Password:<input class="pass"
-						type="password" name="passwordConfirm" minlength="4"></label>
+					<label>Confirm New Password:<input class="form-control"
+						type="password" name="passwordConfirm"></label>
 				</div>
 				<div class="add-div">Address:</div>
 				<div>
-					<label>City:<input class="city" type="text" name="city"
-						required minlength="4" value="${employee.city}"></label>
+					<label>City:<input class="form-control" type="text" name="city"
+						required  value="${employee.city}"></label>
 				</div>
 				<div>
-					<label>Street:<input class="street" type="text"
-						name="streetAddress" required minlength="4"
+					<label>Street:<input class="form-control" type="text"
+						name="streetAddress" required
 						value="${employee.streetAddress}"></label>
 				</div>
 				<div>
-					<label>Zip code:<input class="zip" type="text"
-						name="zipCode" value="${employee.zipCode}" required minlength="4"></label>
+					<label>Zip code:<input class="form-control" type="text"
+						name="zipCode" value="${employee.zipCode}" required></label>
 				</div>
 
 
@@ -133,12 +86,16 @@ input[class=zip] {
 							</c:when>
 						</c:choose>
 					</c:forEach>
-				</select> <label>Enter Current Password:<input class="pass"
+				</select> <label>Enter Current Password:<input class="form-control"
 					type="password" name="current" required></label>
 
 				<button type="submit" class="btn btn-primary">Submit</button>
 		</form>
-
+</div>
 	</main>
+<script src="/script.js"></script>
+    
+
 </body>
 </html>
+

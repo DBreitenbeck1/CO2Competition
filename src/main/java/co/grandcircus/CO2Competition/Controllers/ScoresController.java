@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.stream.Stream;
 
 import javax.servlet.http.HttpSession;
 
@@ -23,6 +22,7 @@ import co.grandcircus.CO2Competition.Objects.Score;
 import co.grandcircus.CO2Competition.Repos.CarpoolRepo;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
+
 
 @Controller
 
@@ -264,7 +264,7 @@ public class ScoresController {
 		//create a new hashmap to store the 'local totals'
 		HashMap<String, Integer> localTotals = new HashMap<String, Integer>();
 		//Define comparator objects
-		ValueComparator vc = new ValueComparator(localTotals);
+//		ValueComparator vc = new ValueComparator(localTotals);
 		
 		// Declare Variables
 		Integer companyTotal = 0;
@@ -289,13 +289,13 @@ public class ScoresController {
 		}
 		
 		//transfer to a new map sorted by scores
-		TreeMap<String, Integer> localTotals2 = new TreeMap<>(vc);
-		localTotals2.putAll(localTotals);
+//		TreeMap<String, Integer> localTotals2 = new TreeMap<>(vc);
+//		localTotals2.putAll(localTotals);
 			
 		
 		// Create ModelAndView and add objects
 		ModelAndView mav = new ModelAndView("scores/weeklyscores");
-		mav.addObject("empscores", localTotals2);
+//		mav.addObject("empscores", localTotals2);
 	//	mav.addObject("scoreboard", scores);
 		mav.addObject("total", companyTotal);
 		return mav;
