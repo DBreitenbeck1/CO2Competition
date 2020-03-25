@@ -1,5 +1,7 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,6 @@ public class LoginController {
 	private EmployeeRepo emRepo;
 	@Autowired
 	private CompanyRepo coRepo;
-
 
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
