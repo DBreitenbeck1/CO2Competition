@@ -70,14 +70,7 @@ input[class=zip] {
 					<label>Company Name:<input class="name" type="text"
 						name="name" required minlength="3"></label>
 				</div>
-				<div>
-					<label>User-name:<input class="user" type="text"
-						name="username" required minlength="4"></label>
-				</div>
-				<div>
-					<label>Password:<input class="pass" type="password"
-						name="password" required minlength="4"></label>
-				</div>
+
 				<div class="add-div">Address:</div>
 				<div>
 					<label>City:<input class="city" type="text" name="city"
