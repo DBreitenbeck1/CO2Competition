@@ -84,9 +84,6 @@ input[class=zip] {
 					<label>Zip code:<input class="zip" type="text"
 						name="zipCode" required minlength="4"></label>
 				</div>
-				<div>
-					<label>Goal:<input class="goal" type="number" name="goal"></label>
-				</div>
 
 
 			</section>
