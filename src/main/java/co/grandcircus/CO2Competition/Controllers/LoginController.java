@@ -1,5 +1,7 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,6 @@ public class LoginController {
 	private EmployeeRepo emRepo;
 	@Autowired
 	private CompanyRepo coRepo;
-
 
 	@RequestMapping("/login")
 	public ModelAndView showLogin() {
@@ -61,12 +62,23 @@ public class LoginController {
 
 		mav.addObject("companies", coRepo.findAll());
 		mav.addObject("vehicleTypes", emRepo.findAllVehicleType());
+
 		return mav;
 	}
 
 	@PostMapping("/register")
 	public ModelAndView submitReg(Employee employee, RedirectAttributes red) {
+		List<Employee> employeeList = emRepo.findByCompanyName(employee.getCompany().getName());
+
+		if (employeeList.size() == 0 || employeeList == null) {
+			employee.setCompanyAdmin(employee.getCompany());
+			Company company = coRepo.getOne(employee.getCompany().getCompanyId());
+			company.setAdmin(employee);
+
+		}
+
 		emRepo.save(employee);
+
 //		coRepo.save(company);
 		red.addFlashAttribute("msg", "Thank you for registering with us, " + employee.getName());
 
@@ -87,13 +99,13 @@ public class LoginController {
 
 		return new ModelAndView("redirect:/login");
 	}
-	
+
 	// Shows form for user to update settings
 	@RequestMapping("/updateuser")
 	public ModelAndView updateUser() {
 		// Get logged in employee
-		Employee employee = (Employee)sesh.getAttribute("employee");
-		
+		Employee employee = (Employee) sesh.getAttribute("employee");
+
 		ModelAndView mav = new ModelAndView("login/employee-update");
 		mav.addObject("companies", coRepo.findAll());
 		mav.addObject("vehicleTypes", emRepo.findAllVehicleType());
@@ -102,14 +114,13 @@ public class LoginController {
 //		Employee user = (Employee) sesh.getAttribute("employee");
 //		Employee admin = user.getCompany().getAdmin();
 //		if (user.getUsername().equals(admin.getUsername())) {
-			mav.addObject("admin", "true");
-			mav.addObject("employeeList", emRepo.findByCompanyName(employee.getCompany().getName()));
+		mav.addObject("admin", "true");
+		mav.addObject("employeeList", emRepo.findByCompanyName(employee.getCompany().getName()));
 //		}
 
-		
 		return mav;
 	}
-	
+
 	// handles admin feature to edit another employee
 	@PostMapping("/updateadmin")
 	public ModelAndView updateAdmin(@RequestParam Long id) {
@@ -122,36 +133,34 @@ public class LoginController {
 //		Employee user = (Employee) sesh.getAttribute("employee");
 //		Employee admin = user.getCompany().getAdmin();
 //		if (user.getUsername().equals(admin.getUsername())) {
-			mav.addObject("admin", "true");
-			mav.addObject("employeeList", emRepo.findByCompanyName(employee.getCompany().getName()));
+		mav.addObject("admin", "true");
+		mav.addObject("employeeList", emRepo.findByCompanyName(employee.getCompany().getName()));
 //		}
 		return mav;
 	}
 
 	// Handles admin change
 	@PostMapping("/newadmin")
-	public ModelAndView newAdmin(@RequestParam("id") Long id,
-			RedirectAttributes redir) {
+	public ModelAndView newAdmin(@RequestParam("id") Long id, RedirectAttributes redir) {
 		Employee newAdmin = emRepo.findById(id).orElse(null);
 		Company company = newAdmin.getCompany();
 //		if (company.setAdmin(newAdmin){
-			redir.addFlashAttribute("message", "Sucessfully changed admin to " + newAdmin.getName());
-			redir.addFlashAttribute("messageType", "success");
+		redir.addFlashAttribute("message", "Sucessfully changed admin to " + newAdmin.getName());
+		redir.addFlashAttribute("messageType", "success");
 //		} else {
 //			redir.addFlashAttribute("message", "An error has ocurred, please try again.");
 //			redir.addFlashAttribute("messageType", "warning");
 //		}
-			
+
 		return new ModelAndView("redirect:/updateuser");
 	}
-	
+
 	// Handles post request and redirects with appropriate message
 	// if passwords do not match, if current password does not match,
 	// or if user was successfully updated
 	@PostMapping("/updateuser")
 	public ModelAndView submitUpdateUser(@RequestParam String current,
-			@RequestParam(required = false) String passwordConfirm,
-			Employee updatedEmployee,
+			@RequestParam(required = false) String passwordConfirm, Employee updatedEmployee,
 			RedirectAttributes redir) {
 		Employee employee = (Employee) sesh.getAttribute("employee");
 		// if password matches
@@ -171,15 +180,9 @@ public class LoginController {
 		}
 
 		// update
-		emRepo.update(
-				updatedEmployee.getCity(), 
-				updatedEmployee.getName(), 
-				updatedEmployee.getPassword(), 
-				updatedEmployee.getStreetAddress(), 
-				updatedEmployee.getUsername(), 
-				updatedEmployee.getZipCode(), 
-				updatedEmployee.getCompany().getCompanyId(), 
-				updatedEmployee.getVehicleType(),
+		emRepo.update(updatedEmployee.getCity(), updatedEmployee.getName(), updatedEmployee.getPassword(),
+				updatedEmployee.getStreetAddress(), updatedEmployee.getUsername(), updatedEmployee.getZipCode(),
+				updatedEmployee.getCompany().getCompanyId(), updatedEmployee.getVehicleType(),
 				updatedEmployee.getEmployeeId());
 		sesh.removeAttribute("employee");
 		sesh.setAttribute("employee", updatedEmployee);
