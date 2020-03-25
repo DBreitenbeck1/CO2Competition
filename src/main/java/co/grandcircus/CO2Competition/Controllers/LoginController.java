@@ -90,12 +90,60 @@ public class LoginController {
 	// Shows form for user to update settings
 	@RequestMapping("/updateuser")
 	public ModelAndView updateUser() {
+		// Get logged in employee
+		Employee employee = (Employee)sesh.getAttribute("employee");
+		
 		ModelAndView mav = new ModelAndView("login/employee-update");
 		mav.addObject("companies", coRepo.findAll());
 		mav.addObject("vehicleTypes", emRepo.findAllVehicleType());
+
+		// CHECK IF USER IS ADMIN
+//		Employee user = (Employee) sesh.getAttribute("employee");
+//		Employee admin = user.getCompany().getAdmin();
+//		if (user.getUsername().equals(admin.getUsername())) {
+			mav.addObject("admin", "true");
+			mav.addObject("employeeList", emRepo.findByCompanyName(employee.getCompany().getName()));
+//		}
+
+		
+		return mav;
+	}
+	
+	// handles admin feature to edit another employee
+	@PostMapping("/updateadmin")
+	public ModelAndView updateAdmin(@RequestParam Long id) {
+		ModelAndView mav = new ModelAndView("login/employee-update");
+		Employee employee = emRepo.findById(id).orElse(null);
+		mav.addObject("employee", employee);
+		mav.addObject("companies", coRepo.findAll());
+		mav.addObject("vehicleTypes", emRepo.findAllVehicleType());
+		// CHECK IF USER IS ADMIN
+//		Employee user = (Employee) sesh.getAttribute("employee");
+//		Employee admin = user.getCompany().getAdmin();
+//		if (user.getUsername().equals(admin.getUsername())) {
+			mav.addObject("admin", "true");
+			mav.addObject("employeeList", emRepo.findByCompanyName(employee.getCompany().getName()));
+//		}
 		return mav;
 	}
 
+	// Handles admin change
+	@PostMapping("/newadmin")
+	public ModelAndView newAdmin(@RequestParam("id") Long id,
+			RedirectAttributes redir) {
+		Employee newAdmin = emRepo.findById(id).orElse(null);
+		Company company = newAdmin.getCompany();
+//		if (company.setAdmin(newAdmin){
+			redir.addFlashAttribute("message", "Sucessfully changed admin to " + newAdmin.getName());
+			redir.addFlashAttribute("messageType", "success");
+//		} else {
+//			redir.addFlashAttribute("message", "An error has ocurred, please try again.");
+//			redir.addFlashAttribute("messageType", "warning");
+//		}
+			
+		return new ModelAndView("redirect:/updateuser");
+	}
+	
 	// Handles post request and redirects with appropriate message
 	// if passwords do not match, if current password does not match,
 	// or if user was successfully updated
@@ -131,7 +179,7 @@ public class LoginController {
 				updatedEmployee.getZipCode(), 
 				updatedEmployee.getCompany().getCompanyId(), 
 				updatedEmployee.getVehicleType(),
-				employee.getEmployeeId());
+				updatedEmployee.getEmployeeId());
 		sesh.removeAttribute("employee");
 		sesh.setAttribute("employee", updatedEmployee);
 		// redirect

@@ -23,23 +23,24 @@
 			</div>
 		</c:if>
 
-				<div class="jumbotron">
-					<div class="container-fluid">
-						<h3>Update Account</h3>
-					</div>
-			<form method="post" onsubmit="passwordValidate()">
-					<label>Name:<input class="form-control" type="text" name="name"
-						required minlength="3" value="${employee.name}"></label>
-				
+		<div class="jumbotron">
+			<div class="container-fluid">
+				<h3>Update Account</h3>
+			</div>
+			<form method="post" onsubmit="passwordValidate()" action="/updateuser">
+				<input type="hidden" name="id" value="${employee.employeeId}">
+				<label>Name:<input class="form-control" type="text"
+					name="name" required minlength="3" value="${employee.name}"></label>
+
 				<div>
 					<label>Username:<input class="form-control" type="text"
-						name="username" required 
-						value="${employee.username}"></label>
+						name="username" required value="${employee.username}"></label>
 				</div>
 				<div>
-					<label>New Password:<input id="psw" class="form-control" type="password"
-						name="password" onchange="validate()"></label>
-						<div id="feedback" class="invalid-feedback">Password must be at least 4 characters long and include at least one numeric digit.</div>
+					<label>New Password:<input id="psw" class="form-control"
+						type="password" name="password" onchange="validate()"></label>
+					<div id="feedback" class="invalid-feedback">Password must be
+						at least 4 characters long and include at least one numeric digit.</div>
 				</div>
 				<div>
 					<label>Confirm New Password:<input class="form-control"
@@ -47,13 +48,12 @@
 				</div>
 				<div class="add-div">Address:</div>
 				<div>
-					<label>City:<input class="form-control" type="text" name="city"
-						required  value="${employee.city}"></label>
+					<label>City:<input class="form-control" type="text"
+						name="city" required value="${employee.city}"></label>
 				</div>
 				<div>
 					<label>Street:<input class="form-control" type="text"
-						name="streetAddress" required
-						value="${employee.streetAddress}"></label>
+						name="streetAddress" required value="${employee.streetAddress}"></label>
 				</div>
 				<div>
 					<label>Zip code:<input class="form-control" type="text"
@@ -90,11 +90,46 @@
 					type="password" name="current" required></label>
 
 				<button type="submit" class="btn btn-primary">Submit</button>
-		</form>
-</div>
+			</form>
+		</div>
+		<c:if test="${admin ne null}">
+			<div class="container-fluid">
+				<h3>Admin Access Panel</h3>
+				<!-- Dropdown of employees to edit -->
+				<h4>Select an Employee to Edit</h4>
+				<form method="post" action="/updateadmin">
+
+					<label for="employee">Employee</label> <select class="form-control"
+						name="id" required>
+						<c:forEach items="${employeeList}" var="e">
+							<option value="${e.employeeId}">${e.name}</option>
+						</c:forEach>
+					</select>
+				<button type="submit" class="btn btn-primary">Edit</button>
+
+				</form>
+				<!-- Dropdown of employees to pass admin access to -->
+				<h4>Select a new Admin</h4>
+				<div class="alert alert-danger">
+				<strong>THIS WILL REMOVE YOU AS ADMIN</strong>
+				</div>
+				<form method="post" action="/newadmin">
+					<label for="employee">Employee</label> <select class="form-control"
+						name="id" required>
+						<c:forEach items="${employeeList}" var="e">
+							<option value="${e.employeeId}">${e.name}</option>
+						</c:forEach>
+					</select>
+				<button type="submit" class="btn btn-danger">CHANGE ADMIN</button>
+
+				</form>
+								
+
+			</div>
+		</c:if>
 	</main>
-<script src="/script.js"></script>
-    
+	<script src="/script.js"></script>
+
 
 </body>
 </html>
