@@ -41,7 +41,7 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 			@Param("vehicleType") String vehicleType,
 			@Param("employeeId") Long employeeId
 			);
-	
+
 	@Query(value="SELECT vehicleType FROM Employee")
 	Set<String> findAllVehicleType();
 	

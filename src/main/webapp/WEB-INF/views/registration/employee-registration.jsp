@@ -33,10 +33,13 @@
 						name="username" required></label>
 				</div>
 				<div>
-					<label>Password:<input id="psw" class="form-control" type="password"
-						name="password" onchange="validate()" required></label>
-						<div id="feedback" class="invalid-feedback">Password must be at least 4 characters long and include at least one numeric digit.</div>
+					<label>Password:<input id="psw" class="form-control"
+						type="password" name="password" onchange="validate()" required></label>
+					<div id="feedback" class="invalid-feedback">Password must be
+						at least 4 characters long and include at least one numeric digit.</div>
 				</div>
+				
+				
 				<div class="add-div">Address:</div>
 				<div>
 					<label>City:<input class="form-control" type="text"
@@ -64,6 +67,17 @@
 					</c:forEach>
 				</select>
 			</section>
+			<div>
+
+
+
+
+				<input type="hidden" name="admin" value="0">
+
+
+			</div>
+
+
 
 			<button type="submit" class="btn btn-primary">Submit</button>
 		</form>

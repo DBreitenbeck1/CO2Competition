@@ -20,33 +20,35 @@
 
 		<section class="jumbotron">
 
-			<h2>About Application</h2>
+			<h2>About the Application</h2>
 			<p align="justify">Whether cutting your carbon footprint or simply saving on gas,
 				carpooling is a practice that more and more companies are trying to
-				encourage in their employees. It is simple, its efficient, and it
-				does not cost your company a cent.So how do we encourage employees to
-				start pooling their resources? By making it simple, easy, and fun.
-				The Green on the Go app accomplishes this through an easy-to-use
+				encourage in their employees. It's simple, it's efficient, and it
+				doesn't cost your company a cent. </p>
+				<p>So how do we encourage employees to start pooling their resources? 
+				By making it simple, easy, and fun.</p>
+				<p>The Green on the Go app provides a user-friendly
 				interface that allows you the employee to both find potential
-				carpools and keep track of how much carbon you have saved by doing
-				so.Drawing from the Google Maps API, the app gives you the
-				opportunity to find out who among your fellow employees lives in
+				carpools and to keep track of how much carbon you are saving. 
+				Drawing from the Google Maps API, the app gives you the
+				opportunity to find out which of your fellow employees live in
 				your area and might like to carpool. Once you make the request for a
 				specific date and time, the carpool is logged into the attached SQL
-				database. The app then calculates the amount of carbon that you will
+				database and the app calculates the amount of carbon that you will
 				be saving that trip according to distance travelled and the kind of
-				car you drive, and the resulting tally of saved emissions goes into
-				the score of everyone in that carpool.Once you start carpooling,
+				car you drive. The resulting tally of saved emissions is then added to
+				the score of everyone in that carpool. <p>Once you start carpooling,
 				your progress goes up on the company board, and then the race is on
-				to see who can rack up the highest score per week or per month or
-				all time. The more you carpool, the more you will be encouraged to
-				carpool, and the more you will save in both gas and emissions.And
-				not only does the app track emissions by employee, but also tracks
+				to see who can rack up the highest score per week, per month, or
+				all time. The more you carpool, the more you're encouraged to
+				carpool, and the more you will save in both gas and emissions.</p>
+				<p>Not only does the app track emissions by employee, it also tracks
 				how much the company as a whole is saving by aggregating the
 				employee scores. The results are displayed on the score board of
 				participating companies, allowing employers to compete for the
-				ability to saythat their employees have cut their emissions more
-				than any of their rivals.Simple, easy, and fun means bigger gains
+				ability to say that their employees have cut their emissions more
+				than any of their rivals. </p>
+				<p>Simple, easy, and fun means bigger gains
 				for your company and cleaner air for everyone.</p>
 				
 		</section>

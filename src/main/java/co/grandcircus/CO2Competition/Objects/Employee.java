@@ -39,29 +39,10 @@ public class Employee implements Serializable {
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Carpool> carpool;
 	
-	@OneToOne
-	private Company companyAdmin;
-	
-	public Company getCompanyAdmin() {
-		return companyAdmin;
-	}
-
-	public void setCompanyAdmin(Company companyAdmin) {
-		this.companyAdmin = companyAdmin;
-	}
-
 	//Boolean for easily checking if the employee is the company admin or not
 	public Boolean isAdmin() {
-		Boolean isAdmin;
-		if(this.getCompany().getAdmin()!=null && this.getCompany().getAdmin().equals(this)){
-			isAdmin=true;
-		} else {
-			isAdmin=false;
-		}
-		return isAdmin;
+		return getCompany().getAdmin().getUsername().equals(getUsername());
 	}
-	
-	
 	
 	public void addToScore(int add) {
 		this.score +=add;

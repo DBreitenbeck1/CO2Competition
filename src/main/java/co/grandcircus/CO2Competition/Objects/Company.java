@@ -14,7 +14,8 @@ import javax.persistence.OneToOne;
 
 public class Company implements Serializable {
 
-	// Serializable attribute - Allows user to stay logged in when server refreshes -- Sam
+	// Serializable attribute - Allows user to stay logged in when server refreshes
+	// -- Sam
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -24,37 +25,16 @@ public class Company implements Serializable {
 	private String name;
 	private String streetAddress;
 	private String city;
-	private String username;
-	private String password;
-	
+
 	@OneToOne
 	private Employee admin;
-	
+
 	public Employee getAdmin() {
 		return admin;
 	}
 
 	public void setAdmin(Employee admin) {
 		this.admin = admin;
-	}
-
-
-	
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public Integer getGoal() {
@@ -190,9 +170,8 @@ public class Company implements Serializable {
 	@Override
 	public String toString() {
 		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", username=" + username + ", password=" + password + ", zipCode=" + zipCode + ", goal=" + goal
-				+ ", employees=" + employees + ", carpool=" + carpool + "]";
+				+ city + ", admin=" + admin + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees
+				+ ", carpool=" + carpool + "]";
 	}
-
 
 }

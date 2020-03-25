@@ -90,7 +90,7 @@ public class CarpoolController {
 		Company company = coRepo.findByName(employee.getCompany().getName());
 
 		// Get distances to compare and calculate CO2 Savings and points earned
-		Double savings = coCal.calculateDifference(employee.getAddress(), passenger.getAddress(), company.getAddress());
+		Double savings = coCal.calculateDifference(employee, passenger);
 		// User scores 1 pt for 0.10 lbs/CO2 Saved
 		Integer score = (int)(savings * 10);
 		
