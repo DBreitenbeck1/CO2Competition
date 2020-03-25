@@ -43,5 +43,29 @@ input[class=zip] {
 	margin-top: 15px;
 }
 
+.score-div {
+	margin-left: 100px;
+	margin-top: 40px;
+}
 
+.table-t {
+	font-size: larger;
+}
 
+.index-img {
+	border: 0px solid #ddd;
+	border-radius: 0px;
+	padding: 5px;
+	width: 548px;
+	margin-left: 850px;
+	margin-top: -32%;
+	opacity: 0.8;
+}
+
+.btn-div {
+	margin-left: 343px;
+	margin-top: 20px;
+}
+button[id=btn-login] {
+	width: 20%;
+}

@@ -1,4 +1,16 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+  <meta name="viewport" content="width=device-width" />
+  <title>Index</title>
+  <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+  <script src="~/Scripts/jquery-2.1.4.min.js"></script>
+  <script src="~/Scripts/bootstrap.min.js"></script>
+</head>
+
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div id="nav-text">
 		<div>

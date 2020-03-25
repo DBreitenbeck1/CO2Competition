@@ -6,18 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<%@ include file="../partials/header.jsp"%>
-
-<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 
 <link
-	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/cerulean/bootstrap.min.css"
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
 	rel="stylesheet"
-	integrity="sha384-LV/SIoc08vbV9CCeAwiz7RJZMI5YntsH8rGov0Y2nysmepqMWVvJqds6y0RaxIXT"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
-<link href='https://fonts.googleapis.com/css?family=Merienda'
-	rel='stylesheet'>
-<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="/style.css" />
+<%@ include file="../partials/header.jsp"%>
 <title>CO2 Competition</title>
 <style>
 .carpool-div {
@@ -26,48 +23,19 @@
 	font-weight: bold;
 }
 
-<
-title>CO2 Competition </title> <style>.carpool-div {
+<title>CO2 Competition </title> <style>.carpool-div {
 	margin-top: 150px;
 	margin-left: 100px;
 	font-weight: bold;
 }
 
-h1 {
-	font-family: 'Merienda';
-	font-size: 22px;
-	font-weight: bold;
-	font-size: 50px
-}
 
-body {
-	font-family: 'Merienda';
-	font-size: 22px;
-	font-weight: bold;
-}
 
-img {
-	border: 0px solid #ddd;
-	border-radius: 0px;
-	padding: 5px;
-	width: 548px;
-	margin-left: 970px;
-	margin-top: -520px;
-	opacity: 0.8;
-}
 
-.btn-div {
-	margin-left: 343px;
-	margin-top: 20px;
-}
 
-button {
-	width: 22%;
-}
-.score-div{
-margin-left:100px;
-margin-top:50px;
-}
+
+
+
 </style>
 </head>
 <body>
@@ -83,13 +51,13 @@ margin-top:50px;
 						
 			<c:if test="${employee eq null}">
 				<div class="btn-div">
-					<a href="/login"><button class="btn btn-primary" type="submit">Login</button></a>
+					<a href="/login"><button id="btn-login" class="btn btn-primary" type="submit">Login</button></a>
 				</div>
 			</c:if>
 		</div>
 	<div class="score-div">
 	<h3>Our Top Clients</h3>
-	<table>
+	<table class="table-t">
 	<thead>
   <tr class="table-primary">
     <th>Company</th>
@@ -107,11 +75,9 @@ margin-top:50px;
   </tbody>
 </table>
 
+				<img class="index-img" src="Carpool App Image.png" />
 	
 	</div>
-		<div class="img-div">
-			<img src="Carpool App Image.png" />
-		</div>
 	</section>
 
 </body>
