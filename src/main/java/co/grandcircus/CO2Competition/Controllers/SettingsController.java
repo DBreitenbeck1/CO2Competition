@@ -112,7 +112,7 @@ public class SettingsController {
 		} else {
 			updatedEmployee.setPassword(emRepo.getOne(updatedEmployee.getEmployeeId()).getPassword());
 		}
-		System.out.println(updatedEmployee.getEmployeeId());
+	//	System.out.println(updatedEmployee.getEmployeeId());
 		// update
 		emRepo.update(
 				updatedEmployee.getCity(), 

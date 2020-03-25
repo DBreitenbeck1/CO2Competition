@@ -38,6 +38,8 @@
 					<div id="feedback" class="invalid-feedback">Password must be
 						at least 4 characters long and include at least one numeric digit.</div>
 				</div>
+				
+				
 				<div class="add-div">Address:</div>
 				<div>
 					<label>City:<input class="form-control" type="text"
