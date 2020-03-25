@@ -97,11 +97,11 @@ margin-top:50px;
   </tr>
   </thead>
   <tbody>
-  <c:forEach var="c" items="${com}" varStatus="status">
+  <c:forEach var="c" items="${cc}" >
 
   <tr class="table-primary">
-    <td>${c.name }</td>
-    <td>${em[status.index].score}</td>
+    <td>${c.key}</td>
+    <td>${c.value}</td>
   </tr>
   </c:forEach>
   </tbody>

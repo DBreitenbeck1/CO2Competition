@@ -1,7 +1,9 @@
 package co.grandcircus.CO2Competition.Controllers;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 import javax.servlet.http.HttpSession;
 
@@ -122,20 +124,24 @@ public class IndexController {
 	public ModelAndView showIndex() {
 
 		List<Company> company= coRepo.findAll();
-		List<Score> em = new ArrayList<>();
-		List<Score> co = new ArrayList<>();
-		
-		for(int i =0; i<company.size();i++) {
-			co =emRepo.findScoreByTotalScore(company.get(i).getCompanyId());
-			
-			for (int j=0; j<co.size(); j++){
-            em.add(co.get(j));
-			}
-		}
 
+		HashMap<String, Integer> co = new HashMap <String, Integer>();
+		
+		ValueComparator value = new ValueComparator(co);
+		
+		for(Company c : company) {
+			Integer total=0;
+			
+			for (Employee e : c.getEmployees()){
+				total += e.getScore();
+			}
+			co.put(c.getName(), total);
+		}
+		TreeMap <String,Integer> cc = new TreeMap<>(value);
+		cc.putAll(co);
 		ModelAndView mav = new ModelAndView ("index/index");
-		mav.addObject("com",company);
-		mav.addObject("em",em);
+
+		mav.addObject("cc",cc);
 		return mav;
 	}
 
