@@ -17,7 +17,6 @@
 </head>
 <body>
 	<h1 class="Jumbotron">User Scores:</h1>
-
 	<section class="lead">
 		<table class="text-muted">
 			<thead>
@@ -44,6 +43,5 @@
 		</table>
 
 	</section>
-
 </body>
 </html>

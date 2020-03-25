@@ -14,46 +14,14 @@
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%>
-<style>
 
-input[type=text] {
-	border: 2px solid brown;
-	border-radius: 4px;
-	left: 230px;
-	bottom: 330px;
-	color: black;
-	margin-left: 15px;
-}
-
-input[type=password] {
-	border: 2px solid brown;
-	border-radius: 4px;
-	left: 230px;
-	bottom: 330px;
-	color: black;
-	margin-left: 20px;
-}
-
-.control-label {
-	margin-top: 50px;
-}
-
-.submit-div {
-	margin-top: 30px;
-	margin-left: 16px;
-}
-
-h1 {
-	margin-top: 15px;
-}
-</style>
 </head>
 <body>
 
 	<main class="container">
 		<form method="post">
 			<section class="container">
-				<h1>Welcome to Green on the Go</h1>
+				<h1 class="h1-title">Welcome to Green on the Go</h1>
 			</section>
 			<section class="container-fluid">
 				<c:if test="${message ne null}">
@@ -62,12 +30,12 @@ h1 {
 					</div>
 				</c:if>
 
-				<div>
-					<label class="control-label">Username:<input type="text"
+				<div class="text-div">
+					<label class="control-label">Username:<input id="text-id"type="text"
 						name="username" required></label>
 				</div>
-				<div>
-					<label>Password:<input type="password" name="password"
+				<div class="p-div">
+					<label>Password:<input id="pass-id" type="password" name="password"
 						required></label>
 				</div>
 

@@ -66,6 +66,128 @@ input[class=zip] {
 	margin-left: 343px;
 	margin-top: 20px;
 }
+
+.carpool-div {
+	margin-top: 100px;
+	margin-left: 100px;
+	font-weight: bold;
+}
+
 button[id=btn-login] {
 	width: 20%;
+}
+
+div[id=carpool-table] {
+	margin-top: 100px;
+}
+
+div[class=route-title] {
+	margin-top: 50px;
+	margin-left: 20px;
+}
+
+div[class=user-score] {
+	margin-top: 50px;
+	margin-left: 20px;
+}
+
+div[class=weekly-table] {
+	margin-top: 100px;
+}
+
+div[class=p-routes] {
+	margin-top: 50px;
+	margin-left: 20px;
+}
+
+div[class=p-routes-t] {
+	margin-top: 100px;
+}
+
+button[id=edit-btn] {
+	margin-top: 20px;
+}
+
+button[id=change-btn] {
+	margin-top: 20px;
+	margin-bottom: 30px;
+}
+
+h4[class=s-h] {
+	margin-top: 20px;
+}
+
+div[id=update-t] {
+	margin-bottom: 30px;
+}
+
+div[class=submit-d] {
+	margin-top: 20px;
+}
+
+input[id=text-id] {
+	border: 2px solid brown;
+	border-radius: 4px;
+	left: 230px;
+	bottom: 330px;
+	color: black;
+	margin-left: 15px;
+}
+
+input[id=pass-id] {
+	border: 2px solid brown;
+	border-radius: 4px;
+	left: 230px;
+	bottom: 330px;
+	color: black;
+	margin-left: 20px;
+}
+
+.control-label {
+	margin-top: 50px;
+}
+
+.submit-div {
+	margin-top: 30px;
+	margin-left: 16px;
+}
+
+h1[class=h1-title] {
+	margin-top: 15px;
+}
+
+.home-div {
+	margin-top: -100px;
+	margin-left: 35px;
+}
+
+.work-div {
+	margin-left: 35px;
+	margin-top: 50px;
+}
+
+.date-div {
+	margin-left: 35px;
+	margin-top: 40px;
+}
+
+.time-div {
+	margin-left: 35px;
+	margin-top: 20px;
+}
+
+.pick-div {
+	margin-top: 20px;
+}
+
+button[id=log-c] {
+	margin-top: 20px;
+}
+
+h4[class=h4-s] {
+	margin-bottom: 25px;
+}
+
+input[class=in-bh] {
+	margin-left: 15px;
 }

@@ -19,101 +19,105 @@
 
 </head>
 <body>
+	<div class="user-score">
 
-	<h1 class="Jumbotron">User Scores:</h1>
-<div class ="container"> 
-		<div class="row">
-	<div class="col-4">
-	<h2>All Time</h2>
-	<section class="lead">
-
-		<table class="text-muted">
-			<thead>
-				<tr>
-					<th>User</th>
-					<th>Score</th>
-				</tr>
-			</thead>
-
-			<tbody>
-
-				<c:forEach var="emp" items="${empscoresAT}">
-					<tr class="table-primary">
-						<td>${emp.name}</td>
-						<td>${emp.score}</td>
-					</tr>
-				</c:forEach>
-				<tr class="table-primary">
-					<td><b>Company Total:</b></td>
-					<td><b>${totalAT}</b></td>
-				</tr>
-			</tbody>
-
-		</table>
-
-	</section>
+		<h1 class="Jumbotron">User Scores:</h1>
 	</div>
-	
-	<div class="col-4">
-	<h2>Monthly</h2>
+	<div class="weekly-table">
 
-		<table class="text-muted">
-			<thead>
-				<tr>
-					<th>User</th>
-					<th>Score</th>
-				</tr>
-			</thead>
+		<div class="container">
+			<div class="row">
+				<div class="col-4">
+					<h2>All Time</h2>
+					<section class="lead">
 
-			<tbody>
+						<table class="text-muted">
+							<thead>
+								<tr>
+									<th>User</th>
+									<th>Score</th>
+								</tr>
+							</thead>
 
-				<c:forEach var="emp" items="${empscoresMN}">
-					<tr class="table-primary">
-						<td>${emp.key}</td>
-						<td>${emp.value}</td>
-					</tr>
-				</c:forEach>
-				<tr class="table-primary">
-					<td><b>Company Total:</b></td>
-					<td><b>${totalMN}</b></td>
-				</tr>
-			</tbody>
+							<tbody>
 
-		</table>
+								<c:forEach var="emp" items="${empscoresAT}">
+									<tr class="table-primary">
+										<td>${emp.name}</td>
+										<td>${emp.score}</td>
+									</tr>
+								</c:forEach>
+								<tr class="table-primary">
+									<td><b>Company Total:</b></td>
+									<td><b>${totalAT}</b></td>
+								</tr>
+							</tbody>
 
+						</table>
+
+					</section>
+				</div>
+
+				<div class="col-4">
+					<h2>Monthly</h2>
+
+					<table class="text-muted">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Score</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<c:forEach var="emp" items="${empscoresMN}">
+								<tr class="table-primary">
+									<td>${emp.key}</td>
+									<td>${emp.value}</td>
+								</tr>
+							</c:forEach>
+							<tr class="table-primary">
+								<td><b>Company Total:</b></td>
+								<td><b>${totalMN}</b></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+				</div>
+				<div class="col-4">
+					<h2>Weekly</h2>
+					<table class="text-muted">
+						<thead>
+							<tr>
+								<th>User</th>
+								<th>Score</th>
+							</tr>
+						</thead>
+
+						<tbody>
+
+							<c:forEach var="emp" items="${empscoresWK}">
+								<tr class="table-primary">
+									<td>${emp.key}</td>
+									<td>${emp.value}</td>
+								</tr>
+							</c:forEach>
+							<tr class="table-primary">
+								<td><b>Company Total:</b></td>
+								<td><b>${totalWK}</b></td>
+							</tr>
+						</tbody>
+
+					</table>
+
+
+
+				</div>
+			</div>
+
+		</div>
 	</div>
-	<div class="col-4">
-	<h2>Weekly</h2>
-		<table class="text-muted">
-			<thead>
-				<tr>
-					<th>User</th>
-					<th>Score</th>
-				</tr>
-			</thead>
-
-			<tbody>
-
-				<c:forEach var="emp" items="${empscoresWK}">
-					<tr class="table-primary">
-						<td>${emp.key}</td>
-						<td>${emp.value}</td>
-					</tr>
-				</c:forEach>
-				<tr class="table-primary">
-					<td><b>Company Total:</b></td>
-					<td><b>${totalWK}</b></td>
-				</tr>
-			</tbody>
-
-		</table>
-	
-	
-	
-	</div>
-	</div>
-
-</div>
-	
 </body>
 </html>
