@@ -43,6 +43,7 @@ public class LoginController {
 		}
 
 		sesh.setAttribute("employee", employee);
+//		System.out.println(employee.isAdmin());
 		return new ModelAndView("redirect:/dashboard");
 	}
 

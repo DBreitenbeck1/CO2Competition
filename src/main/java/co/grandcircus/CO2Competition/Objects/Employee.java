@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 @Entity
 
@@ -37,6 +38,29 @@ public class Employee implements Serializable {
 	
 	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	private List<Carpool> carpool;
+	
+	@OneToOne
+	private Company companyAdmin;
+	
+	public Company getCompanyAdmin() {
+		return companyAdmin;
+	}
+
+	public void setCompanyAdmin(Company companyAdmin) {
+		this.companyAdmin = companyAdmin;
+	}
+
+	//Boolean for easily checking if the employee is the company admin or not
+	public Boolean isAdmin() {
+		Boolean isAdmin;
+		if(this.getCompany().getAdmin()!=null && this.getCompany().getAdmin().equals(this)){
+			isAdmin=true;
+		} else {
+			isAdmin=false;
+		}
+		return isAdmin;
+	}
+	
 	
 	
 	public void addToScore(int add) {
