@@ -48,21 +48,12 @@ public class COCalculator {
 		switch (employee.getVehicleType()) {
 		case ("sedan"):
 			CO2Savings = smallCar(distance.getValue());
-			System.out.println("sedan");
-			System.out.println(employee.getVehicleType());
-			System.out.println(CO2Savings);
 			break;
 		case ("suv"):
 			CO2Savings = medCar(distance.getValue());
-		System.out.println("suv");
-		System.out.println(employee.getVehicleType());
-		System.out.println(CO2Savings);
 			break;
 		case ("truck"):
 			CO2Savings = truck(distance.getValue());
-		System.out.println("truck");
-		System.out.println(employee.getVehicleType());
-		System.out.println(CO2Savings);
 			break;
 		}
 

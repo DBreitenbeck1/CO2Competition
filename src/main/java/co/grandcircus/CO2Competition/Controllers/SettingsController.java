@@ -103,7 +103,7 @@ public class SettingsController {
 			redir.addFlashAttribute("messageType", "danger");
 			return new ModelAndView("redirect:/updateuser");
 		}
-		if (!updatedEmployee.getPassword().isBlank() || updatedEmployee.getPassword() == null) {
+		if (!updatedEmployee.getPassword().isEmpty() || updatedEmployee.getPassword() == null) {
 			if (!updatedEmployee.getPassword().equals(passwordConfirm)) {
 				redir.addFlashAttribute("message", "Passwords do not match.");
 				redir.addFlashAttribute("messageType", "warning");
