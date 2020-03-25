@@ -28,13 +28,13 @@
 				<h3>Update Account</h3>
 			</div>
 			<form method="post" onsubmit="passwordValidate()" action="/updateuser">
-				<input type="hidden" name="id" value="${employee.employeeId}">
+				<input type="hidden" name="employeeId" value="${employeeToEdit.employeeId}">
 				<label>Name:<input class="form-control" type="text"
-					name="name" required minlength="3" value="${employee.name}"></label>
+					name="name" required minlength="3" value="${employeeToEdit.name}"></label>
 
 				<div>
 					<label>Username:<input class="form-control" type="text"
-						name="username" required value="${employee.username}"></label>
+						name="username" required value="${employeeToEdit.username}"></label>
 				</div>
 				<div>
 					<label>New Password:<input id="psw" class="form-control"
@@ -49,15 +49,15 @@
 				<div class="add-div">Address:</div>
 				<div>
 					<label>City:<input class="form-control" type="text"
-						name="city" required value="${employee.city}"></label>
+						name="city" required value="${employeeToEdit.city}"></label>
 				</div>
 				<div>
 					<label>Street:<input class="form-control" type="text"
-						name="streetAddress" required value="${employee.streetAddress}"></label>
+						name="streetAddress" required value="${employeeToEdit.streetAddress}"></label>
 				</div>
 				<div>
 					<label>Zip code:<input class="form-control" type="text"
-						name="zipCode" value="${employee.zipCode}" required></label>
+						name="zipCode" value="${employeeToEdit.zipCode}" required></label>
 				</div>
 
 
@@ -66,10 +66,10 @@
 					class="form-control" name="vehicleType" required>
 					<c:forEach items="${vehicleTypes}" var="v">
 						<c:choose>
-							<c:when test="${v eq employee.vehicleType}">
+							<c:when test="${v eq employeeToEdit.vehicleType}">
 								<option value="${v}" selected>${v}</option>
 							</c:when>
-							<c:when test="${v ne employee.vehicleType}">
+							<c:when test="${v ne employeeToEdit.vehicleType}">
 								<option value="${v}">${v}</option>
 							</c:when>
 						</c:choose>
@@ -78,10 +78,10 @@
 					name="company" required>
 					<c:forEach items="${companies}" var="c">
 						<c:choose>
-							<c:when test="${c.name eq employee.company.name}">
+							<c:when test="${c.name eq employeeToEdit.company.name}">
 								<option value="${c.companyId}" selected>${c.name}</option>
 							</c:when>
-							<c:when test="${c.name ne employee.company.name}">
+							<c:when test="${c.name ne employeeToEdit.company.name}">
 								<option value="${c.companyId}">${c.name}</option>
 							</c:when>
 						</c:choose>
