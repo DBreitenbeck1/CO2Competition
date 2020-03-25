@@ -35,7 +35,9 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public ModelAndView submitReg(Employee employee, RedirectAttributes red) {
+	public ModelAndView submitReg(Employee employee, @RequestParam("lastName") String lastName,
+	RedirectAttributes red) {
+		employee.setName(employee.getName() + " " + lastName);
 		emRepo.save(employee);
 //		coRepo.save(company);
 		red.addFlashAttribute("msg", "Thank you for registering with us, " + employee.getName());
