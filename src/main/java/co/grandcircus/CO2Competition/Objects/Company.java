@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 
@@ -25,13 +26,20 @@ public class Company implements Serializable {
 	private String city;
 	private String username;
 	private String password;
-
-	@Override
-	public String toString() {
-		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-				+ city + ", username=" + username + ", password=" + password + ", zipCode=" + zipCode + ", goal=" + goal
-				+ ", employees=" + employees + ", carpool=" + carpool + "]";
+	
+	@OneToOne
+	private Employee admin;
+	
+	public Employee getAdmin() {
+		return admin;
 	}
+
+	public void setAdmin(Employee admin) {
+		this.admin = admin;
+	}
+
+
+	
 
 	public String getUsername() {
 		return username;
@@ -179,12 +187,12 @@ public class Company implements Serializable {
 		this.employees = employees;
 	}
 
-//	@Override
-//	public String toString() {
-//		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
-//				+ city + ", zipCode=" + zipCode + ", goal=" + goal + ", employees=" + employees + ", carpool=" + carpool
-//				+ "]";
-//	}
+	@Override
+	public String toString() {
+		return "Company [companyId=" + companyId + ", name=" + name + ", streetAddress=" + streetAddress + ", city="
+				+ city + ", username=" + username + ", password=" + password + ", zipCode=" + zipCode + ", goal=" + goal
+				+ ", employees=" + employees + ", carpool=" + carpool + "]";
+	}
 
 
 }

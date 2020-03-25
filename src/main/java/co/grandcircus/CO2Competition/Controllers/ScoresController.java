@@ -6,15 +6,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-
 import co.grandcircus.CO2Competition.Objects.Carpool;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
@@ -237,8 +234,6 @@ public class ScoresController {
 		mav.addObject("Total", companyTotal);
 
 		return mav;
-
-//		return new ModelAndView("companyscores", "Score", goalPercent);
 	}
 	
 
@@ -264,7 +259,7 @@ public class ScoresController {
 		//create a new hashmap to store the 'local totals'
 		HashMap<String, Integer> localTotals = new HashMap<String, Integer>();
 		//Define comparator objects
-//		ValueComparator vc = new ValueComparator(localTotals);
+		ValueComparator vc = new ValueComparator(localTotals);
 		
 		// Declare Variables
 		Integer companyTotal = 0;
@@ -289,13 +284,13 @@ public class ScoresController {
 		}
 		
 		//transfer to a new map sorted by scores
-//		TreeMap<String, Integer> localTotals2 = new TreeMap<>(vc);
-//		localTotals2.putAll(localTotals);
+		TreeMap<String, Integer> localTotals2 = new TreeMap<>(vc);
+		localTotals2.putAll(localTotals);
 			
 		
 		// Create ModelAndView and add objects
 		ModelAndView mav = new ModelAndView("scores/weeklyscores");
-//		mav.addObject("empscores", localTotals2);
+		mav.addObject("empscores", localTotals2);
 	//	mav.addObject("scoreboard", scores);
 		mav.addObject("total", companyTotal);
 		return mav;
