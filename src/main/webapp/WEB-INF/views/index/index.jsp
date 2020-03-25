@@ -17,25 +17,12 @@
 <%@ include file="../partials/header.jsp"%>
 <title>CO2 Competition</title>
 <style>
-.carpool-div {
-	margin-top: 100px;
-	margin-left: 100px;
-	font-weight: bold;
-}
-
-<title>CO2 Competition </title> <style>.carpool-div {
+<
+title>CO2 Competition </title> <style>.carpool-div {
 	margin-top: 150px;
 	margin-left: 100px;
 	font-weight: bold;
 }
-
-
-
-
-
-
-
-
 </style>
 </head>
 <body>
@@ -48,36 +35,37 @@
 		<div class="carpool-div">
 			<h1>Make your ride to work</h1>
 			<h1>mean more.</h1>
-						
+
 			<c:if test="${employee eq null}">
 				<div class="btn-div">
-					<a href="/login"><button id="btn-login" class="btn btn-primary" type="submit">Login</button></a>
+					<a href="/login"><button id="btn-login" class="btn btn-primary"
+							type="submit">Login</button></a>
 				</div>
 			</c:if>
 		</div>
-	<div class="score-div">
-	<h3>Our Top Clients</h3>
-	<table class="table-t">
-	<thead>
-  <tr class="table-primary">
-    <th>Company</th>
-    <th>Score</th>
-  </tr>
-  </thead>
-  <tbody>
-  <c:forEach var="c" items="${cc}" >
+		<div class="score-div">
+			<h3>Our Top Clients</h3>
+			<table class="table-t">
+				<thead>
+					<tr class="table-primary">
+						<th>Company</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach var="c" items="${cc}">
 
-  <tr class="table-primary">
-    <td>${c.key}</td>
-    <td>${c.value}</td>
-  </tr>
-  </c:forEach>
-  </tbody>
-</table>
+						<tr class="table-primary">
+							<td>${c.key}</td>
+							<td>${c.value}</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 
-				<img class="index-img" src="Carpool App Image.png" />
-	
-	</div>
+			<img class="index-img" src="Carpool App Image.png" />
+
+		</div>
 	</section>
 
 </body>

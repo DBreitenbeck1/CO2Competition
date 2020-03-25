@@ -34,7 +34,7 @@
 				<li class="nav-item"><a class="nav-link" href="/dashboard">Dashboard</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/routes">Available
-						Routes</a></li>
+						Carpools</a></li>
 				<!--  <li class="nav-item"><a class="nav-link"
 					href="/previous-routes">Previous Routes</a></li>
 				<li class="nav-item">

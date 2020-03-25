@@ -24,9 +24,13 @@
 		</c:if>
 
 		<div class="jumbotron">
-			<div class="container-fluid">
+			<div id="update-t" class="container-fluid">
 				<h3>Update Account</h3>
 			</div>
+			<form method="post" onsubmit="passwordValidate()"
+				action="/updateuser">
+
+				<input type="hidden" name="id" value="${employee.employeeId}">
 			<form method="post" onsubmit="passwordValidate()" action="/updateuser">
 				<input type="hidden" name="employeeId" value="${employeeToEdit.employeeId}">
 				<label>Name:<input class="form-control" type="text"
@@ -88,8 +92,9 @@
 					</c:forEach>
 				</select> <label>Enter Current Password:<input class="form-control"
 					type="password" name="current" required></label>
-
+<div class="submit-d">
 				<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
 			</form>
 		</div>
 		<c:if test="${admin ne null}">
@@ -105,13 +110,13 @@
 							<option value="${e.employeeId}">${e.name}</option>
 						</c:forEach>
 					</select>
-				<button type="submit" class="btn btn-primary">Edit</button>
+					<button id="edit-btn" type="submit" class="btn btn-primary">Edit</button>
 
 				</form>
 				<!-- Dropdown of employees to pass admin access to -->
-				<h4>Select a new Admin</h4>
+				<h4 class="s-h">Select a new Admin</h4>
 				<div class="alert alert-danger">
-				<strong>THIS WILL REMOVE YOU AS ADMIN</strong>
+					<strong>THIS WILL REMOVE YOU AS ADMIN</strong>
 				</div>
 				<form method="post" action="/newadmin">
 					<label for="employee">Employee</label> <select class="form-control"
@@ -122,11 +127,13 @@
 					</select>
 					<label>Enter Current Password:<input class="form-control"
 					type="password" name="current" required></label>
+					<div>
+					<button id="change-btn" type="submit" class="btn btn-danger">CHANGE
+						ADMIN</button>
+					</div>
 					
-				<button type="submit" class="btn btn-danger">CHANGE ADMIN</button>
 
 				</form>
-								
 
 			</div>
 		</c:if>

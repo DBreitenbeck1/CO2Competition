@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-    
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,15 +19,17 @@
 
 </head>
 <body>
-<main class="container">
-<form action="/employee/${id }">
-<section class="jumbotron">
+	<main class="container">
+		<form action="/employee/${id }">
+			<section class="jumbotron">
 
-<h4>Your carpool request successfully submitted</h4>
-<h5>${name} will carpool with you on ${date} at ${time} to take you to ${destination}</h5>
-<h5>This will save ${saved} lbs of CO2 and earn you ${score} points!</h5>
-</section>
-</form>
-</main>
+				<h4 class="h4-s">Your carpool request successfully submitted</h4>
+				<h5>${name}will carpool with you on ${date} at ${time} to take
+					you to ${destination}</h5>
+				<h5>This will save ${saved} lbs of CO2 and earn you ${score}
+					points!</h5>
+			</section>
+		</form>
+	</main>
 </body>
 </html>

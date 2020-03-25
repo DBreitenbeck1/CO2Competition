@@ -17,25 +17,6 @@
 
 
 <style>
-.home-div {
-	margin-top: -100px;
-	margin-left: 35px;
-}
-
-.work-div {
-	margin-left: 35px;
-	margin-top: 50px;
-}
-
-.date-div {
-	margin-left: 35px;
-	margin-top: 40px;
-}
-
-.time-div {
-	margin-left: 35px;
-	margin-top: 20px;
-}
 </style>
 </head>
 <body>
@@ -58,14 +39,15 @@
 						${employee.zipCode}</div>
 				</c:if>
 
-				<div>
+				<div class="pick-div">
 					Select pickup date: <input type="date" name="date" required />
 				</div>
-				<div>
+				<div class="pick-div">
 					Select pickup time: <input type="time" name="time" required />
 				</div>
 				<input type="hidden" value="${username}" name="username">
-				<button class="btn btn-primary" type="submit">Log Carpool</button>
+				<button id="log-c" class="btn btn-primary" type="submit">Log
+					Carpool</button>
 			</form>
 		</section>
 	</main>

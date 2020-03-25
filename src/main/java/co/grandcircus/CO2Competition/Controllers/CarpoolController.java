@@ -2,15 +2,14 @@ package co.grandcircus.CO2Competition.Controllers;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -189,6 +188,18 @@ public class CarpoolController {
 		
 		return mav;
 	}
-	
+	@RequestMapping("/cancel/{id}")
+	public ModelAndView showCancel(@PathVariable("id") Long carpool) {
+		Carpool c = carRepo.findById(carpool).orElse(null);
+		for (Employee e: c.getEmployees()) {
+			e.getCarpool().remove(c);
+			emRepo.save(e);
+		}
+		
+		carRepo.save(c);
+		carRepo.delete(c);
+
+		return new ModelAndView("redirect:/previous-routes");
+	}
 
 }
