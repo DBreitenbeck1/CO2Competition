@@ -128,7 +128,7 @@ public class CarpoolController {
 				passenger.getName() + " will carpool with you on " +
 				date + " at " + time + " to take you to " +
 				company.getName() + ".</p><p>This will save " +
-				savings + " lbs of CO2 and earn you " +
+				savings + " lbs of CO2 and earn you each " +
 				userScore + " points!</p>";
 		redir.addFlashAttribute("message", message);
 		redir.addFlashAttribute("messageType", "success");
