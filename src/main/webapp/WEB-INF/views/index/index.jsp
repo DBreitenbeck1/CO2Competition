@@ -49,6 +49,7 @@ title>CO2 Competition </title> <style>.carpool-div {
 				</div>
 			</c:if>
 		</div>
+
 		<div class="score-div">
 			<h3>Our Top Clients</h3>
 			<table class="table-t">
@@ -59,7 +60,7 @@ title>CO2 Competition </title> <style>.carpool-div {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="c" items="${cc}">
+					<c:forEach var="c" items="${cc}" end ="9">
 
 						<tr class="table-primary">
 							<td>${c.key}</td>
@@ -68,6 +69,7 @@ title>CO2 Competition </title> <style>.carpool-div {
 					</c:forEach>
 				</tbody>
 			</table>
+
 
 			<img class="index-img" src="Carpool App Image.png" />
 

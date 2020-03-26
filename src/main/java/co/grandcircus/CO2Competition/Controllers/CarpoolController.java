@@ -84,13 +84,17 @@ public class CarpoolController {
 			@RequestParam String time) {
 		// Creates list of carpoolers and adds current user and selected carpooler
 		Employee tester = (Employee) sesh.getAttribute("employee");
+		
 		Employee employee = emRepo.findByUsernameIgnoreCase(tester.getUsername());
 		Employee passenger = emRepo.findByUsernameIgnoreCase(username);
+		
 		List<Employee> poolers = Arrays.asList(employee, passenger);
 		Company company = coRepo.findByName(employee.getCompany().getName());
 
 		// Get distances to compare and calculate CO2 Savings and points earned
 		Double savings = coCal.calculateDifference(employee, passenger);
+		
+		
 		// User scores 1 pt for 0.10 lbs/CO2 Saved
 		Integer score = (int)(savings * 10);
 		
