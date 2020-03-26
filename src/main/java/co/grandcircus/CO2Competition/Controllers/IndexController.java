@@ -13,14 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
-import co.grandcircus.CO2Competition.Entities.Distance;
-import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Carpool;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;

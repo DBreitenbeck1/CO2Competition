@@ -32,17 +32,17 @@
 				</c:if>
 
 				<div class="text-div">
-					<label class="control-label">Username:<input id="text-id"type="text"
+					<label class="control-label">Username:<input class="form-control" type="text"
 						name="username" required></label>
 				</div>
 				<div class="p-div">
-					<label>Password:<input id="pass-id" type="password" name="password"
+					<label>Password:<input class="form-control" type="password" name="password"
 						required></label>
 				</div>
 
 			</section>
 			<div class="submit-div">
-				<button type="submit" class="btn btn-primary">Login</button>
+				<button type="submit" class="btn btn-success">Login</button>
 			</div>
 		</form>
 

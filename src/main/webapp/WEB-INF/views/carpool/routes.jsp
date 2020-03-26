@@ -26,7 +26,8 @@
 
 		<h4>Click on the distance to see the map</h4>
 	</div>
-	<div id="carpool-table">
+	<div id="table px-auto">
+		<hr class="my-4">
 
 		<div class="container">
 			<div class="row">
@@ -50,14 +51,13 @@
 					<div class="col">${emp.name}</div>
 					<div class="col">${emp.address}</div>
 					<div class="col">
-						<a href="#"
+						<a href="#" class="nav-link text-success"
 							onClick="window.open('https://www.google.com/maps/dir/${emp.address}/${company.address}/', '_blank', 'width=900%,height=500%')">
 							${distanceC [empLoop.index].text}</a>
-						</td>
 					</div>
 
 					<div class="col">
-						<a href="#"
+						<a href="#" class="nav-link text-success"
 							onClick="window.open('https://www.google.com/maps/dir/${emp.address}/${employ.address}/', '_blank', 'width=900%,height=500%')">
 							${distanceY[empLoop.index].text}</a>
 					</div>
@@ -67,8 +67,8 @@
 							<input type="hidden" value="${distanceC[empLoop.index].value}"
 								name="distanceFromCom"> <input type="hidden"
 								value="${distanceY[empLoop.index].value}" name="distanceFromYou">
-							<input type="submit" name="method" value="To Work"> <input
-								class="in-bh" type="submit" name="method" value="Back Home">
+							<input type="submit" class=" btn btn-success mx-auto" name="method" value="To Work"> <input
+								class="in-bh btn btn-success mx-auto" type="submit" name="method" value="Back Home">
 						</form>
 					</div>
 				</div>
