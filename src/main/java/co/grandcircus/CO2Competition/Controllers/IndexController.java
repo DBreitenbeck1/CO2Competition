@@ -154,9 +154,15 @@ public class IndexController {
 
 	@RequestMapping("/dashboard")
 	public ModelAndView showDesk() {
+		Employee employee = new Employee();
+		try {
 		Employee user = (Employee) sesh.getAttribute("employee");
+		employee = emRepo.findByUsernameIgnoreCase(user.getUsername());
+		} catch (Exception e) {
+			System.out.println("Please Login");
+			return new ModelAndView("redirect:/login/login");
+		}
 		
-		Employee employee = emRepo.findByUsernameIgnoreCase(user.getUsername());
 		
 		//defines current date
 				LocalDate now = LocalDate.now();

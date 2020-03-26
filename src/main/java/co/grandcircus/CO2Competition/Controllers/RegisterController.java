@@ -32,7 +32,7 @@ public class RegisterController {
 	private ApiService apiServe;
 
 	@RequestMapping("/register")
-	public ModelAndView showReg(Company company, Employee employee) {
+	public ModelAndView showReg(Company company) {
 		ModelAndView mav = new ModelAndView("registration/employee-registration");
 
 		mav.addObject("companies", coRepo.findAll());
