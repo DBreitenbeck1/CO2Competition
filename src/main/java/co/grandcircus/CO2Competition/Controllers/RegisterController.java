@@ -56,7 +56,8 @@ public class RegisterController {
 		Distance dist = apiServe.getDistance(result);
 		if (dist == null) {
 			ModelAndView mav = new ModelAndView("redirect:/register");
-			red.addFlashAttribute("valid", "Invalid Address");
+			red.addFlashAttribute("message", "Invalid Address");
+			red.addFlashAttribute("messageType", "danger");
 			return mav;
 		}else {
 		
@@ -75,12 +76,24 @@ public class RegisterController {
 
 	@PostMapping("/registercompany")
 	public ModelAndView submitCompany(Company company, RedirectAttributes red) {
+	
+		Company com = coRepo.findAll().get(0);
+		SearchResult result = apiServe.getResult(company.getAddress(), com.getAddress());
+		Distance dist = apiServe.getDistance(result);
+		if (dist == null) {
+			ModelAndView mav = new ModelAndView("redirect:/registercompany");
+			red.addFlashAttribute("message", "Invalid Address");
+			red.addFlashAttribute("messageType", "danger");
+			return mav;
+		} else {
 		coRepo.save(company);
-//		coRepo.save(company);
+
 		red.addFlashAttribute("msg", "Enjoy your day, " + company.getName());
 
 		return new ModelAndView("redirect:/login");
+		}
 	}
+		
 	
 
 }

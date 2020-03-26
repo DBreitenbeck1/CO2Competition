@@ -27,7 +27,6 @@
 			
 		<form method="post" onsubmit="passwordValidate()">
 			<section class="jumbotron">
-		<h4 style="color:red;">${valid }</h4>
 				<div>
 					<label>First Name:<input class="form-control" type="text"
 						name="name" required minlength="3"></label>

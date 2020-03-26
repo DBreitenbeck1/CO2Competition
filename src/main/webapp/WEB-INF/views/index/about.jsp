@@ -75,11 +75,18 @@
 								years and views coding as a further opportunity to create the
 								kind of elegant, high quality work that he sees a need for in
 								the world. He finds that the two disciplines demand many of the
+								<p class="card-text">
+								<h6></h6>
+								My name is David Breitenbeck. I have spent several years as a Professional Writer and have
+								now decided to add coding to my arsenal of skills.
+								 I view coding as a further opportunity to create the
+								kind of elegant, high quality work that I seen a need for in
+								this world of ours. I find that these two disciplines demand many of the
 								same skills: attention to detail, a clear idea of the end goal,
 								and the ability to see connections in unexpected places.
-								Whatever he does, he strives to be open-minded, curious, and
-								eager to learn, and to maintain high standards for himself and
-								his work.
+								Whatever I do, I strive to be open-minded, curious, and
+								eager to learn, and to maintain high standards for myself and
+								my work.
 								</p>
 							</div>
 							<div class="card-body" >
