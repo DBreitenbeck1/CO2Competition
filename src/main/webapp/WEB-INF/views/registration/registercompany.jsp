@@ -14,6 +14,12 @@
 <link rel="stylesheet" href="/style.css" />
 <meta charset="ISO-8859-1">
 <title>Register a company</title>
+
+		<c:if test="${message ne null}">
+			<div class="alert alert-${messageType}">
+				<strong>${message}</strong>
+			</div>
+			</c:if>
 <style>
 .dropbtn {
 	background-color: #4CAF50;
