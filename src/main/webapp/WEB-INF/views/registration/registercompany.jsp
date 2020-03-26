@@ -67,7 +67,7 @@ input[class=zip] {
 
 	<main class="container">
 
-		<h3>Register a Company</h3>
+		<h3 style="margin-top:20px; margin-bottom:20px">Register a Company</h3>
 
 		<form method="post">
 			<section class="jumbotron">
@@ -77,7 +77,7 @@ input[class=zip] {
 						name="name" required minlength="3"></label>
 				</div>
 
-				<div class="add-div">Address:</div>
+				<div class="add-div" style="margin-top:20px; margin-bottom:20px">Address:</div>
 				<div>
 					<label>Street Address:<input class="form-control" type="text"
 						name="streetAddress" required minlength="4"></label>
