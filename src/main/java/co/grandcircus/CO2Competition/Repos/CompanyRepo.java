@@ -13,14 +13,6 @@ public interface CompanyRepo extends JpaRepository<Company, Long> {
 	Company findByName(String name);
 	
 	Company getOne(Long id);
-	
-	@Transactional
-	@Modifying
-	@Query(value = "UPDATE `CO2_competition`.`company` SET `admin_employee_id` = :adminId "
-			+ "WHERE (`company_id` = :companyId);",
-			nativeQuery = true)
-	void updateAdmin(
-			@Param("adminId") Long adminId,
-			@Param("companyId") Long companyId
-			);
+
 }
+

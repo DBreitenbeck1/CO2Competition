@@ -23,25 +23,6 @@ public interface EmployeeRepo extends JpaRepository<Employee, Long> {
 	
 	List<Employee> findByCompanyName(String name);
 	
-	@Transactional
-	@Modifying
-	@Query(value = "UPDATE `CO2_competition`.`employee` SET `city` = :city, `name` = :name,"
-			+ " `password` = :password, `street_address` = :streetAddress, `username` = :username,"
-			+ " `zip_code` = :zipCode, `company_company_id` = :companyId, `vehicle_type` = :vehicleType "
-			+ "WHERE (`employee_id` = :employeeId);",
-			nativeQuery = true)
-	void update(
-			@Param("city") String city,
-			@Param("name") String name,
-			@Param("password") String password,
-			@Param("streetAddress") String streetAddress,
-			@Param("username") String username,
-			@Param("zipCode") String zipCode,
-			@Param("companyId") Long companyId,
-			@Param("vehicleType") String vehicleType,
-			@Param("employeeId") Long employeeId
-			);
-
 	@Query(value="SELECT vehicleType FROM Employee")
 	Set<String> findAllVehicleType();
 	

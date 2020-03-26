@@ -52,6 +52,7 @@ public class SettingsController {
 		mav.addObject("employeeToEdit", employee);
 		mav.addObject("companies", coRepo.findAll());
 		mav.addObject("vehicleTypes", emRepo.findAllVehicleType());
+
 		// CHECK IF USER IS ADMIN
 		Employee user = (Employee) sesh.getAttribute("employee");
 		if (user.isAdmin()) {
@@ -77,7 +78,8 @@ public class SettingsController {
 		// if password is correct, handle update
 		Employee newAdmin = emRepo.findById(id).orElse(null);
 		Company company = newAdmin.getCompany();
-		coRepo.updateAdmin(id, company.getCompanyId());
+		company.setAdmin(newAdmin);
+		coRepo.save(company);
 		
 		//refreshes session employee
 		sesh.removeAttribute("employee");
@@ -112,20 +114,14 @@ public class SettingsController {
 		} else {
 			updatedEmployee.setPassword(emRepo.getOne(updatedEmployee.getEmployeeId()).getPassword());
 		}
-	//	System.out.println(updatedEmployee.getEmployeeId());
+		
 		// update
-		emRepo.update(
-				updatedEmployee.getCity(), 
-				updatedEmployee.getName(), 
-				updatedEmployee.getPassword(), 
-				updatedEmployee.getStreetAddress(), 
-				updatedEmployee.getUsername(), 
-				updatedEmployee.getZipCode(), 
-				updatedEmployee.getCompany().getCompanyId(), 
-				updatedEmployee.getVehicleType(),
-				updatedEmployee.getEmployeeId());
-//		sesh.removeAttribute("employee");
-//		sesh.setAttribute("employee", updatedEmployee);
+		emRepo.save(updatedEmployee);
+
+		//refreshes session employee
+		sesh.removeAttribute("employee");
+		sesh.setAttribute("employee", emRepo.getOne(employee.getEmployeeId()));
+		
 		// redirect
 		redir.addFlashAttribute("message", "Changes confirmed!");
 		redir.addFlashAttribute("messageType", "success");
