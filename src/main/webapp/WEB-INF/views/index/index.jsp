@@ -17,40 +17,28 @@
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%>
 <title>CO2 Competition</title>
-<style>
-.carpool-div {
-	margin-top: 150px;
-	margin-left: 100px;
-	font-weight: bold;
-}
-</style>
+
 </head>
 <body>
-	<c:if test="${message ne null}">
-		<div class="alert alert-${messageType}">
-			<strong>${message}</strong>
-		</div>
-	</c:if>
-	<section class="carpool">
-		<div class="carpool-div">
-			<h1>Make your ride to work</h1>
-			<h1>mean more.</h1>
+<c:if test="${message ne null}">
+	<div class="alert alert-${messageType}">
+		<strong>${message}</strong>
+	</div>
+</c:if>
 
-			<!-- Fix this make it pretty :D -->
-
-			<c:if test="${employee eq null}">
-				<div class="btn-div">
-					<a href="/login"><button id="btn-login" class="btn btn-primary"
-							type="submit">Login</button></a>
-				</div>
-				<div class="btn-div">
-					<a href="/register"><button id="btn-login"
-							class="btn btn-primary" type="submit">Create account</button></a>
-				</div>
-			</c:if>
-		</div>
-
-		<div class="score-div">
+<div class="container mt-3">
+<div class="row">
+	<div class="col">
+		<h2>Make your ride to work</h2>
+		<h2>mean more.</h2>
+		<!-- Fix this make it pretty :D -->
+		<c:if test="${employee eq null}">
+				<a href="/login"><button id="btn-login" class="btn btn-success"
+						type="submit">Login</button></a>
+				<a href="/register"><button id="btn-login"
+						class="btn btn-success" type="submit">Create account</button></a>
+		</c:if>
+		</div></div><div class="row"><div class="col">
 			<h3>Our Top Clients</h3>
 			<table class="table">
 				<thead>
@@ -68,12 +56,11 @@
 					</c:forEach>
 				</tbody>
 			</table>
-
-
-			<img class="index-img" src="Carpool App Image.png" />
-
-		</div>
-	</section>
-
+	</div>
+	<div class="col">
+		<img class="index-img" src="Carpool App Image.png" />
+	</div>
+	</div>
+</div>
 </body>
 </html>

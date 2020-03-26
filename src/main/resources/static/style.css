@@ -25,13 +25,12 @@
 }
 
 .index-img {
-	border: 0px solid #ddd;
-	border-radius: 0px;
-	padding: 5px;
-	width: 548px;
-	margin-left: 850px;
-	margin-top: -32%;
+	right: 0px;
+	bottom: 0px;
+	position: absolute;
 	opacity: 0.8;
+	max-width: 100%;
+	height: auto;
 }
 
 .btn-div {
