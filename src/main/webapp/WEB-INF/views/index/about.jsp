@@ -70,13 +70,12 @@
 								src="David Breitenbeck.jpeg" alt="David Breitenbeck Headshot">
 							<div class="card-body">
 								<h3 class="card-header">David Breitenbeck</h3>
-								<p class="card-text" align="justify">
+								<p class="card-text" align="justify" style="margin-top:10px">
 								David Breitenbeck has been a Professional Writer for several
 								years and views coding as a further opportunity to create the
 								kind of elegant, high quality work that he sees a need for in
 								the world. He finds that the two disciplines demand many of the
-								<p class="card-text">
-								<h6></h6>
+								<p class="card-text" align="justify">
 								My name is David Breitenbeck. I have spent several years as a Professional Writer and have
 								now decided to add coding to my arsenal of skills.
 								 I view coding as a further opportunity to create the
@@ -107,7 +106,7 @@
 								alt="Card image">
 							<div class="card-body">
 								<h3 class="card-header">Sam Keim</h3>
-								<p class="card-text" align="justify">
+								<p class="card-text" align="justify" style="margin-top:10px">
 								My name is Sam Keim, I am a Java developer and graduate of Grand
 								Circus in Detroit. Before enrolling I was working on an
 								accounting team for an automotive company, developing reports
@@ -140,7 +139,7 @@
 								src="Rana Siroosian.jpg" alt="Card image">
 							<div class="card-body">
 								<h3 class="card-header">Rana Siroosian</h3>
-								<p class="card-text" align="justify">
+								<p class="card-text" align="justify" style="margin-top:10px">
 								My name is Rana Siroosian and I graduated from a technical school overseas where I studied
 								computer science. In addition I studied information technology
 								for two years, but because of the poor education services I
@@ -172,7 +171,7 @@
 								alt="Card image">
 							<div class="card-body">
 								<h3 class="card-header">Kyle Warchuck</h3>
-								<p class="card-text" align="justify">
+								<p class="card-text" align="justify" style="margin-top:10px">
 								My name is Kyle Warchuck, i'm a developer graduating from Grand
 								Circus. Before Grand Circus I took Python classes which fueled
 								my interest in object orientated programming. Grand Circus has
