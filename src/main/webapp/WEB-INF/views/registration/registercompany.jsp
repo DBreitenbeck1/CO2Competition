@@ -14,6 +14,12 @@
 <link rel="stylesheet" href="/style.css" />
 <meta charset="ISO-8859-1">
 <title>Register a company</title>
+
+		<c:if test="${message ne null}">
+			<div class="alert alert-${messageType}">
+				<strong>${message}</strong>
+			</div>
+			</c:if>
 <style>
 .dropbtn {
 	background-color: #4CAF50;
@@ -67,7 +73,7 @@ input[class=zip] {
 
 	<main class="container">
 
-		<h3>Register a Company</h3>
+		<h3 style="margin-top:20px; margin-bottom:20px">Register a Company</h3>
 
 		<form method="post">
 			<section class="jumbotron">
@@ -77,7 +83,7 @@ input[class=zip] {
 						name="name" required minlength="3"></label>
 				</div>
 
-				<div class="add-div">Address:</div>
+				<div class="add-div" style="margin-top:20px; margin-bottom:20px">Address:</div>
 				<div>
 					<label>Street Address:<input class="form-control" type="text"
 						name="streetAddress" required minlength="4"></label>
@@ -92,7 +98,7 @@ input[class=zip] {
 				</div>
 			</section>
 
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" style="margin-bottom:20px">Submit</button>
 		</form>
 
 

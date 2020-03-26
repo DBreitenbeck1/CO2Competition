@@ -23,11 +23,10 @@
 			</div>
 		</c:if>
 	
-		<h3>Register for Green on the Go</h3>
+		<h3 style="margin-top:20px; margin-bottom:20px">Register for Green on the Go</h3>
 			
 		<form method="post" onsubmit="passwordValidate()">
 			<section class="jumbotron">
-		<h4 style="color:red;">${valid }</h4>
 				<div>
 					<label>First Name:<input class="form-control" type="text"
 						name="name" required minlength="3"></label>
@@ -51,7 +50,7 @@
 						type="password" name="passwordConfirm"></label>
 				</div>
 								
-				<div class="add-div">Address:</div>
+				<div class="add-div" style="margin-top:20px; margin-bottom:20px">Address:</div>
 				<div>
 					<label>Street:<input class="form-control" type="text"
 						name="streetAddress" required></label>
@@ -90,7 +89,7 @@
 
 
 
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" style="margin-bottom:20px">Submit</button>
 		</form>
 
 
