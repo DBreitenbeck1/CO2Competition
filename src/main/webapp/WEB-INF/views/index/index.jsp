@@ -25,7 +25,7 @@
 	</div>
 </c:if>
 
-<div class="container mt-3">
+<div class="container p-5">
 <div class="row">
 	<div class="col">
 		<h2>Make your ride to work</h2>
@@ -36,15 +36,18 @@
 						type="submit">Login</button></a>
 				<a href="/register"><button id="btn-login"
 						class="btn btn-success" type="submit">Create account</button></a>
+
 		</c:if>
+		
 		</div></div><div class="row"><div class="col">
+		<hr class="my-4">
 			<h3>Our Top Clients</h3>
 	<div class="container-chart">
 		<canvas id="myChart"></canvas>
 	</div>
 	</div>
-	<div class="col">
-		<img class="index-img" src="Carpool App Image.png" />
+	<div class="col m-2">
+		<img class="index-img" src="Carpool App Image.png"/>
 	</div>
 	</div>
 </div>
