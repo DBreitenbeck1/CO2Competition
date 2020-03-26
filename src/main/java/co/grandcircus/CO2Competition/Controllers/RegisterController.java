@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.grandcircus.CO2Competition.ApiService;
+import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
@@ -24,6 +27,9 @@ public class RegisterController {
 	private EmployeeRepo emRepo;
 	@Autowired
 	private CompanyRepo coRepo;
+	
+	@Autowired
+	private ApiService apiServe;
 
 	@RequestMapping("/register")
 	public ModelAndView showReg(Company company, Employee employee) {
@@ -35,6 +41,7 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
+
 	public ModelAndView submitReg(Employee employee, @RequestParam String lastName,
 			@RequestParam String passwordConfirm,
 			RedirectAttributes red) {
@@ -45,10 +52,19 @@ public class RegisterController {
 			return new ModelAndView("redirect:/register");
 		}
 		employee.setName(employee.getName() + " " + lastName);		
+		SearchResult result = apiServe.getResult(employee.getAddress(), employee.getCompany().getAddress());
+		Distance dist = apiServe.getDistance(result);
+		if (dist == null) {
+			ModelAndView mav = new ModelAndView("redirect:/register");
+			red.addFlashAttribute("valid", "Invalid Address");
+			return mav;
+		}else {
+		
 		emRepo.save(employee);
 		red.addFlashAttribute("message", "Thank you for registering with us, " + employee.getName());
 		red.addFlashAttribute("messageType", "success");
 		return new ModelAndView("redirect:/login");
+		}
 	}
 
 	@RequestMapping("/registercompany")

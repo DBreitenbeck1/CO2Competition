@@ -78,7 +78,7 @@ public class ApiService {
 		String dist;
 		Double distDouble = 0.0;
 		Long distLong = 0L;
-		
+	try {	
 		Route routes = result.getRoutes().get(0);
 		List<Leg> legs = routes.getLegs();
 		for (Leg leg : legs) {
@@ -94,7 +94,12 @@ public class ApiService {
 		distance.setText(dist);
 		distance.setValue(distLong);
 		return distance;
+	} catch (Exception e) {
+		System.out.println("No route found");
+		return null;
 	}
+	}
+	
 	
 	public List<Route> getRoutes(SearchResult result){
 		return result.getRoutes();
