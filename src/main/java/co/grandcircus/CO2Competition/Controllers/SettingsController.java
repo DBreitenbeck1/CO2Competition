@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import co.grandcircus.CO2Competition.ApiService;
+import co.grandcircus.CO2Competition.Entities.Distance;
+import co.grandcircus.CO2Competition.Entities.SearchResult;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
@@ -24,11 +27,14 @@ public class SettingsController {
 	private EmployeeRepo emRepo;
 	@Autowired
 	private CompanyRepo coRepo;
-
+	@Autowired
+	private ApiService apiServe;
+	
 	
 	// Shows form for user to update settings
 	@RequestMapping("/updateuser")
 	public ModelAndView updateUser() {
+		
 		Employee user = (Employee) sesh.getAttribute("employee");
 
 		ModelAndView mav = new ModelAndView("settings/employee-update");
@@ -37,6 +43,7 @@ public class SettingsController {
 		mav.addObject("employeeToEdit", user);
 		
 		// CHECK IF USER IS ADMIN
+	
 		if (user.isAdmin()) {
 			mav.addObject("admin", "true");
 			mav.addObject("employeeList", emRepo.findByCompanyName(user.getCompany().getName()));
@@ -114,10 +121,18 @@ public class SettingsController {
 		} else {
 			updatedEmployee.setPassword(emRepo.getOne(updatedEmployee.getEmployeeId()).getPassword());
 		}
+		SearchResult result = apiServe.getResult(updatedEmployee.getAddress(), employee.getCompany().getAddress());
+		Distance dist = apiServe.getDistance(result);
+		if (dist == null) {
+			ModelAndView mav = new ModelAndView("redirect:/updateuser");
+			redir.addFlashAttribute("message", "Invalid Address");
+			redir.addFlashAttribute("messageType", "warning");
+			return mav;
+		}else {
 		
 		// update
 		emRepo.save(updatedEmployee);
-
+	
 		//refreshes session employee
 		sesh.removeAttribute("employee");
 		sesh.setAttribute("employee", emRepo.getOne(employee.getEmployeeId()));
@@ -126,6 +141,7 @@ public class SettingsController {
 		redir.addFlashAttribute("message", "Changes confirmed!");
 		redir.addFlashAttribute("messageType", "success");
 		return new ModelAndView("redirect:/updateuser");
+		}
 	}
 
 
