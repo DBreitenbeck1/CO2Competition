@@ -38,7 +38,8 @@
 								</tr>
 							</thead>
 							<tbody>
-								<c:forEach var="emp" items="${empscoresAT}">
+
+								<c:forEach var="emp" items="${empscoresAT}" end ="9">
 									<tr scope="row">
 										<td>${emp.name}</td>
 										<td><fmt:formatNumber type="number" value="${emp.score}" /></td>
@@ -68,7 +69,7 @@
 
 						<tbody>
 
-							<c:forEach var="emp" items="${empscoresMN}">
+							<c:forEach var="emp" items="${empscoresMN}" end ="9">
 								<tr scope="row">
 									<td>${emp.key}</td>
 									<td><fmt:formatNumber type="number" value="${emp.value}" /></td>
@@ -95,7 +96,7 @@
 
 						<tbody>
 
-							<c:forEach var="emp" items="${empscoresWK}">
+							<c:forEach var="emp" items="${empscoresWK}" end ="9">
 								<tr scope="row">
 									<td>${emp.key}</td>
 									<td><fmt:formatNumber type="number" value="${emp.value}" /></td>
@@ -115,6 +116,7 @@
 			</div>
 
 		</div>
+
 	</div>
 </body>
 </html>

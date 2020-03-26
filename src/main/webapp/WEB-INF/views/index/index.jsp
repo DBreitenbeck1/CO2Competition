@@ -36,13 +36,20 @@
 			<h1>Make your ride to work</h1>
 			<h1>mean more.</h1>
 
+			<!-- Fix this make it pretty :D -->
+
 			<c:if test="${employee eq null}">
 				<div class="btn-div">
 					<a href="/login"><button id="btn-login" class="btn btn-primary"
 							type="submit">Login</button></a>
 				</div>
+				<div class="btn-div">
+					<a href="/register"><button id="btn-login"
+							class="btn btn-primary" type="submit">Create account</button></a>
+				</div>
 			</c:if>
 		</div>
+
 		<div class="score-div">
 			<h3>Our Top Clients</h3>
 			<table class="table">
@@ -53,7 +60,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="c" items="${cc}">
+					<c:forEach var="c" items="${cc}" end ="9">
 						<tr scope="row">
 							<td>${c.key}</td>
 							<td><fmt:formatNumber type="number" value="${c.value}" /></td>
@@ -61,6 +68,7 @@
 					</c:forEach>
 				</tbody>
 			</table>
+
 
 			<img class="index-img" src="Carpool App Image.png" />
 

@@ -1,5 +1,7 @@
 package co.grandcircus.CO2Competition.Controllers;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -19,9 +21,10 @@ import co.grandcircus.CO2Competition.ApiService;
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.Entities.Distance;
 import co.grandcircus.CO2Competition.Entities.SearchResult;
+import co.grandcircus.CO2Competition.Objects.Carpool;
 import co.grandcircus.CO2Competition.Objects.Company;
 import co.grandcircus.CO2Competition.Objects.Employee;
-import co.grandcircus.CO2Competition.Objects.Score;
+import co.grandcircus.CO2Competition.Repos.CarpoolRepo;
 import co.grandcircus.CO2Competition.Repos.CompanyRepo;
 import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 
@@ -29,7 +32,7 @@ import co.grandcircus.CO2Competition.Repos.EmployeeRepo;
 public class IndexController {
 
 	@Autowired
-	HttpSession httpSesh;
+	HttpSession sesh;
 
 	@Value("${api_key}")
 	String apiKey;
@@ -45,6 +48,10 @@ public class IndexController {
 	
 	@Autowired
 	private CompanyRepo coRepo;
+	
+	@Autowired
+	private CarpoolRepo carRepo;
+	
 //
 //		// Declare Variables
 //		String address1 = "NoviMI";
@@ -147,7 +154,37 @@ public class IndexController {
 
 	@RequestMapping("/dashboard")
 	public ModelAndView showDesk() {
-		return new ModelAndView("index/dashboard");
+		Employee user = (Employee) sesh.getAttribute("employee");
+		
+		Employee employee = emRepo.findByUsernameIgnoreCase(user.getUsername());
+		
+		//defines current date
+				LocalDate now = LocalDate.now();
+				DateTimeFormatter dateForm = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+				String today = now.format(dateForm) + " 00:00";		
+				
+				//retrieves the user's carpools and orders by date
+				List<Carpool> carpools = carRepo.findByEmployeesContainingOrderByDateDesc(employee);
+				List<Integer> userScore = new ArrayList<>();
+				
+				
+				
+				for(Carpool cp: carpools) {
+					if (cp.getCo2()!=null) {
+					int s = cp.getCo2()/cp.getEmployees().size();
+					userScore.add(s);
+					}
+					
+					
+				}
+		
+		ModelAndView mav = new ModelAndView("index/dashboard");
+		mav.addObject("noCP", "You Don't Have Any Carpools Yet!");
+		mav.addObject("score", employee.getScore());
+		mav.addObject("userScore", userScore);
+		mav.addObject("carpools", carpools);
+		mav.addObject("today",today);
+		return mav;
 
 	}
 	
