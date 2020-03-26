@@ -92,7 +92,7 @@ input[class=zip] {
 				</div>
 			</section>
 
-			<button type="submit" class="btn btn-primary">Submit</button>
+			<button type="submit" class="btn btn-primary" style="margin-bottom:20px">Submit</button>
 		</form>
 
 
