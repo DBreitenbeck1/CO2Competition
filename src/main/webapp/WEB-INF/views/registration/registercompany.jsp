@@ -5,6 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<%@ include file="../partials/header.jsp"%>
 <link rel="stylesheet"
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
 	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -62,7 +63,11 @@ input[class=zip] {
 </head>
 <body>
 
+
 	<main class="container">
+
+		<h3>Register a company for Green on the Go</h3>
+
 		<form method="post">
 			<section class="jumbotron">
 
