@@ -35,13 +35,19 @@ public class RegisterController {
 	}
 
 	@PostMapping("/register")
-	public ModelAndView submitReg(Employee employee, @RequestParam("lastName") String lastName,
-	RedirectAttributes red) {
-		employee.setName(employee.getName() + " " + lastName);
+	public ModelAndView submitReg(Employee employee, @RequestParam String lastName,
+			@RequestParam String passwordConfirm,
+			RedirectAttributes red) {
+		// if password does not match
+		if (!employee.getPassword().equals(passwordConfirm)) {
+			red.addFlashAttribute("message", "Passwords do not match.");
+			red.addFlashAttribute("messageType", "warning");
+			return new ModelAndView("redirect:/register");
+		}
+		employee.setName(employee.getName() + " " + lastName);		
 		emRepo.save(employee);
-//		coRepo.save(company);
-		red.addFlashAttribute("msg", "Thank you for registering with us, " + employee.getName());
-
+		red.addFlashAttribute("message", "Thank you for registering with us, " + employee.getName());
+		red.addFlashAttribute("messageType", "success");
 		return new ModelAndView("redirect:/login");
 	}
 

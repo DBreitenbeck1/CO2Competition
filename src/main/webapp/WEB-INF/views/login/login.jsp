@@ -19,6 +19,7 @@
 <body>
 
 	<main class="container">
+	
 		<form method="post">
 			<section class="container">
 				<h1 class="h1-title">Welcome to Green on the Go</h1>

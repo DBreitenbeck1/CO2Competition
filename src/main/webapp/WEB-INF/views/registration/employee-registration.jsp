@@ -17,6 +17,12 @@
 </head>
 <body>
 	<main class="container">
+			<c:if test="${message ne null}">
+			<div class="alert alert-${messageType}">
+				<strong>${message}</strong>
+			</div>
+		</c:if>
+	
 		<h3>Register for Green on the Go</h3>
 		<form method="post" onsubmit="passwordValidate()">
 			<section class="jumbotron">
@@ -39,16 +45,19 @@
 					<div id="feedback" class="invalid-feedback">Password must be
 						at least 4 characters long and include at least one numeric digit.</div>
 				</div>
-				
-				
-				<div class="add-div">Address:</div>
 				<div>
-					<label>City:<input class="form-control" type="text"
-						name="city" required></label>
+					<label>Confirm New Password:<input class="form-control"
+						type="password" name="passwordConfirm"></label>
 				</div>
+								
+				<div class="add-div">Address:</div>
 				<div>
 					<label>Street:<input class="form-control" type="text"
 						name="streetAddress" required></label>
+				</div>
+				<div>
+					<label>City:<input class="form-control" type="text"
+						name="city" required></label>
 				</div>
 				<div>
 					<label>Zip code:<input class="form-control" type="text"

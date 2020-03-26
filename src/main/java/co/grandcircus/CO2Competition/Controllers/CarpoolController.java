@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import co.grandcircus.CO2Competition.COCalculator;
 import co.grandcircus.CO2Competition.RouteCalculator;
@@ -81,7 +82,7 @@ public class CarpoolController {
 	// end point
 	@RequestMapping("/submit-carpool")
 	public ModelAndView submitCarpool(@RequestParam String username, @RequestParam String date,
-			@RequestParam String time) {
+			@RequestParam String time, RedirectAttributes redir) {
 		// Creates list of carpoolers and adds current user and selected carpooler
 		Employee tester = (Employee) sesh.getAttribute("employee");
 		
@@ -122,17 +123,16 @@ public class CarpoolController {
 		// Save to database
 		carRepo.save(carpool);
 		
-		
-	
-		
-		ModelAndView mav = new ModelAndView("carpool/confirmation");
-		mav.addObject("name", passenger.getName());
-		mav.addObject("destination", company.getName());
-		mav.addObject("date",date);
-		mav.addObject("time",time);
-		mav.addObject("saved", savings);
-		mav.addObject("score", userScore);
-		return mav;
+		// Add confirmation message
+		String message = "<p>Your carpool request was sucessfully submitted. " +
+				passenger.getName() + " will carpool with you on " +
+				date + " at " + time + " to take you to " +
+				company.getName() + ".</p><p>This will save " +
+				savings + " lbs of CO2 and earn you " +
+				userScore + " points!</p>";
+		redir.addFlashAttribute("message", message);
+		redir.addFlashAttribute("messageType", "success");
+		return new ModelAndView("redirect:/dashboard");
 	}
 	
 	// Work from Home Button

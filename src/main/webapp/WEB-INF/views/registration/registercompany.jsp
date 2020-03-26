@@ -67,31 +67,29 @@ input[class=zip] {
 
 	<main class="container">
 
-		<h3>Register a company for Green on the Go</h3>
+		<h3>Register a Company</h3>
 
 		<form method="post">
 			<section class="jumbotron">
 
 				<div>
-					<label>Company Name:<input class="name" type="text"
+					<label>Company Name:<input class="form-control" type="text"
 						name="name" required minlength="3"></label>
 				</div>
 
 				<div class="add-div">Address:</div>
 				<div>
-					<label>City:<input class="city" type="text" name="city"
-						required minlength="4"></label>
-				</div>
-				<div>
-					<label>Street Address:<input class="street" type="text"
+					<label>Street Address:<input class="form-control" type="text"
 						name="streetAddress" required minlength="4"></label>
 				</div>
 				<div>
-					<label>Zip code:<input class="zip" type="text"
+					<label>City:<input class="form-control" type="text" name="city"
+						required minlength="4"></label>
+				</div>
+				<div>
+					<label>Zip code:<input class="form-control" type="text"
 						name="zipCode" required minlength="4"></label>
 				</div>
-
-
 			</section>
 
 			<button type="submit" class="btn btn-primary">Submit</button>
