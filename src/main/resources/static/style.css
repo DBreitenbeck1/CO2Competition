@@ -191,3 +191,14 @@ h4[class=h4-s] {
 input[class=in-bh] {
 	margin-left: 15px;
 }
+.container-chart{
+	position:relative;
+	width:500px;
+	height:500px;
+	margin-left: 850px;
+    margin-top: 20px;
+}
+h3[class=h3-t]{
+	margin-left:890px;
+	margin-top:-50px;
+}
