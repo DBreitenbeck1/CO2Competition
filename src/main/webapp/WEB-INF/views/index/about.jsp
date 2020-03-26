@@ -38,7 +38,7 @@
 				Each gallon of gas burns 19.64 lbs of CO2, so measuring that against
 				the average mileage of the kind of car you drive and the distance to
 				work gives us the amount of CO2 you save by carpooling. Each 0.1 lbs
-				of CO2 nets you a point, and the resulting tally of saved emissions
+				of CO2 nets you a point, and the resulting tally
 				is added to the score of everyone in that carpool.
 			<p>Once you start carpooling, your progress goes up on the
 				company board, and then the race is on to see who can rack up the

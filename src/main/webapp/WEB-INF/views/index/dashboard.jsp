@@ -21,21 +21,83 @@
 
 			<h1>Welcome ${employee.name}!</h1>
 			<p>You are currently working at ${employee.company.name}.</p>
+			<p>Your current score is ${score } points!</p>
 
-<!-- Hey what's this cool list for??? --Sam -->
-			<ul>
-				<c:forEach items="${carpools }" var="cp">
-					<li><a href="/carpoolsummary/${cp.carpoolId }">${cp.carpoolId }</a>
-					</li>
-					<li>${cp.co2 }</li>
-					<li><c:forEach items="${cp.employees }" var="emp">
-							<ul>
-								<li>${emp.name }</li>
+<a href="/routes" class="btn btn-primary" type="submit"
+									>Find a Carpool!
+										</a>
 
-							</ul>
-						</c:forEach></li>
+
+<div class="p-routes">
+		
+	</div>
+
+	<div class="p-routes-t">
+	<c:choose>
+	
+	<c:when test ="${empty carpools }">
+	<h2>${noCP }</h2>
+	
+	</c:when>
+	<c:when test="${not empty carpools }">
+	
+<h2>Your Past Carpools:</h2>
+		<div class="container-fluid">
+			<table class="table">
+				<tr>	
+					<th>Date</th>
+					<th>Passengers</th>
+					<th>CO2 Saved</th>
+					<th>User Score</th>
+					<th></th>
+				</tr>
+				<c:forEach var="cp" items="${carpools}" varStatus="sl">
+					<c:choose>
+						<c:when test="${cp.date>today }">
+							<tr bgcolor=lightyellow>
+								<td>${cp.date}</td>
+								<td>
+									<ul>
+										<c:forEach var="pass" items="${cp.employees}">
+											<li>${pass.name}</li>
+										</c:forEach>
+									</ul>
+								</td>
+								<td>${cp.co2}</td>
+								<td>${userScore[sl.index] }</td>
+								
+								<td><a href="/cancel/${cp.carpoolId}"
+									class="btn btn-warning" type="submit"
+									onclick="return confirm('Are you sure you want to cancel this carpool?')">Cancel
+										carpool</a></td>
+
+							</tr>
+						</c:when>
+
+						<c:when test="${cp.date<today }">
+							<tr bgcolor=lightgreen>
+								<td>${cp.date}</td>
+								<td>
+									<ul>
+										<c:forEach var="pass" items="${cp.employees}" varStatus="scoreLoop">
+											<li>${pass.name}</li>
+										</c:forEach>
+									</ul>
+								</td>
+								<td>${cp.co2}</td>
+								<td>${userScore[sl.index] }</td>
+								<th></th>
+							</tr>
+						</c:when>
+					</c:choose>
 				</c:forEach>
-			</ul>
+			</table>
+		</div>
+	</div>
+		</c:when>
+	</c:choose>
+	
+
 		</section>
 	</main>
 </body>

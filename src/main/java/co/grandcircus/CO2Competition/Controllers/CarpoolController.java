@@ -90,6 +90,8 @@ public class CarpoolController {
 		
 		List<Employee> poolers = Arrays.asList(employee, passenger);
 		Company company = coRepo.findByName(employee.getCompany().getName());
+		
+	
 
 		// Get distances to compare and calculate CO2 Savings and points earned
 		Double savings = coCal.calculateDifference(employee, passenger);
@@ -115,19 +117,21 @@ public class CarpoolController {
 				pooler.setScore(userScore);
 			}
 			pooler.addCarpool(carpool);
-			emRepo.save(pooler);
 		}
 		
 		// Save to database
 		carRepo.save(carpool);
-
+		
+		
+	
+		
 		ModelAndView mav = new ModelAndView("carpool/confirmation");
 		mav.addObject("name", passenger.getName());
 		mav.addObject("destination", company.getName());
 		mav.addObject("date",date);
 		mav.addObject("time",time);
 		mav.addObject("saved", savings);
-		mav.addObject("score", score);
+		mav.addObject("score", userScore);
 		return mav;
 	}
 	
@@ -203,7 +207,7 @@ public class CarpoolController {
 		carRepo.save(c);
 		carRepo.delete(c);
 
-		return new ModelAndView("redirect:/previous-routes");
+		return new ModelAndView("redirect:/dashboard");
 	}
 
 }
