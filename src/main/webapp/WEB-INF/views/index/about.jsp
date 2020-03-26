@@ -7,9 +7,10 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>About</title>
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+<link
+	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%>
@@ -38,7 +39,7 @@
 				Each gallon of gas burns 19.64 lbs of CO2, so measuring that against
 				the average mileage of the kind of car you drive and the distance to
 				work gives us the amount of CO2 you save by carpooling. Each 0.1 lbs
-				of CO2 nets you a point, and the resulting tally of saved emissions
+				of CO2 nets you a point, and the resulting tally
 				is added to the score of everyone in that carpool.
 			<p>Once you start carpooling, your progress goes up on the
 				company board, and then the race is on to see who can rack up the

@@ -6,35 +6,6 @@
 	border: none;
 }
 
-input[class=name] {
-	margin-left: 10px;
-}
-
-input[class=last] {
-	margin-left: 12px;
-}
-
-input[class=user] {
-	margin-left: 15px;
-}
-
-input[class=pass] {
-	margin-left: 20px;
-}
-
-input[class=city] {
-	margin-left: 59px;
-	margin-top: 10px;
-}
-
-input[class=street] {
-	margin-left: 45px;
-}
-
-input[class=zip] {
-	margin-left: 25px;
-}
-
 .add-div {
 	margin-top: 10px;
 }
@@ -46,6 +17,7 @@ input[class=zip] {
 .score-div {
 	margin-left: 100px;
 	margin-top: 40px;
+	max-width: 20%
 }
 
 .table-t {
@@ -191,14 +163,40 @@ h4[class=h4-s] {
 input[class=in-bh] {
 	margin-left: 15px;
 }
-.container-chart{
-	position:relative;
-	width:500px;
-	height:500px;
+
+.container-chart {
+	position: relative;
+	width: 500px;
+	height: 500px;
 	margin-left: 850px;
-    margin-top: 20px;
+	margin-top: 80px;
 }
-h3[class=h3-t]{
-	margin-left:890px;
-	margin-top:-50px;
+
+h3[class=h3-t] {
+	margin-left: 890px;
+	margin-top: -150px;
+}
+
+.container-myChart {
+	position: relative;
+	width: 800px;
+	height: 800px;
+	margin-left: 125px;
+	margin-top: 80px;
+}
+
+.container-myChart1 {
+	position: relative;
+	width: 800px;
+	height: 800px;
+	margin-left: -245px;
+	margin-top: 600px;
+}
+
+.container-myChart2 {
+	position: relative;
+	width: 800px;
+	height: 800px;
+	margin-left: -623px;
+	margin-top: 1120px;
 }

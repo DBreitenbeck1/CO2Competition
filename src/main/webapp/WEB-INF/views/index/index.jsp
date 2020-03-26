@@ -12,12 +12,12 @@
 	rel="stylesheet"
 	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
+
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%>
 <title>CO2 Competition</title>
 <style>
-<
-title>CO2 Competition </title> <style>.carpool-div {
+.carpool-div {
 	margin-top: 150px;
 	margin-left: 100px;
 	font-weight: bold;
@@ -49,64 +49,41 @@ title>CO2 Competition </title> <style>.carpool-div {
 			</c:if>
 		</div>
 
-		<div class="score-div">
-			<h3 class="h3-t">Our Top Clients</h3>
-			<!-- <table class="table-t">
-				<thead>
-					<tr class="table-primary">
-						<th>Company</th>
-						<th>Score</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="c" items="${cc}" end ="9">
+		<h3 class="h3-t">Our Top Clients</h3>
 
-						<tr class="table-primary">
-							<td>${c.key}</td>
-							<td>${c.value}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>-->
-
-
-
-
-		</div>
 	</section>
-<div class="container-chart">
-	<canvas id="myChart"></canvas>
-</div>
+	<div class="container-chart">
+		<canvas id="myChart"></canvas>
+	</div>
 	<script
 		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js
 "></script>
 	<script>var ctx = document.getElementById('myChart');
-var stars = [
-<c:forEach var="c" items="${cc}">
-${c.value}, 
-</c:forEach>
-];
-var frameworks = [
-<c:forEach var="o" items="${cc}">
-"${o.key}", 
-</c:forEach>
-];
-//var frameworks = ['React', 'Angular', 'Vue', 'Hyperapp', 'Omi'];
-var myChart = new Chart(ctx, {
-    type: 'bar',
-    data: {
-        labels: frameworks,
-        datasets: [{
-            label: 'Green on the Go',
-            backgroundColor: "rgba(2, 184, 117, 1)",
-            borderColor: "rgba(255,99,132,1)",
-            borderWidth: 2,
-            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-            hoverBorderColor: "rgba(255,99,132,1)",
-            data: stars
-        }]
-    }
-});</script>
+		var stars = [
+		<c:forEach var="c" items="${cc}">
+			${c.value}, 
+			</c:forEach>
+		];
+		var frameworks = [
+			<c:forEach var="o" items="${cc}">
+			"${o.key}", 
+		</c:forEach>
+		];
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: frameworks,
+		        datasets: [{
+		            label: 'Green on the Go',
+		            backgroundColor: "rgba(2, 184, 117, 1)",
+		            borderColor: "rgba(255,99,132,1)",
+		            borderWidth: 2,
+		            hoverBackgroundColor: "rgba(255,99,132,0.4)",
+		            hoverBorderColor: "rgba(255,99,132,1)",
+		            data: stars
+		        }]
+		    }
+		});</script>
 
 
 </body>
