@@ -177,8 +177,6 @@ public class IndexController {
 					
 					
 				}
-				
-//				System.out.println(userScore.get(0));
 		
 		ModelAndView mav = new ModelAndView("index/dashboard");
 		mav.addObject("noCP", "You Don't Have Any Carpools Yet!");
