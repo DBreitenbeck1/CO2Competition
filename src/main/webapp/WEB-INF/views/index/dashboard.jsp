@@ -17,6 +17,11 @@
 </head>
 <body>
 	<main class="container">
+			<c:if test="${message ne null}">
+			<div class="alert alert-${messageType}">
+				<strong>${message}</strong>
+			</div>
+		</c:if>
 		<section class="jumbotron">
 
 			<h1>Welcome ${employee.name}!</h1>

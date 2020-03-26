@@ -25,8 +25,6 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/routes">Available
 						Carpools</a></li>
- 				<li class="nav-item"><a class="nav-link" href="/previous-routes">Your Carpools</a>
-				</li>
 				<li class="nav-item"><a class="nav-link" href="/summary">Leaderboard</a>
 				</li>
 

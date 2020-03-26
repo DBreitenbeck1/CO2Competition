@@ -52,12 +52,12 @@
 				</div>
 				<div class="add-div">Address:</div>
 				<div>
-					<label>City:<input class="form-control" type="text"
-						name="city" required value="${employeeToEdit.city}"></label>
-				</div>
-				<div>
 					<label>Street:<input class="form-control" type="text"
 						name="streetAddress" required value="${employeeToEdit.streetAddress}"></label>
+				</div>
+				<div>
+					<label>City:<input class="form-control" type="text"
+						name="city" required value="${employeeToEdit.city}"></label>
 				</div>
 				<div>
 					<label>Zip code:<input class="form-control" type="text"

@@ -14,7 +14,11 @@
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%></head>
 <body>
-
+		<c:if test="${message ne null}">
+			<div class="alert alert-${messageType}">
+				<strong>${message}</strong>
+			</div>
+		</c:if>
 	<div class="route-title">
 		<H2>Available Carpools</H2>
 
