@@ -36,13 +36,20 @@ public class RouteCalculator {
 		if (method.equals("fromUser")) {
 			for (Employee e : employeeList) {
 				result = apiServe.getResult(employeeAddress, e.getAddress());
-				distances.add(apiServe.getDistance(result));
+				Distance distance = apiServe.getDistance(result);
+				if (distance != null) {
+				distances.add(distance);
+				}
 			}
 		} else if (method.equals("fromWork")) {
 			Company company = cRepo.findByName(employee.getCompany().getName());
 			for (Employee e : employeeList) {
 				result = apiServe.getResult(e.getAddress(), company.getAddress());
-				distances.add(apiServe.getDistance(result));
+				Distance distance = apiServe.getDistance(result);
+				if (distance != null) {
+				distances.add(distance);
+				}
+//				distances.add(apiServe.getDistance(result));
 			}
 		}
 		return distances;
@@ -56,6 +63,7 @@ public class RouteCalculator {
 		SearchResult result = apiServe.getResult(employee.getAddress(), employee.getCompany().getAddress());
 		
 		// gets distance of route and returns as distance item
+		
 		return apiServe.getDistance(result);
 	}
 }

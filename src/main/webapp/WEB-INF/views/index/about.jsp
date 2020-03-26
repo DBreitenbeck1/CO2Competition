@@ -36,7 +36,8 @@
 				carpool. Once you make the request for a specific date and time, the
 				carpool is logged into the attached SQL database and the app
 				calculates the amount of carbon that you will be saving that trip.
-				Each gallon of gas burns 19.64 lbs of CO2, so measuring that against
+				<p>Each gallon of gas burns 19.64 lbs of CO2.</p>
+				<p>Measuring that against
 				the average mileage of the kind of car you drive and the distance to
 				work gives us the amount of CO2 you save by carpooling. Each 0.1 lbs
 				of CO2 nets you a point, and the resulting tally

@@ -200,6 +200,8 @@ public class CarpoolController {
 	public ModelAndView showCancel(@PathVariable("id") Long carpool) {
 		Carpool c = carRepo.findById(carpool).orElse(null);
 		for (Employee e: c.getEmployees()) {
+			int score = c.getCo2()/c.getEmployees().size();
+			e.addToScore(-score);
 			e.getCarpool().remove(c);
 			emRepo.save(e);
 		}

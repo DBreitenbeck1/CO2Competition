@@ -52,7 +52,38 @@
 							</tbody>
 
 						</table>
-
+	<div class="container-myChart">
+		<canvas id="myChart"></canvas>
+	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js
+"></script>
+	<script>var ctx = document.getElementById('myChart');
+	var stars = [
+	<c:forEach var="emp1" items="${empscoresAT}">
+		${emp1.score}, 
+	</c:forEach>
+	];
+	var frameworks = [
+	<c:forEach var="emp2" items="${empscoresAT}">
+		"${emp2.name}", 
+	</c:forEach>
+	];
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: frameworks,
+	        datasets: [{
+	            label: 'All Time',
+	            backgroundColor: "rgba(2, 184, 117, 1)",
+	            borderColor: "rgba(0, 0, 0, 1)",
+	            borderWidth: 2,
+	            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+	            hoverBorderColor: "rgba(0, 0, 0, 1)",
+	            data: stars
+	        }]
+	    }
+	});</script>
 					</section>
 				</div>
 
@@ -82,7 +113,38 @@
 						</tbody>
 
 					</table>
-
+					<div class="container-myChart1">
+		<canvas id="myChart1"></canvas>
+	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js
+"></script>
+	<script>var ctx = document.getElementById('myChart1');
+	var stars = [
+	<c:forEach var="emp3" items="${empscoresMN}">
+		${emp3.value}, 
+	</c:forEach>
+	];
+	var frameworks = [
+	<c:forEach var="emp4" items="${empscoresMN}">
+		"${emp4.key}", 
+	</c:forEach>
+	];
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: frameworks,
+	        datasets: [{
+	            label: 'Monthly',
+	            backgroundColor: "rgba(2, 184, 117, 1)",
+	            borderColor: "rgba(0, 0, 0, 1)",
+	            borderWidth: 2,
+	            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+	            hoverBorderColor: "rgba(0, 0, 0, 1)",
+	            data: stars
+	        }]
+	    }
+	});</script>
 				</div>
 				<div class="col-4">
 					<h3 class="text-center">Weekly</h3>
@@ -109,7 +171,38 @@
 						</tbody>
 
 					</table>
-
+	<div class="container-myChart2">
+		<canvas id="myChart2"></canvas>
+	</div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js
+"></script>
+	<script>var ctx = document.getElementById('myChart2');
+	var stars = [
+	<c:forEach var="emp5" items="${empscoresWK}">
+		${emp5.value}, 
+	</c:forEach>
+	];
+	var frameworks = [
+	<c:forEach var="emp6" items="${empscoresWK}">
+		"${emp6.key}", 
+	</c:forEach>
+	];
+	var myChart = new Chart(ctx, {
+	    type: 'bar',
+	    data: {
+	        labels: frameworks,
+	        datasets: [{
+	            label: 'Weekly',
+	            backgroundColor: "rgba(2, 184, 117, 1)",
+	            borderColor: "rgba(0, 0, 0, 1)",
+	            borderWidth: 2,
+	            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+	            hoverBorderColor: "rgba(0, 0, 0, 1)",
+	            data: stars
+	        }]
+	    }
+	});</script>
 
 
 				</div>

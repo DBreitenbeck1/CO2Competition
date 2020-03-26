@@ -7,7 +7,6 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-
 <link
 	href="https://stackpath.bootstrapcdn.com/bootswatch/4.4.1/litera/bootstrap.min.css"
 	rel="stylesheet"
@@ -40,27 +39,43 @@
 		</c:if>
 		</div></div><div class="row"><div class="col">
 			<h3>Our Top Clients</h3>
-			<table class="table">
-				<thead>
-					<tr>
-						<th scope="col">Company</th>
-						<th scope="col">Score</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach var="c" items="${cc}" end ="9">
-						<tr scope="row">
-							<td>${c.key}</td>
-							<td><fmt:formatNumber type="number" value="${c.value}" /></td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
+	<div class="container-chart">
+		<canvas id="myChart"></canvas>
+	</div>
 	</div>
 	<div class="col">
 		<img class="index-img" src="Carpool App Image.png" />
 	</div>
 	</div>
 </div>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.bundle.js
+"></script>
+	<script>var ctx = document.getElementById('myChart');
+		var stars = [
+		<c:forEach var="c" items="${cc}">
+			${c.value}, 
+			</c:forEach>
+		];
+		var frameworks = [
+			<c:forEach var="o" items="${cc}">
+			"${o.key}", 
+		</c:forEach>
+		];
+		var myChart = new Chart(ctx, {
+		    type: 'bar',
+		    data: {
+		        labels: frameworks,
+		        datasets: [{
+		            label: 'Green on the Go',
+		            backgroundColor: "rgba(2, 184, 117, 1)",
+		            borderColor: "rgba(0, 0, 0, 1)",
+		            borderWidth: 2,
+		            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+		            hoverBorderColor: "rgba(0, 0, 0, 1)",
+		            data: stars
+		        }]
+		    }
+		});</script>
 </body>
 </html>
