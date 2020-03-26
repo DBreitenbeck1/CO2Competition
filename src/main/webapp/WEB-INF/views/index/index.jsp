@@ -36,10 +36,16 @@ title>CO2 Competition </title> <style>.carpool-div {
 			<h1>Make your ride to work</h1>
 			<h1>mean more.</h1>
 
+			<!-- Fix this make it pretty :D -->
+
 			<c:if test="${employee eq null}">
 				<div class="btn-div">
 					<a href="/login"><button id="btn-login" class="btn btn-primary"
 							type="submit">Login</button></a>
+				</div>
+				<div class="btn-div">
+					<a href="/register"><button id="btn-login"
+							class="btn btn-primary" type="submit">Create account</button></a>
 				</div>
 			</c:if>
 		</div>
