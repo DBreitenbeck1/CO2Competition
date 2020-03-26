@@ -28,7 +28,7 @@
 			<p>You are currently working at ${employee.company.name}.</p>
 			<p>Your current score is ${score } points!</p>
 
-<a href="/routes" class="btn btn-primary" type="submit"
+<a href="/routes" class="btn btn-success" type="submit"
 									>Find a Carpool!
 										</a>
 

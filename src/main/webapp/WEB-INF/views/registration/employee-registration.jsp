@@ -89,7 +89,7 @@
 
 
 
-			<button type="submit" class="btn btn-primary" style="margin-bottom:20px">Submit</button>
+			<button type="submit" class="btn btn-success" style="margin-bottom:20px">Submit</button>
 		</form>
 
 

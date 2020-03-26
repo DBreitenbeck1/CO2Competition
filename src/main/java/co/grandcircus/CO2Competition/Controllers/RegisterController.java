@@ -34,7 +34,6 @@ public class RegisterController {
 	@RequestMapping("/register")
 	public ModelAndView showReg(Company company) {
 		ModelAndView mav = new ModelAndView("registration/employee-registration");
-
 		mav.addObject("companies", coRepo.findAll());
 		mav.addObject("vehicleTypes", emRepo.findAllVehicleType());
 		return mav;

@@ -70,8 +70,8 @@
 								src="David Breitenbeck.jpeg" alt="David Breitenbeck Headshot">
 							<div class="card-body">
 								<h3 class="card-header">David Breitenbeck</h3>
-								<p class="card-text" align="justify" style="margin-top:10px">
-										My name is David Breitenbeck. I have spent several years as a Professional Writer and have
+								<p align="justify" style="margin-top:10px">
+								My name is David Breitenbeck. I have spent several years as a Professional Writer and have
 								now decided to add coding to my arsenal of skills.
 								 I view coding as a further opportunity to create the
 								kind of elegant, high quality work that I seen a need for in

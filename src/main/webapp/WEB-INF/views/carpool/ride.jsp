@@ -22,21 +22,23 @@
 <body>
 
 	<main class="container">
-		<section class="jumbotron">
-
+		<section class="">
+				<hr class="my-4">
+		
+			<h1>Schedule a Carpool</h1>
 			<form action="/submit-carpool" method="post">
 				<c:if test="${method eq 'To Work'}">
-					<div>Home - ${employee.streetAddress}, ${employee.city},
-						${employee.zipCode}</div>
-					<div>Work - ${employee.company.streetAddress},
-						${employee.company.city}, ${employee.company.zipCode}</div>
+					<div><h3>Home - ${employee.streetAddress}, ${employee.city},
+						${employee.zipCode}</h3></div>
+					<div><h3>Work - ${employee.company.streetAddress},
+						${employee.company.city}, ${employee.company.zipCode}</h3></div>
 				</c:if>
 
 				<c:if test="${method eq 'Back Home'}">
-					<div>Work - ${employee.company.streetAddress},
-						${employee.company.city}, ${employee.company.zipCode}</div>
-					<div>Home - ${employee.streetAddress}, ${employee.city},
-						${employee.zipCode}</div>
+					<div><h3>Work - ${employee.company.streetAddress},
+						${employee.company.city}, ${employee.company.zipCode}</h3></div>
+					<div><h3>Home - ${employee.streetAddress}, ${employee.city},
+						${employee.zipCode}</h3></div>
 				</c:if>
 
 				<div class="pick-div">
