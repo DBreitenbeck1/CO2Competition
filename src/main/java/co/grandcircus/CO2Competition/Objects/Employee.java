@@ -168,9 +168,10 @@ public class Employee implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
-				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
-				+ ", company=" + company + ", carpool=" + carpool + "]";
+//		return "Employee [employeeId=" + employeeId + ", name=" + name + ", username=" + username + ", password="
+//				+ password + ", streetAddress=" + streetAddress + ", city=" + city + ", zipCode=" + zipCode
+//				+ ", company=" + company + ", carpool=" + carpool + "]";
+		return isAdmin().toString();
 	}
 
 

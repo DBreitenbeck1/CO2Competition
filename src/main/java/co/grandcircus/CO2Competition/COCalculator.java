@@ -13,24 +13,30 @@ public class COCalculator {
 	@Autowired
 	private ApiService apiServe;
 
-	// Estimations based on average for each car type
+	/*
+	 *  Calculations are based on the average MPG of the most popular cars 
+	 *  in each category and assuming 19.64 lbs of CO2 burned per gallon of gasoline  
+	 */
 	public double smallCar(long meters) {
 		double miles = meters / 1609.344;
-		double emissions = 7.08 * miles;
+//		System.out.println("Miles: "+ miles);
+		double emissions = 0.76 * miles;
 		emissions = (int) (Math.round(emissions * 100)) / 100.00;
 		return emissions;
 	}
 
 	public double medCar(double meters) {
 		double miles = meters / 1609.344;
-		double emissions = 13.2 * miles;
+//		System.out.println("Miles: "+ miles);
+		double emissions = 0.93 * miles;
 		emissions = (int) (Math.round(emissions * 100)) / 100.00;
 		return emissions;
 	}
 
 	public double truck(double meters) {
 		double miles = meters / 1609.344;
-		double emissions = 18.84 * miles;
+//		System.out.println("Miles: "+ miles);
+		double emissions = 1.16 * miles;
 		emissions = (int) (Math.round(emissions * 100)) / 100.00;
 		return emissions;
 	}
@@ -42,7 +48,7 @@ public class COCalculator {
 		// Calculate distance
 		SearchResult result = apiServe.getResult(employee.getAddress(), employee.getCompany().getAddress());
 		Distance distance = apiServe.getDistance(result);
-
+		
 		// call calculator method, assume medCar for now
 		double CO2Savings = 0;
 		switch (employee.getVehicleType()) {
@@ -56,7 +62,7 @@ public class COCalculator {
 			CO2Savings = truck(distance.getValue());
 			break;
 		}
-
+	
 		// return savings
 		return CO2Savings;
 	}
@@ -75,7 +81,7 @@ public class COCalculator {
 		if (savingsUser < savingsPassenger) {
 			returnSavings = Math.round(savingsUser * 100) / 100.00;
 		} else {
-			returnSavings = Math.round(savingsUser * 100) / 100.00;
+			returnSavings = Math.round(savingsPassenger * 100) / 100.00;
 		}
 
 		return returnSavings;

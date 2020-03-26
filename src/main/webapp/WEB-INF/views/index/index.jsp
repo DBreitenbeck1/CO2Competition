@@ -35,13 +35,20 @@ title>CO2 Competition </title> <style>.carpool-div {
 			<h1>Make your ride to work</h1>
 			<h1>mean more.</h1>
 
+			<!-- Fix this make it pretty :D -->
+
 			<c:if test="${employee eq null}">
 				<div class="btn-div">
 					<a href="/login"><button id="btn-login" class="btn btn-primary"
 							type="submit">Login</button></a>
 				</div>
+				<div class="btn-div">
+					<a href="/register"><button id="btn-login"
+							class="btn btn-primary" type="submit">Create account</button></a>
+				</div>
 			</c:if>
 		</div>
+
 		<div class="score-div">
 			<h3 class="h3-t">Our Top Clients</h3>
 			<!-- <table class="table-t">
@@ -52,7 +59,7 @@ title>CO2 Competition </title> <style>.carpool-div {
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach var="c" items="${cc}">
+					<c:forEach var="c" items="${cc}" end ="9">
 
 						<tr class="table-primary">
 							<td>${c.key}</td>
@@ -61,6 +68,8 @@ title>CO2 Competition </title> <style>.carpool-div {
 					</c:forEach>
 				</tbody>
 			</table>-->
+
+
 
 
 		</div>
@@ -89,7 +98,7 @@ var myChart = new Chart(ctx, {
         labels: frameworks,
         datasets: [{
             label: 'Green on the Go',
-            backgroundColor: "rgba(86, 199, 15, 1)",
+            backgroundColor: "rgba(2, 184, 117, 1)",
             borderColor: "rgba(255,99,132,1)",
             borderWidth: 2,
             hoverBackgroundColor: "rgba(255,99,132,0.4)",

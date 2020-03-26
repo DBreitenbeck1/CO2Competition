@@ -37,45 +37,7 @@ public class ScoresController {
 	@Autowired
 	private CarpoolRepo carRepo;
 
-//	// Shows scoreboard for the company of the logged in user --Sam
-//	@RequestMapping("/summary")
-//	public ModelAndView showScores() {
-//		// Retrieve usable employee object --David
-//		Employee emp = (Employee) sesh.getAttribute("employee");
-//		Employee employee = emRepo.findByUsernameIgnoreCase(emp.getUsername());
-//		
-//		//company Id isn't really necessary at this point, fyi
-//		Long companyId = emp.getCompany().getCompanyId();
-//
-//		// Declare Variables
-//		Integer companyTotal = 0;
-//
-//		// Get Scoreboard
-//		List<Score> scores = emRepo.findScoresByCompany(companyId);
-//	//	List<Score> scores = emRepo.findScoresByCompany(companyId);
-//
-//		// Get company total from scoreboard
-////		for (Score score : scores) {
-////			companyTotal += score.getScore();
-////		}
-//		
-//		//recover employees from company and order by scores
-//		List<Employee> employees = emRepo.findByCompanyOrderByScoreDesc(employee.getCompany());
-//		
-//		//calculate company total
-//		for (Employee e: employees) {
-//		companyTotal += e.getScore();	
-//		}
-//		
-//		
-//		// Create ModelAndView and add objects
-//		ModelAndView mav = new ModelAndView("scores/userscores");
-//		mav.addObject("empscores", employees);
-//	//	mav.addObject("scoreboard", scores);
-//		mav.addObject("total", companyTotal);
-//		return mav;
-//	}
-	
+
 	
 	// Shows scoreboard for the company of the logged in user --Sam
 	@RequestMapping("/summary")
@@ -83,7 +45,12 @@ public class ScoresController {
 		//All-Time____
 		// Retrieve usable employee object --David
 		Employee emp = (Employee) sesh.getAttribute("employee");
-		Employee employee = emRepo.findByUsernameIgnoreCase(emp.getUsername());
+		Employee employee = new Employee();
+		try {
+		employee = emRepo.findByUsernameIgnoreCase(emp.getUsername());
+		} catch (NullPointerException e) {
+			System.out.println("User not found");
+		}
 		Company company = employee.getCompany();	
 	
 		// Declare Variables

@@ -17,6 +17,10 @@
 
 	<div class="route-title">
 		<H2>Available Carpools</H2>
+
+		<!-- COME CHANGE THIS IF BETTER IDEA -->
+
+		<h4>Click on the distance to see the map</h4>
 	</div>
 	<div id="carpool-table">
 
@@ -59,8 +63,8 @@
 							<input type="hidden" value="${distanceC[empLoop.index].value}"
 								name="distanceFromCom"> <input type="hidden"
 								value="${distanceY[empLoop.index].value}" name="distanceFromYou">
-							<input type="submit" name="method" value="To Work"> <input class="in-bh"
-								type="submit" name="method" value="Back Home">
+							<input type="submit" name="method" value="To Work"> <input
+								class="in-bh" type="submit" name="method" value="Back Home">
 						</form>
 					</div>
 				</div>

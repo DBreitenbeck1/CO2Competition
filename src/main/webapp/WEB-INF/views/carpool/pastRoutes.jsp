@@ -25,7 +25,6 @@
 		<div class="container-fluid">
 			<table class="table">
 				<tr>
-					<th>Id</th>
 					<th>Date</th>
 					<th>Passengers</th>
 					<th>CO2 Saved</th>
@@ -35,7 +34,6 @@
 					<c:choose>
 						<c:when test="${cp.date>today }">
 							<tr bgcolor=lightyellow>
-								<td>${cp.carpoolId}</td>
 								<td>${cp.date}</td>
 								<td>
 									<ul>

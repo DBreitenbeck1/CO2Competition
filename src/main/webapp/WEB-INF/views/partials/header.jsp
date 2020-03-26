@@ -35,17 +35,11 @@
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/routes">Available
 						Carpools</a></li>
-				<!--  <li class="nav-item"><a class="nav-link"
-					href="/previous-routes">Previous Routes</a></li>
-				<li class="nav-item">
-	        <a class="nav-link" href="/favorite-routes">Favorite Routes</a>
-	      </li>
-	 -->
-	 
-	 				<li class="nav-item"><a class="nav-link" href="/previous-routes">Your Carpools</a>
+ 				<li class="nav-item"><a class="nav-link" href="/previous-routes">Your Carpools</a>
 				</li>
 				<li class="nav-item"><a class="nav-link" href="/summary">Leaderboard</a>
 				</li>
+
 				
 			</c:if>
 		</ul>
@@ -70,8 +64,11 @@
 				<a class="nav-link" href="/login">Login</a>
 			</li>
 			<li class="nav-item">
-				<a class="nav-link" href="/register">Register</a>
+			          <a class="nav-link" href="/register">New User</a>
 			</li>
+			<li class="nav-item">
+			          <a class="nav-link" href="/registercompany">New Company</a>
+		    </li>
 		</ul>
 	</c:if>
 </nav>

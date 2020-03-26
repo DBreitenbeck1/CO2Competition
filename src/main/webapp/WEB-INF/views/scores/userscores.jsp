@@ -41,7 +41,7 @@
 
 							<tbody>
 
-								<c:forEach var="emp" items="${empscoresAT}">
+								<c:forEach var="emp" items="${empscoresAT}" end ="9">
 									<tr class="table-primary">
 										<td>${emp.name}</td>
 										<td>${emp.score}</td>
@@ -71,7 +71,7 @@
 
 						<tbody>
 
-							<c:forEach var="emp" items="${empscoresMN}">
+							<c:forEach var="emp" items="${empscoresMN}" end ="9">
 								<tr class="table-primary">
 									<td>${emp.key}</td>
 									<td>${emp.value}</td>
@@ -98,7 +98,7 @@
 
 						<tbody>
 
-							<c:forEach var="emp" items="${empscoresWK}">
+							<c:forEach var="emp" items="${empscoresWK}" end ="9">
 								<tr class="table-primary">
 									<td>${emp.key}</td>
 									<td>${emp.value}</td>
@@ -118,6 +118,7 @@
 			</div>
 
 		</div>
+
 	</div>
 </body>
 </html>
