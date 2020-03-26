@@ -76,10 +76,10 @@
 	        datasets: [{
 	            label: 'All Time',
 	            backgroundColor: "rgba(2, 184, 117, 1)",
-	            borderColor: "rgba(255,99,132,1)",
+	            borderColor: "rgba(0, 0, 0, 1)",
 	            borderWidth: 2,
-	            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-	            hoverBorderColor: "rgba(255,99,132,1)",
+	            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+	            hoverBorderColor: "rgba(0, 0, 0, 1)",
 	            data: stars
 	        }]
 	    }
@@ -137,10 +137,10 @@
 	        datasets: [{
 	            label: 'Monthly',
 	            backgroundColor: "rgba(2, 184, 117, 1)",
-	            borderColor: "rgba(255,99,132,1)",
+	            borderColor: "rgba(0, 0, 0, 1)",
 	            borderWidth: 2,
-	            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-	            hoverBorderColor: "rgba(255,99,132,1)",
+	            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+	            hoverBorderColor: "rgba(0, 0, 0, 1)",
 	            data: stars
 	        }]
 	    }
@@ -195,10 +195,10 @@
 	        datasets: [{
 	            label: 'Weekly',
 	            backgroundColor: "rgba(2, 184, 117, 1)",
-	            borderColor: "rgba(255,99,132,1)",
+	            borderColor: "rgba(0, 0, 0, 1)",
 	            borderWidth: 2,
-	            hoverBackgroundColor: "rgba(255,99,132,0.4)",
-	            hoverBorderColor: "rgba(255,99,132,1)",
+	            hoverBackgroundColor: "rgba(43, 202, 106, 0.69)",
+	            hoverBorderColor: "rgba(0, 0, 0, 1)",
 	            data: stars
 	        }]
 	    }
