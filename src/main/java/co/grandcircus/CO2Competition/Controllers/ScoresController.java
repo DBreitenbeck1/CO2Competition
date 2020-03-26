@@ -134,11 +134,11 @@ public class ScoresController {
 			int total = 0;
 			for(Carpool c:monthCPs) {
 				if(c.getEmployees().contains(e)) {
-					System.out.println(e.getName());
+					
 					int save = c.getCo2();
-					System.out.println(save);
+			
 					total+=(save/c.getEmployees().size());
-					System.out.println(total);
+				
 				}
 				
 			}
