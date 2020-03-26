@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
 	pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <!DOCTYPE html>
 <html>
@@ -14,42 +15,38 @@
 
 <%@ include file="../partials/header.jsp"%>
 <meta charset="ISO-8859-1">
-<title>User Scores!</title>
+<title>Scoreboard || Green on the Go</title>
 
 
 </head>
 <body>
 	<div class="user-score">
 
-		<h1 class="Jumbotron">User Scores:</h1>
+		<h1 class="Jumbotron">User Scores</h1>
 	</div>
 	<div class="weekly-table">
-
 		<div class="container">
 			<div class="row">
 				<div class="col-4">
-					<h2>All Time</h2>
+					<h3 class="text-center">All Time</h3>
 					<section class="lead">
-
-						<table class="text-muted">
+						<table class="text-muted table">
 							<thead>
 								<tr>
-									<th>User</th>
-									<th>Score</th>
+									<th scope="col">User</th>
+									<th scope="col">Score</th>
 								</tr>
 							</thead>
-
 							<tbody>
-
 								<c:forEach var="emp" items="${empscoresAT}">
-									<tr class="table-primary">
+									<tr scope="row">
 										<td>${emp.name}</td>
-										<td>${emp.score}</td>
+										<td><fmt:formatNumber type="number" value="${emp.score}" /></td>
 									</tr>
 								</c:forEach>
-								<tr class="table-primary">
-									<td><b>Company Total:</b></td>
-									<td><b>${totalAT}</b></td>
+								<tr scope="row">
+									<th scope="row">Company Total:</th>
+									<th scope="row"><fmt:formatNumber type = "number" value = "${totalAT}" /></th>
 								</tr>
 							</tbody>
 
@@ -59,27 +56,27 @@
 				</div>
 
 				<div class="col-4">
-					<h2>Monthly</h2>
+					<h3 class="text-center">Monthly</h3>
 
-					<table class="text-muted">
+					<table class="text-muted table">
 						<thead>
 							<tr>
-								<th>User</th>
-								<th>Score</th>
+								<th scope="col">User</th>
+								<th scope="col">Score</th>
 							</tr>
 						</thead>
 
 						<tbody>
 
 							<c:forEach var="emp" items="${empscoresMN}">
-								<tr class="table-primary">
+								<tr scope="row">
 									<td>${emp.key}</td>
-									<td>${emp.value}</td>
+									<td><fmt:formatNumber type="number" value="${emp.value}" /></td>
 								</tr>
 							</c:forEach>
-							<tr class="table-primary">
-								<td><b>Company Total:</b></td>
-								<td><b>${totalMN}</b></td>
+							<tr scope="row">
+								<th scope="row">Company Total:</th>
+								<th scope="row"><fmt:formatNumber type = "number" value = "${totalMN}" /></th>
 							</tr>
 						</tbody>
 
@@ -87,26 +84,26 @@
 
 				</div>
 				<div class="col-4">
-					<h2>Weekly</h2>
-					<table class="text-muted">
+					<h3 class="text-center">Weekly</h3>
+					<table class="text-muted table">
 						<thead>
-							<tr>
-								<th>User</th>
-								<th>Score</th>
+							<tr scope="row">
+								<th scope="col">User</th>
+								<th scope="col">Score</th>
 							</tr>
 						</thead>
 
 						<tbody>
 
 							<c:forEach var="emp" items="${empscoresWK}">
-								<tr class="table-primary">
+								<tr scope="row">
 									<td>${emp.key}</td>
-									<td>${emp.value}</td>
+									<td><fmt:formatNumber type="number" value="${emp.value}" /></td>
 								</tr>
 							</c:forEach>
-							<tr class="table-primary">
-								<td><b>Company Total:</b></td>
-								<td><b>${totalWK}</b></td>
+							<tr scope="row">
+								<th scope="row">Company Total:</th>
+								<th scope="row"><fmt:formatNumber type = "number" value = "${totalWK}" /></th>
 							</tr>
 						</tbody>
 

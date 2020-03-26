@@ -13,12 +13,12 @@
 	rel="stylesheet"
 	integrity="sha384-pLgJ8jZ4aoPja/9zBSujjzs7QbkTKvKw1+zfKuumQF9U+TH3xv09UUsRI52fS+A6"
 	crossorigin="anonymous">
+
 <link rel="stylesheet" href="/style.css" />
 <%@ include file="../partials/header.jsp"%>
 <title>CO2 Competition</title>
 <style>
-<
-title>CO2 Competition </title> <style>.carpool-div {
+.carpool-div {
 	margin-top: 150px;
 	margin-left: 100px;
 	font-weight: bold;
@@ -45,19 +45,18 @@ title>CO2 Competition </title> <style>.carpool-div {
 		</div>
 		<div class="score-div">
 			<h3>Our Top Clients</h3>
-			<table class="table-t">
+			<table class="table">
 				<thead>
-					<tr class="table-primary">
-						<th>Company</th>
-						<th>Score</th>
+					<tr>
+						<th scope="col">Company</th>
+						<th scope="col">Score</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach var="c" items="${cc}">
-
-						<tr class="table-primary">
+						<tr scope="row">
 							<td>${c.key}</td>
-							<td>${c.value}</td>
+							<td><fmt:formatNumber type="number" value="${c.value}" /></td>
 						</tr>
 					</c:forEach>
 				</tbody>
