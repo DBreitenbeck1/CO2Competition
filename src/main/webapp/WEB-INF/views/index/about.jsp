@@ -25,37 +25,38 @@
 				simply saving on gas, carpooling is a practice that more and more
 				companies are trying to encourage in their employees. It's simple,
 				it's efficient, and it doesn't cost your company a cent.</p>
-			<p align="justify">So how do we encourage employees to start pooling their
-				resources? By making it simple, easy, and fun.</p>
+			<p align="justify">So how do we encourage employees to start
+				pooling their resources? By making it simple, easy, and fun.</p>
 			<img src="Footprint.jpg" alt="CO2 Footprint" align="left"
 				style="width: 30%; border: 2px black solid" hspace="20">
-			<p align="justify">The Green on the Go app provides a user-friendly interface
-				that allows you the employee to both find potential carpools and to
-				keep track of how much carbon you are saving. Drawing from the
-				Google Maps API, the app gives you the opportunity to find out which
-				of your fellow employees live in your area and might like to
-				carpool. Once you make the request for a specific date and time, the
-				carpool is logged into the attached SQL database and the app
-				calculates the amount of carbon that you will be saving that trip.
-				<p align="justify">Each gallon of gas burns 19.64 lbs of CO2.</p>
-				<p align="justify">Measuring that against
-				the average mileage of the kind of car you drive and the distance to
-				work gives us the amount of CO2 you save by carpooling. Each 0.1 lbs
-				of CO2 nets you a point, and the resulting tally
-				is added to the score of everyone in that carpool.
-			<p align="justify">Once you start carpooling, your progress goes up on the
-				company board, and then the race is on to see who can rack up the
-				highest score per week, per month, or all time. The more you
+			<p align="justify">The Green on the Go app provides a
+				user-friendly interface that allows you the employee to both find
+				potential carpools and to keep track of how much carbon you are
+				saving. Drawing from the Google Maps API, the app gives you the
+				opportunity to find out which of your fellow employees live in your
+				area and might like to carpool. Once you make the request for a
+				specific date and time, the carpool is logged into the attached SQL
+				database and the app calculates the amount of carbon that you will
+				be saving that trip.
+			<p align="justify">Each gallon of gas burns 19.64 lbs of CO2.</p>
+			<p align="justify">Measuring that against the average mileage of
+				the kind of car you drive and the distance to work gives us the
+				amount of CO2 you save by carpooling. Each 0.1 lbs of CO2 nets you a
+				point, and the resulting tally is added to the score of everyone in
+				that carpool.
+			<p align="justify">Once you start carpooling, your progress goes
+				up on the company board, and then the race is on to see who can rack
+				up the highest score per week, per month, or all time. The more you
 				carpool, the more you're encouraged to carpool, and the more you
 				will save in both gas and emissions.</p>
-			<p align="justify">Not only does the app track emissions by employee, it also
-				tracks how much the company as a whole is saving by aggregating the
-				employee scores. The results are displayed on the score board of
-				participating companies, allowing employers to compete for the
-				ability to say that their employees have cut their emissions more
-				than any of their rivals.</p>
-			<p align="justify">Simple, easy, and fun means bigger gains for your company and
-				cleaner air for everyone.</p>
+			<p align="justify">Not only does the app track emissions by
+				employee, it also tracks how much the company as a whole is saving
+				by aggregating the employee scores. The results are displayed on the
+				score board of participating companies, allowing employers to
+				compete for the ability to say that their employees have cut their
+				emissions more than any of their rivals.</p>
+			<p align="justify">Simple, easy, and fun means bigger gains for
+				your company and cleaner air for everyone.</p>
 
 		</section>
 		<section class="jumbotron">
@@ -169,9 +170,9 @@
 								<h3 class="card-header">Kyle Warchuck</h3>
 								<p class="card-text">
 								<h6></h6>
-								My name is Kyle Warchuck, a developer graduating from Grand
-								Circus. Before this I took Python classes which fueled my
-								interest in object orientated programming. Grand Circus has
+								My name is Kyle Warchuck, i'm a developer graduating from Grand
+								Circus. Before Grand Circus I took Python classes which fueled
+								my interest in object orientated programming. Grand Circus has
 								taught me relevant skills, including Java, algorithms and Agile
 								methodologies. I'm excited to start my career in the tech field!
 								</p>
